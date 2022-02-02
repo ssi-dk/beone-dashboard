@@ -16,6 +16,9 @@ function App() {
   return (
     <div className="App">
       <div className="row">
+        <input directory="" webkitdirectory="" type="file" />
+      </div>
+      <div className="row">
         <div className="column">
             <DataView title="Map"/>
         </div>
