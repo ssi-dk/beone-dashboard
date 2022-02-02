@@ -14,7 +14,7 @@ function DataView(props){
 
 function App() {
   return (
-    <div>
+    <div className="App">
       <div className="row">
         <div className="column">
             <DataView title="Map"/>
