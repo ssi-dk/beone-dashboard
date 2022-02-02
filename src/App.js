@@ -17,7 +17,9 @@ function App() {
     <div className="App">
       <div className="row">
         <div className="column">
-          <input className="pane" directory="" webkitdirectory="" type="file" />
+        <form className = "pane">
+            <input directory="" webkitdirectory="" type="file" />
+        </form>
         </div>
         <div className="column">
             <DataView title="Map"/>
