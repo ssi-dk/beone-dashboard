@@ -37,7 +37,7 @@
   }
 }
 
-.view{
+.pane{
   border:1px solid #eee;
   min-height: 200px;
   box-shadow:0 2px 2px #ccc;

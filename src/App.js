@@ -4,7 +4,7 @@ export default App;
 
 function DataView(props){
   return(
-     <div className="view">
+     <div className="pane">
         <header>
         <p>{props.title}</p>
         </header>
@@ -16,9 +16,9 @@ function App() {
   return (
     <div className="App">
       <div className="row">
-        <input directory="" webkitdirectory="" type="file" />
-      </div>
-      <div className="row">
+        <div className="column">
+          <input className="pane" directory="" webkitdirectory="" type="file" />
+        </div>
         <div className="column">
             <DataView title="Map"/>
         </div>
