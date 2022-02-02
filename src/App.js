@@ -17,9 +17,9 @@ function App() {
     <div className="App">
       <div className="row">
         <div className="column">
-        <form className = "pane">
-            <input directory="" webkitdirectory="" type="file" />
-        </form>
+        <div className = "pane">
+            <p>Data folder: {process.env.REACT_APP_DATA_FOLDER}</p>
+        </div>
         </div>
         <div className="column">
             <DataView title="Map"/>
