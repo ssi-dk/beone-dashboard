@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import './App.css';
 export default App;
 
-class SampleSelector extends Component {
+class FileSelector extends Component {
 
   showFile = async (e) => {
     e.preventDefault()
@@ -40,7 +40,7 @@ function App() {
     <div className="App">
       <div className="row">
         <div className="column">
-          <SampleSelector />
+          <FileSelector />
         </div>
         <div className="column">
             <DataView title="Map"/>
