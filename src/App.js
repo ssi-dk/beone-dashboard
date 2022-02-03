@@ -8,12 +8,13 @@ class FileSelector extends Component {
   showFile = async (e) => {
     e.preventDefault()
     const reader = new FileReader()
-    reader.onload = async (e) => { 
+    reader.onload = async (e) => {
       const text = (e.target.result)
-      console.log(text)
-      alert(text)
+      const data = JSON.parse(text)
+      console.log(data)
+      alert("Open web console to view data")
     };
-    reader.readAsText(e.target.files[0])
+    const raw = reader.readAsText(e.target.files[0])
   }
 
   render = () => {
