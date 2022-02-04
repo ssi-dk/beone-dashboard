@@ -57,7 +57,7 @@ function App() {
       </div>
       <div className = "row">
         <div className="column">
-            <DataView title="Grid"/>
+            <DataView title="Samples"/>
         </div>
       </div>
  </div>
