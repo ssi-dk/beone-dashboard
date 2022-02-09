@@ -1,65 +1,118 @@
 // import logo from './logo.svg';
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
+
+import {
+  RecoilRoot,
+  atom,
+  selector,
+  useRecoilState,
+  useRecoilValue,
+} from 'recoil'
+
 import './App.css';
 export default App;
 
-class FileSelector extends Component {
+const sampleState = atom({
+  key: 'sampleState',
+  default: {},
+});
 
-  showFile = async (e) => {
-    e.preventDefault()
-    const reader = new FileReader()
-    reader.onload = async (e) => {
-      const text = (e.target.result)
-      const data = JSON.parse(text)
-      console.log(data)
-      alert("Open web console to view data")
+function FileUploader(){
+	const [samples, setSamples] = useRecoilState(sampleState);
+
+	const changeHandler = async (event) => {
+    console.log("Current samples:")
+    console.log(samples)
+    var samples2 = {
+      ...samples
     };
-    const raw = reader.readAsText(e.target.files[0])
-  }
 
-  render = () => {
-    return (
-      <div className="pane">
-        <input type="file" onChange={(e) => this.showFile(e)} />
-      </div>
-    )
-  }
+    for (let f of event.target.files) {
+      console.log(f)
+      if (f['type'] === 'application/json') {
+        console.log(f['name'] + " seems to be a JSON file.")
+        const text = await readFile(f, samples2)
+        const data = await JSON.parse(text)
+        console.log("Data:")
+        console.log(data)
+        const sampleId = data["sample"]["summary"]["sample"]
+        samples2[sampleId] = data
+        }
+      }
+
+    setSamples(samples2)
+    }
+
+    function readFile(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+    
+        reader.onload = res => {
+          resolve(res.target.result);
+        };
+        reader.onerror = err => reject(err);
+    
+        reader.readAsText(file);
+      });
+    }
+
+	return(
+   <div className="pane">
+			<input type="file" name="file" multiple onChange={changeHandler} />
+		</div>
+	)
+
 }
 
 function DataView(props){
+  const [samples, setSamples] = useRecoilState(sampleState);
+
+  const listItems = Object.entries(samples).map(([key, value]) =>
+    // Pretty straightforward - use key for the key and value for the value.
+    // Just to clarify: unlike object destructuring, the parameter names don't matter here.
+    <li key={key}>
+      {key}
+    </li>
+    )
+
   return(
      <div className="pane">
         <header>
         <p>{props.title}</p>
         </header>
+        <ul>
+          {listItems}
+        </ul>
      </div>
   );
 }
 
 function App() {
   return (
-    <div className="App">
-      <div className="row">
-        <div className="column">
-          <FileSelector />
+    <RecoilRoot>
+      <div className="App">
+        <div className="row">
+          <div className="column">
+            <FileUploader />
+          </div>
+          <div className="column">
+              <DataView title="Map"/>
+          </div>
+          <div className="column">
+              <DataView title="Tree"/>
+          </div>
         </div>
-        <div className="column">
-            <DataView title="Map"/>
+        <div className = "row">
+          <div className="column">
+              <DataView title="Epi"/>
+          </div>
         </div>
-        <div className="column">
-            <DataView title="Tree"/>
+        <div className = "row">
+          <div className="column">
+              <DataView title="Data"/>
+          </div>
         </div>
-      </div>
-      <div className = "row">
-        <div className="column">
-            <DataView title="Epi"/>
-        </div>
-      </div>
-      <div className = "row">
-        <div className="column">
-            <DataView title="Samples"/>
-        </div>
-      </div>
- </div>
+    </div>
+  </RecoilRoot>
   );
 }
