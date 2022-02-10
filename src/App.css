@@ -50,7 +50,7 @@ h2 {
 }
 
 .row-header {
-  border-bottom: 1px solid;
+  border-bottom: 1px solid #ccc;;
   align-items: baseline;
 }
 
@@ -63,6 +63,7 @@ h2 {
 }
 .row {
   display: flex;
+  margin-top: 5px
 }
 .column {
   flex: 50%;
