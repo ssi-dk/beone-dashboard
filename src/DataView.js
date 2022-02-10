@@ -20,7 +20,7 @@ function DataView(props){
     const rowItems = Object.entries(samples).map(([key, value]) =>
     <div class="data-row" key={key}>
       <div class="column">
-        {key}
+        Sample ID: {key}
       </div>
       <div class="column">
         <ReactJson src={value["sample"]} name="sample" collapsed="true"/>
