@@ -65,8 +65,6 @@ function DummyView(props){
   const [samples, setSamples] = useRecoilState(sampleState);
 
   const rowItems = Object.entries(samples).map(([key, value]) =>
-    // Pretty straightforward - use key for the key and value for the value.
-    // Just to clarify: unlike object destructuring, the parameter names don't matter here.
     <div class="row" key={key}>
       {key}
     </div>
@@ -84,13 +82,24 @@ function DummyView(props){
 
 function DataView(props){
   const [samples, setSamples] = useRecoilState(sampleState);
+  
+  const rowItems = Object.entries(samples).map(([key, value]) =>
+  <div class="row" key={key}>
+    <div class="column">
+      {key}
+    </div>
+    <div class="column">
+    <ReactJson src={value} collapsed="true"/>
+    </div>
+  </div>
+  )
 
   return(
      <div className="pane">
         <header>
           <p>Data</p>
         </header>
-        <ReactJson src={samples} collapsed="true"/>
+        {rowItems}
      </div>
   );
 }
