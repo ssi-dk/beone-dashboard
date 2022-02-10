@@ -68,3 +68,7 @@ h2 {
 .column {
   flex: 50%;
 }
+
+.react-json-view {
+  font-family: sans-serif !important;
+}
