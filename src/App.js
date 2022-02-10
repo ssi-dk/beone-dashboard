@@ -23,20 +23,15 @@ function FileUploader(){
 	const [samples, setSamples] = useRecoilState(sampleState);
 
 	const changeHandler = async (event) => {
-    console.log("Current samples:")
-    console.log(samples)
     var samples2 = {
       ...samples
     };
 
     for (let f of event.target.files) {
-      console.log(f)
       if (f['type'] === 'application/json') {
         console.log(f['name'] + " seems to be a JSON file.")
         const text = await readFile(f, samples2)
         const data = await JSON.parse(text)
-        console.log("Data:")
-        console.log(data)
         const sampleId = data["sample"]["summary"]["sample"]
         samples2[sampleId] = data
         }
