@@ -92,7 +92,7 @@ function DataView(props){
         <header>
           <p>Data</p>
         </header>
-        <ReactJson src={samples}/>
+        <ReactJson src={samples} collapsed="true"/>
      </div>
   );
 }
