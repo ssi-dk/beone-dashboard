@@ -18,7 +18,7 @@ function DataView(props){
     const [samples, setSamples] = useRecoilState(sampleState);
     
     const rowItems = Object.entries(samples).map(([key, value]) =>
-    <div class="row" key={key}>
+    <div class="data-row" key={key}>
       <div class="column">
         {key}
       </div>
