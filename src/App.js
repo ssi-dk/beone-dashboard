@@ -9,6 +9,8 @@ import {
   useRecoilValue,
 } from 'recoil'
 
+import ReactJson from 'react-json-view'
+
 import './App.css';
 export default App;
 
@@ -64,7 +66,7 @@ function FileUploader(){
 
 }
 
-function DataView(props){
+function DummyView(props){
   const [samples, setSamples] = useRecoilState(sampleState);
 
   const listItems = Object.entries(samples).map(([key, value]) =>
@@ -87,6 +89,19 @@ function DataView(props){
   );
 }
 
+function DataView(props){
+  const [samples, setSamples] = useRecoilState(sampleState);
+
+  return(
+     <div className="pane">
+        <header>
+          <p>Data</p>
+        </header>
+        <ReactJson src={samples}/>
+     </div>
+  );
+}
+
 function App() {
   return (
     <RecoilRoot>
@@ -96,20 +111,20 @@ function App() {
             <FileUploader />
           </div>
           <div className="column">
-              <DataView title="Map"/>
+              <DummyView title="Map"/>
           </div>
           <div className="column">
-              <DataView title="Tree"/>
-          </div>
-        </div>
-        <div className = "row">
-          <div className="column">
-              <DataView title="Epi"/>
+              <DummyView title="Tree"/>
           </div>
         </div>
         <div className = "row">
           <div className="column">
-              <DataView title="Data"/>
+              <DummyView title="Epi"/>
+          </div>
+        </div>
+        <div className = "row">
+          <div className="column">
+              <DataView/>
           </div>
         </div>
     </div>
