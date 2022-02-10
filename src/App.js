@@ -89,7 +89,10 @@ function DataView(props){
       {key}
     </div>
     <div class="column">
-    <ReactJson src={value} collapsed="true"/>
+      <ReactJson src={value["sample"]} collapsed="true"/>
+    </div>
+    <div class="column">
+      <ReactJson src={value["pipelines"]} collapsed="true"/>
     </div>
   </div>
   )
