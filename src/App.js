@@ -64,12 +64,12 @@ function FileUploader(){
 function DummyView(props){
   const [samples, setSamples] = useRecoilState(sampleState);
 
-  const listItems = Object.entries(samples).map(([key, value]) =>
+  const rowItems = Object.entries(samples).map(([key, value]) =>
     // Pretty straightforward - use key for the key and value for the value.
     // Just to clarify: unlike object destructuring, the parameter names don't matter here.
-    <li key={key}>
+    <div class="row" key={key}>
       {key}
-    </li>
+    </div>
     )
 
   return(
@@ -77,9 +77,7 @@ function DummyView(props){
         <header>
         <p>{props.title}</p>
         </header>
-        <ul>
-          {listItems}
-        </ul>
+        {rowItems}
      </div>
   );
 }
