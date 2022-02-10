@@ -73,7 +73,7 @@ function DummyView(props){
   return(
      <div className="pane">
         <header>
-        <p>{props.title}</p>
+        <div>{props.title}</div>
         </header>
         {rowItems}
      </div>
@@ -97,7 +97,7 @@ function DataView(props){
   return(
      <div className="pane">
         <header>
-          <p>Data</p>
+          <div>Data</div>
         </header>
         {rowItems}
      </div>
