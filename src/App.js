@@ -55,6 +55,9 @@ function FileUploader(){
 
 	return(
    <div className="pane">
+      <h1>
+        <div>Files</div>
+      </h1>
 			<input type="file" name="file" multiple onChange={changeHandler} />
 		</div>
 	)
