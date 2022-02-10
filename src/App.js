@@ -9,10 +9,9 @@ import {
   useRecoilValue,
 } from 'recoil'
 
-import ReactJson from 'react-json-view'
-
 import './App.css';
 import FileUploader from './FileUploader';
+import DataView from './DataView';
 
 export default App;
 
@@ -35,47 +34,6 @@ function DummyView(props){
         <h1>
         <div>{props.title}</div>
         </h1>
-        {rowItems}
-     </div>
-  );
-}
-
-function DataView(props){
-  const [samples, setSamples] = useRecoilState(sampleState);
-  
-  const rowItems = Object.entries(samples).map(([key, value]) =>
-  <div class="row" key={key}>
-    <div class="column">
-      {key}
-    </div>
-    <div class="column">
-      <ReactJson src={value["sample"]} name="sample" collapsed="true"/>
-    </div>
-    <div class="column">
-      <ReactJson src={value["pipelines"]} name="pipelines" collapsed="true"/>
-    </div>
-  </div>
-  )
-
-  return(
-     <div className="pane">
-      <div class="row row-header">
-        <div class="column">
-          <h1>
-            Data
-          </h1>
-        </div>
-        <div class="column">
-          <h2>
-            Sample
-          </h2>
-        </div>
-        <div class="column">
-          <h2>
-            Pipelines
-          </h2>
-        </div>
-      </div>
         {rowItems}
      </div>
   );
