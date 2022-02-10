@@ -99,9 +99,23 @@ function DataView(props){
 
   return(
      <div className="pane">
-        <h1>
-          <div>Data</div>
-        </h1>
+      <div class="row">
+        <div class="column">
+          <h1>
+            <div>Data</div>
+          </h1>
+        </div>
+        <div class="column">
+          <h2>
+            <div>Sample</div>
+          </h2>
+        </div>
+        <div class="column">
+          <h2>
+            <div>Pipelines</div>
+          </h2>
+        </div>
+      </div>
         {rowItems}
      </div>
   );
