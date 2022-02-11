@@ -24,7 +24,7 @@ function DummyView(props){
   const [samples, setSamples] = useRecoilState(sampleState);
 
   const rowItems = Object.entries(samples).map(([key, value]) =>
-    <div class="row" key={key}>
+    <div className="row" key={key}>
       {key}
     </div>
     )

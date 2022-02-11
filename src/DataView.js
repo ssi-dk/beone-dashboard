@@ -18,14 +18,14 @@ function DataView(props){
     const [samples, setSamples] = useRecoilState(sampleState);
     
     const rowItems = Object.entries(samples).map(([key, value]) =>
-    <div class="data-row" key={key}>
-      <div class="column">
+    <div className="data-row" key={key}>
+      <div className="column">
         Sample ID: {key}
       </div>
-      <div class="column">
+      <div className="column">
         <ReactJson src={value["sample"]} name="sample" collapsed="true"/>
       </div>
-      <div class="column">
+      <div className="column">
         <ReactJson src={value["pipelines"]} name="pipelines" collapsed="true"/>
       </div>
     </div>
@@ -33,18 +33,18 @@ function DataView(props){
   
     return(
        <div className="pane">
-        <div class="row row-header">
-          <div class="column">
+        <div className="row row-header">
+          <div className="column">
             <h1>
               Data
             </h1>
           </div>
-          <div class="column">
+          <div className="column">
             <h2>
               Sample
             </h2>
           </div>
-          <div class="column">
+          <div className="column">
             <h2>
               Pipelines
             </h2>
