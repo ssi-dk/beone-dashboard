@@ -56,7 +56,7 @@ function DataView(props){
           </div>
           <div className="column">
             <h2>
-              QC Assessment
+              QC assessment
             </h2>
           </div>
           <div className="column">
