@@ -70,7 +70,6 @@ h2 {
   display: flex;
   margin: 0;
   padding: 3px;
-  /* background-color:beige; */
   align-items: baseline;
 }
 
@@ -82,4 +81,9 @@ h2 {
 
 .react-json-view {
   font-family: sans-serif !important;
+}
+
+.object-content {
+  margin: 0 3px 0 3px;
+  background-color:beige;
 }
