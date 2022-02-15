@@ -23,10 +23,19 @@ function DataView(props){
         {key}
       </div>
       <div className="column">
-        <ReactJson src={value["sample"]} name="sample" collapsed="true"/>
+        <ReactJson src={value["sample"]["summary"]} name="summary" collapsed="true"/>
       </div>
       <div className="column">
-        <ReactJson src={value["pipelines"]} name="pipelines" collapsed="true"/>
+        <ReactJson src={value["sample"]["qc_assessment"]} name="qc" collapsed="true"/>
+      </div>
+      <div className="column">
+        <ReactJson src={value["sample"]["metadata"]} name="sample_meta" collapsed="true"/>
+      </div>
+      <div className="column">
+        <ReactJson src={value["sample"]["run_metadata"]} name="run_meta" collapsed="true"/>
+      </div>
+      <div className="column">
+        <ReactJson src={value["pipelines"]} name="pipeline" collapsed="true"/>
       </div>
     </div>
     )
@@ -47,7 +56,7 @@ function DataView(props){
           </div>
           <div className="column">
             <h2>
-              QC
+              QC Assessment
             </h2>
           </div>
           <div className="column">
