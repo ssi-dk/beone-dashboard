@@ -70,7 +70,9 @@ function FileUploader(){
       <h1>
         <div>Files</div>
       </h1>
-			<input type="file" name="file" multiple onChange={changeHandler} />
+      <div className='spacer'>
+			  <input type="file" name="file" multiple onChange={changeHandler} />
+      </div>
 		</div>
 	)
 

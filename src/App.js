@@ -51,9 +51,9 @@ function App() {
     <RecoilRoot>
       <div className="App">
         <div className="row">
-          <div className="column">
-            <FileUploader />
-          </div>
+          <FileUploader />
+        </div>
+        <div className="row">
           <div className="column">
               <DummyView title="Map"/>
           </div>

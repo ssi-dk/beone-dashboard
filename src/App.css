@@ -56,11 +56,15 @@ h2 {
 .pane{
   flex: 1;
   border:1px solid #eee;
-  min-height: 200px;
   box-shadow:0 2px 2px #ccc;
   padding: 7px 10px;
   margin:10px;
 }
+
+.spacer {
+  padding: 3px 0 3px 0;
+}
+
 .row {
   display: flex;
   margin-top: 5px
