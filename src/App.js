@@ -9,6 +9,8 @@ import {
   useRecoilValue,
 } from 'recoil'
 
+import Phylo from './Phylo'
+
 import './App.css';
 import FileUploader from './FileUploader';
 import DataView from './DataView';
@@ -18,6 +20,11 @@ export default App;
 const sampleState = atom({
   key: 'sampleState',
   default: {},
+});
+
+const newickState = atom({
+  key: 'newickState',
+  default: '()',
 });
 
 function DummyView(props){
@@ -51,7 +58,13 @@ function App() {
               <DummyView title="Map"/>
           </div>
           <div className="column">
-              <DummyView title="Tree"/>
+
+          <div className="pane">
+            <h1>
+              Tree
+            </h1>
+            <Phylo/>
+          </div>
           </div>
         </div>
         <div className = "row">
