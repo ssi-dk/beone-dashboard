@@ -9,11 +9,11 @@ import {
   useRecoilValue,
 } from 'recoil'
 
+import './App.css'
+import FileUploader from './FileUploader'
+import DataView from './DataView'
 import Phylo from './Phylo'
-
-import './App.css';
-import FileUploader from './FileUploader';
-import DataView from './DataView';
+import Epi from './Epi'
 
 export default App;
 
@@ -69,7 +69,7 @@ function App() {
         </div>
         <div className = "row">
           <div className="column">
-              <DummyView title="Epi"/>
+              <Epi/>
           </div>
         </div>
         <div className = "row">
