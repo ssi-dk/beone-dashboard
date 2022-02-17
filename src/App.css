@@ -61,8 +61,12 @@ h2 {
   margin:10px;
 }
 
-.spacer {
+.vspace {
   padding: 3px 0 3px 0;
+}
+
+.rspace {
+  padding-right: 5px;
 }
 
 .row {

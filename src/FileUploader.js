@@ -67,11 +67,11 @@ function FileUploader(){
 
 	return(
    <div className="pane">
-      <h1>
-        <div>Files</div>
-      </h1>
-      <div className='spacer'>
-			  <input type="file" name="file" multiple onChange={changeHandler} />
+      <div className='vspace'>
+        <label>
+          <span className='rspace'>Select files:</span>
+			    <input type="file" name="file" multiple onChange={changeHandler} />
+        </label>
       </div>
 		</div>
 	)

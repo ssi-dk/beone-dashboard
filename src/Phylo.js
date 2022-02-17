@@ -49,7 +49,7 @@ class PhyloClass extends React.Component {
       <div>
         <PhyloClass
           source={newick}
-          size={{ width: 400, height: 200 }}
+          size={{ width: 900, height: 400 }}
           showLabels
           showLeafLabels
           interactive
