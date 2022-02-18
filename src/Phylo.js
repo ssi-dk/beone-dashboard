@@ -30,10 +30,18 @@ class PhyloClass extends React.Component {
         this.props || {},
       );
     }
-  
+
     componentDidUpdate() {
-      this.tree.setProps(this.props);
+      var props = {
+        ...this.props
+      }
+      /* A couple of examples of how to work with graphics on individual nodes */
+      props['styles'] = {'Se-Germany-BfR-0001': {fillColour: "lightgray" }}
+      props['selectedIds']=['Se-Germany-BfR-0010']
+      this.tree.setProps(props);
+
       console.log(this.tree.findNodeById('Se-Germany-BfR-0001'))
+      console.log(this.tree.exportJSON())
     }
   
     componentWillUnmount() {
@@ -53,7 +61,10 @@ class PhyloClass extends React.Component {
     const [samples, setSamples] = useRecoilState(sampleState);
    
     return(
-      <div>
+      <div className="pane">
+      <h1>
+        Tree
+      </h1>
         <PhyloClass
           source={newick}
           metadata={samples}
@@ -61,7 +72,6 @@ class PhyloClass extends React.Component {
           showLabels
           showLeafLabels
           interactive
-          selectedIds={['Se-Germany-BfR-0001']}
         />
       </div>
     )

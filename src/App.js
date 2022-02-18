@@ -58,18 +58,7 @@ function App() {
               <DummyView title="Map"/>
           </div>
           <div className="column">
-
-          <div className="pane">
-            <h1>
-              Tree
-            </h1>
-            <Phylo/>
-          </div>
-          </div>
-        </div>
-        <div className = "row">
-          <div className="column">
-              <Epi/>
+              <Phylo/>
           </div>
         </div>
         <div className = "row">
