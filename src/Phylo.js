@@ -61,6 +61,7 @@ class PhyloClass extends React.Component {
           showLabels
           showLeafLabels
           interactive
+          selectedIds={['Se-Germany-BfR-0001']}
         />
       </div>
     )
