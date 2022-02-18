@@ -13,6 +13,11 @@ const newickState = atom({
   default: '()',
 });
 
+const sampleState = atom({
+  key: 'sampleState',
+  default: {},
+});
+
 class PhyloClass extends React.Component {
 
     static displayName = "Phylocanvas"
@@ -28,6 +33,7 @@ class PhyloClass extends React.Component {
   
     componentDidUpdate() {
       this.tree.setProps(this.props);
+      console.log(this.tree.findNodeById('Se-Germany-BfR-0001'))
     }
   
     componentWillUnmount() {
@@ -44,11 +50,13 @@ class PhyloClass extends React.Component {
 
   function Phylo(){
     const [newick, setNewick] = useRecoilState(newickState);
-  
+    const [samples, setSamples] = useRecoilState(sampleState);
+   
     return(
       <div>
         <PhyloClass
           source={newick}
+          metadata={samples}
           size={{ width: window.innerWidth / 2, height: 400 }}
           showLabels
           showLeafLabels
