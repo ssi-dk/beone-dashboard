@@ -10,16 +10,15 @@ import {
 } from 'recoil'
 
 import './App.css'
-import FileUploader from './FileUploader'
-import DataView from './DataView'
+import Overview from './Overview'
+import DataFiles from './DataFiles'
 import Phylo from './Phylo'
-import Epi from './Epi'
 
 export default App;
 
 const sampleState = atom({
   key: 'sampleState',
-  default: {},
+  default: new Map(),
 });
 
 const newickState = atom({
@@ -27,35 +26,13 @@ const newickState = atom({
   default: '()',
 });
 
-function DummyView(props){
-  const [samples, setSamples] = useRecoilState(sampleState);
-
-  const rowItems = Object.entries(samples).map(([key, value]) =>
-    <div className="row" key={key}>
-      {key}
-    </div>
-    )
-
-  return(
-     <div className="pane">
-        <h1>
-        <div>{props.title}</div>
-        </h1>
-        {rowItems}
-     </div>
-  );
-}
-
 function App() {
   return (
     <RecoilRoot>
       <div className="App">
         <div className="row">
-          <FileUploader />
-        </div>
-        <div className="row">
           <div className="column">
-              <DummyView title="Map"/>
+              <Overview/>
           </div>
           <div className="column">
               <Phylo/>
@@ -63,9 +40,9 @@ function App() {
         </div>
         <div className = "row">
           <div className="column">
-              <DataView/>
+              <DataFiles/>
           </div>
-        </div>
+      </div>
     </div>
   </RecoilRoot>
   );

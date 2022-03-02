@@ -11,13 +11,12 @@ export default DataView
 
 const sampleState = atom({
     key: 'sampleState',
-    default: {},
+    default: new Map(),
   });
 
 function DataView(props){
-    const [samples, setSamples] = useRecoilState(sampleState);
-    
-    const rowItems = Object.entries(samples).map(([key, value]) =>
+    const dataArray = Array.from(props.data)
+    const rowItems = dataArray.map(([key, value]) =>
     <div className="data-row" key={key}>
       <div className="column">
         {key}
@@ -41,7 +40,7 @@ function DataView(props){
     )
   
     return(
-       <div className="pane">
+       <div>
         <h1>Data</h1>
         <div className="row row-header">
           <div className="column">

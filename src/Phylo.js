@@ -6,7 +6,12 @@ import {
   useRecoilState,
   useRecoilValue,
 } from 'recoil'
-import PhylocanvasGL, { TreeTypes } from "@phylocanvas/phylocanvas.gl";
+import PhylocanvasGL, { TreeTypes } from "@phylocanvas/phylocanvas.gl"
+import parser from "biojs-io-newick"
+
+import {readFile, findValues} from './utils'
+
+export default Phylo
 
 const newickState = atom({
   key: 'newickState',
@@ -15,66 +20,107 @@ const newickState = atom({
 
 const sampleState = atom({
   key: 'sampleState',
-  default: {},
+  default: new Map(),
 });
 
 class PhyloClass extends React.Component {
 
-    static displayName = "Phylocanvas"
-  
-    canvasRef = React.createRef()
-  
-    componentDidMount() {
-      this.tree = new PhylocanvasGL(
-        this.canvasRef.current,
-        this.props || {},
-      );
-    }
+  static displayName = "Phylocanvas"
 
-    componentDidUpdate() {
-      var props = {
-        ...this.props
-      }
-      /* A couple of examples of how to work with graphics on individual nodes */
-      props['styles'] = {'Se-Germany-BfR-0001': {fillColour: "lightgray" }}
-      props['selectedIds']=['Se-Germany-BfR-0010']
-      this.tree.setProps(props);
+  canvasRef = React.createRef()
 
-      console.log(this.tree.findNodeById('Se-Germany-BfR-0001'))
-      console.log(this.tree.exportJSON())
-    }
-  
-    componentWillUnmount() {
-      this.tree.destroy();
-    }
-  
-    render() {
-      return (
-        <div ref={this.canvasRef} />
-      );
-    }
-  
+  componentDidMount() {
+    this.tree = new PhylocanvasGL(
+      this.canvasRef.current,
+      {...this.props} || {},
+    );
   }
 
-  function Phylo(){
-    const [newick, setNewick] = useRecoilState(newickState);
-    const [samples, setSamples] = useRecoilState(sampleState);
-   
-    return(
-      <div className="pane">
+  componentDidUpdate() {
+    console.log("componentDidUpdate")
+    console.log("Styles in componentDidUpdate:")
+    console.log(this.props.styles)
+    this.tree.setProps({
+      ...this.props,
+      // Grey out IDs that are unknown in JSON files
+      // styles: {'Se-Germany-BfR-0001': {fillColour: "lightgray"}}
+    });
+  }
+
+  componentWillUnmount() {
+    this.tree.destroy();
+  }
+
+  render() {
+    return (
+      <div ref={this.canvasRef} />
+    );
+  }
+
+}
+
+function Phylo() {
+  const [newick, setNewick] = useRecoilState(newickState);
+  const [samples, setSamples] = useRecoilState(sampleState);
+
+  const NewickChangeHandler = async (event) => {
+
+    const f = event.target.files[0]
+
+    if (f['name'].endsWith(".nwk")) {
+      const text = await readFile(f)
+      setNewick(text)
+    }
+    else {
+      alert("Filename must end with '.nwk'.")
+    }
+
+  }
+
+  // memoise?
+  var samplesCopy = new Map(JSON.parse(
+    JSON.stringify(Array.from(samples))
+  ));
+
+  var globalIdsIter = samplesCopy.keys()
+  console.log("We can get the global IDs by iterating this variable:")
+  console.log(globalIdsIter)
+  const treeAsJSON = parser.parse_newick(newick)
+  const treeIds = findValues(treeAsJSON, 'name')
+  console.log("IDs in tree:")
+  console.log(treeIds)
+  var styles = {}
+  for (var id of treeIds) {
+    if (!samplesCopy.has(id)) {
+      styles[id] = {fillColour: "lightgray"}
+    }
+  }
+  console.log("Styles:")
+  console.log(styles)
+
+  const selectedIds = ['Se-Germany-BfR-0010']
+
+  return (
+    <div className="pane">
       <h1>
         Tree
       </h1>
-        <PhyloClass
-          source={newick}
-          metadata={samples}
-          size={{ width: window.innerWidth / 2, height: 400 }}
-          showLabels
-          showLeafLabels
-          interactive
-        />
+      <div className='vspace'>
+        <label>
+          <span className='rspace'>Select Newick file:</span>
+          <input type="file" name="file" onChange={NewickChangeHandler} />
+        </label>
       </div>
-    )
-  }
- 
-  export default Phylo
+      <PhyloClass
+        source={newick}
+        metadata={samples}
+        size={{ width: window.innerWidth / 2, height: 400 }}
+        showLabels
+        showLeafLabels
+        interactive
+        styles={styles}
+        selectedIds={selectedIds}
+      />
+    </div>
+  )
+}

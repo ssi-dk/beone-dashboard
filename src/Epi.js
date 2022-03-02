@@ -10,7 +10,7 @@ export default Epi
 
 const sampleState = atom({
     key: 'sampleState',
-    default: {},
+    default: new Map(),
   });
 
 function Epi(props){
