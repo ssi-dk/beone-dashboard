@@ -28,8 +28,17 @@ function Overview(props){
 
     const treeAsJSON = parser.parse_newick(newick)
     const treeIds = findValues(treeAsJSON, 'name')
-    console.log("Tree IDs:")
-    console.log(treeIds)
+    
+    const handleOnSelectedChange = (event) => {
+      const sampleID = event.target.name
+      var samplesCopy = new Map(JSON.parse(
+        JSON.stringify(Array.from(samples))
+      ));
+      var sample = samplesCopy.get(sampleID)
+      sample['selected'] = !samples.get(sampleID)['selected']
+      samplesCopy.set(sampleID, sample)
+      setSamples(samplesCopy)
+    }
 
     const sampleArray = Array.from(samples)
     const rowItems = sampleArray.map(([key, value]) =>
@@ -44,7 +53,7 @@ function Overview(props){
           <input type="checkbox" disabled={true} checked={treeIds.includes(key)}/>
         </div>
         <div className='column'>
-        <input type="checkbox" disabled={true} checked={value['selected']}/>
+        <input type="checkbox" name={key} checked={value['selected']} onChange={handleOnSelectedChange}/>
         </div>
         <div className='column'>
           {value.clusters}
