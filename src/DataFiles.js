@@ -27,10 +27,10 @@ function DataFiles(){
 	const JSONChangeHandler = async (event) => {
 
     // Make deep copies of states
-    const samplesCopy = new Map(JSON.parse(
+    var samplesCopy = new Map(JSON.parse(
       JSON.stringify(Array.from(samples))
     ));
-    const allDataCopy = new Map(JSON.parse(
+    var allDataCopy = new Map(JSON.parse(
       JSON.stringify(Array.from(allData))
     ));
 
