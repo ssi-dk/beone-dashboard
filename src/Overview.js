@@ -33,34 +33,33 @@ function Overview(props){
 
     const sampleArray = Array.from(samples)
     const rowItems = sampleArray.map(([key, value]) =>
-      <div key={key}>
-        <div className='row'>
-          <div className='column'>
-            {key}
-          </div>
-          <div className='column'>
-            {value.source}
-          </div>
-          <div className='column'>
-            <input type="checkbox" disabled={true} checked={treeIds.includes(key)}/>
-          </div>
-          <div className='column'>
-          <input type="checkbox" disabled={true} checked={value['selected']}/>
-          </div>
-          <div className='column'>
-            {value.clusters}
-          </div>
+      <div key={key}className='data-row'>
+        <div className='column'>
+          {key}
         </div>
-      </div>)
+        <div className='column'>
+          {value.source}
+        </div>
+        <div className='column'>
+          <input type="checkbox" disabled={true} checked={treeIds.includes(key)}/>
+        </div>
+        <div className='column'>
+        <input type="checkbox" disabled={true} checked={value['selected']}/>
+        </div>
+        <div className='column'>
+          {value.clusters}
+        </div>
+      </div>
+    )
     return(
        <div className="pane">
           <h1>Overview</h1>
-          <div className='row'>
-            <div className='column'>Sample ID</div>
-            <div className='column'>Source</div>
-            <div className='column'>In tree</div>
-            <div className='column'>Selected</div>
-            <div className='column'>Clusters</div>
+          <div className='row row-header'>
+            <div className='column'><h2>Sample ID</h2></div>
+            <div className='column'><h2>Source</h2></div>
+            <div className='column'><h2>In tree</h2></div>
+            <div className='column'><h2>Selected</h2></div>
+            <div className='column'><h2>Clusters</h2></div>
           </div>
           {rowItems}
        </div>
