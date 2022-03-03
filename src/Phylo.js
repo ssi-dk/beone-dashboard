@@ -96,17 +96,9 @@ function Phylo() {
       styles[id] = {fillColour: "lightgray"}
     }
   }
-  console.log("Styles:")
-  console.log(styles)
-  const samplesArray = Array.from(samples)
-  console.log("Samples array:")
-  console.log(samplesArray)
+  
   const selectedSamples = Array.from(samples).filter(sample => sample[1]['selected'])
-  console.log("Selected samples:")
-  console.log(selectedSamples)
   const selectedIds = selectedSamples.map(x => x[0])
-  console.log("Selected IDs:")
-  console.log(selectedIds)
 
   return (
     <div className="pane">
