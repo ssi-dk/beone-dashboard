@@ -24,10 +24,11 @@ In the terminal window, in the location on your computer where you want the dash
 git clone https://github.com/ssi-dk/beone-dashboard
 ```
 
-## Run BeONE Dashboard
+## Install and run BeONE Dashboard
 In the same console window, you can now type:
 ```
 cd beone-dashboard
+npm install
 npm start
 ```
 
