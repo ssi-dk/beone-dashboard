@@ -35,6 +35,17 @@ class PhyloClass extends React.Component {
       this.canvasRef.current,
       {...this.props} || {},
     );
+  
+    // we can override the handleClick method, but how do we communicate to rest of app?
+    /*     this.tree.handleClick = (info, event) => {
+      alert("Click.")
+      const node = this.tree.pickNodeFromLayer(info);
+      this.tree.selectNode(
+        node,
+        event.srcEvent.metaKey || event.srcEvent.ctrlKey,
+      );
+    }
+   */ 
   }
 
   componentDidUpdate() {
