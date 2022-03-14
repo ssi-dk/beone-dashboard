@@ -39,7 +39,7 @@ class PhyloClass extends React.Component {
 
     this.tree.handleClick = (info, event) => {
       const node = this.tree.pickNodeFromLayer(info);
-      if (node && node.isLeaf && !this.props.selectedIds.includes(node.id)) {
+      if (node && node.isLeaf) {
         this.tree.selectNode(
           node,
           event.srcEvent.metaKey || event.srcEvent.ctrlKey,

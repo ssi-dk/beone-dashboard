@@ -41,8 +41,8 @@ function Overview(props){
           console.log("samplesCopy:")
           console.log(samplesCopy)
           var sample = samplesCopy.get(sampleID)
-          if (sample !== undefined && sample['selected'] == false) {
-            sample['selected'] = true
+          if (sample) {
+            sample['selected'] = !sample['selected']
             samplesCopy.set(sampleID, sample)
             setSamples(samplesCopy)
           }
