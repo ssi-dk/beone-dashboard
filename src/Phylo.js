@@ -9,6 +9,7 @@ import {
 } from 'recoil'
 import PhylocanvasGL, { TreeTypes } from "@phylocanvas/phylocanvas.gl"
 import parser from "biojs-io-newick"
+import PubSub from 'pubsub-js'
 
 import {readFile, findValues} from './utils'
 
@@ -36,22 +37,22 @@ class PhyloClass extends React.Component {
       {...this.props} || {},
     );
   
-    // we can override the handleClick method, but how do we communicate to rest of app?
-    /*     this.tree.handleClick = (info, event) => {
-      alert("Click.")
+    this.tree.handleClick = (info, event) => {
+      // The below code is copied from the original handleClick method in Phylocanvas.gl.
       const node = this.tree.pickNodeFromLayer(info);
       this.tree.selectNode(
         node,
         event.srcEvent.metaKey || event.srcEvent.ctrlKey,
       );
+      if (node) {  // or: if (!node.isNull && node.isLeaf)
+        console.log("Sending " + node.id)
+        PubSub.publish('SELECT', node.id)
+      }
     }
-   */ 
   }
 
   componentDidUpdate() {
     console.log("componentDidUpdate")
-    console.log("Styles in componentDidUpdate:")
-    console.log(this.props.styles)
     this.tree.setProps({
       ...this.props,
       // Grey out IDs that are unknown in JSON files
@@ -94,9 +95,6 @@ function Phylo() {
     JSON.stringify(Array.from(samples))
   ));
 
-  var globalIdsIter = samplesCopy.keys()
-  console.log("We can get the global IDs by iterating this variable:")
-  console.log(globalIdsIter)
   const treeAsJSON = parser.parse_newick(newick)
   const treeIds = findValues(treeAsJSON, 'name')
   console.log("IDs in tree:")

@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import {
     RecoilRoot,
     atom,
@@ -7,6 +8,7 @@ import {
   } from 'recoil'
 
 import parser from "biojs-io-newick"
+import PubSub from 'pubsub-js'
 
 import {findValues} from './utils'
 
@@ -17,10 +19,10 @@ const sampleState = atom({
     default: new Map(),
   });
   
-  const newickState = atom({
-    key: 'newickState',
-    default: '()',
-  });
+const newickState = atom({
+  key: 'newickState',
+  default: '()',
+});
 
 function Overview(props){
     const [samples, setSamples] = useRecoilState(sampleState);
@@ -28,6 +30,30 @@ function Overview(props){
 
     const treeAsJSON = parser.parse_newick(newick)
     const treeIds = findValues(treeAsJSON, 'name')
+
+    useEffect(() => {
+      var selectionSubscriber = function(msg, sampleID) {
+        if (samples) {
+          console.log("Received ID " + sampleID)
+          var samplesCopy = new Map(JSON.parse(
+            JSON.stringify(Array.from(samples))
+          ));
+          console.log("samplesCopy:")
+          console.log(samplesCopy)
+          var sample = samplesCopy.get(sampleID)
+          if (sample !== undefined && sample['selected'] == false) {
+            sample['selected'] = true
+            samplesCopy.set(sampleID, sample)
+            setSamples(samplesCopy)
+          }
+        }
+      }
+      const subscription = PubSub.subscribe('SELECT', selectionSubscriber)
+      return () => {
+        console.log("Unsubscribing.")
+        PubSub.unsubscribe(subscription)
+      }
+    }, [samples])
     
     const handleOnSelectedChange = (event) => {
       const sampleID = event.target.name
