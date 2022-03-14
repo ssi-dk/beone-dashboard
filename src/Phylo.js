@@ -34,19 +34,20 @@ class PhyloClass extends React.Component {
   componentDidMount() {
     this.tree = new PhylocanvasGL(
       this.canvasRef.current,
-      {...this.props} || {},
+      { ...this.props } || {},
     );
-  
+
     this.tree.handleClick = (info, event) => {
-      // The below code is copied from the original handleClick method in Phylocanvas.gl.
       const node = this.tree.pickNodeFromLayer(info);
-      this.tree.selectNode(
-        node,
-        event.srcEvent.metaKey || event.srcEvent.ctrlKey,
-      );
-      if (node) {  // or: if (!node.isNull && node.isLeaf)
-        console.log("Sending " + node.id)
-        PubSub.publish('SELECT', node.id)
+      if (node && node.isLeaf && !this.props.selectedIds.includes(node.id)) {
+        this.tree.selectNode(
+          node,
+          event.srcEvent.metaKey || event.srcEvent.ctrlKey,
+        );
+        if (node) {  // or: if (!node.isNull && node.isLeaf)
+          console.log("Sending " + node.id)
+          PubSub.publish('SELECT', node.id)
+        }
       }
     }
   }
