@@ -11,7 +11,7 @@ local clone of a GitHub repository on your computer.
 
 -   Type `git clone git@github.com:ssi-dk/beone-dashboard.git`
 -   The command above will create a folder containing the dashboard. Below we will refer to the created folder
-    as\<dashboard_folder\>.
+    as \<dashboard_folder\>.
 -   Go to https://nodejs.org in a browser.
 -   Select "Other downloads".
 -   Download "Windows Binary (.zip)" and "64-bit".
