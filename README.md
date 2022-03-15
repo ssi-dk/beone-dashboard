@@ -45,4 +45,5 @@ with \'ERROR in Plugin \"react\" was conflicted between\...\'.
 
 # Opening files in the dashboard
 To see data in the dashboard you must open a tree file (\*.nwk) and some BeONE JSON files (\*.json) from inside the dashboard.
-For testing you can use the test files provided in the test_data folder.
+For testing you can use the test files provided in the test_data folder. For the JSON files you can select more than one file
+at a time.
