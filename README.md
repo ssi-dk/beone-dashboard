@@ -18,7 +18,7 @@ local clone of a GitHub repository on your computer.
 -   Create a text file named \'dashboard.bat\' somewhere on your computer
     containing (replace the placeholders with the actual paths):
     ```
-    @cd <dashboard_folder\
+    @cd <dashboard_folder>
     @set PATH=<node_folder>;%PATH%
     @npm start
     ```
