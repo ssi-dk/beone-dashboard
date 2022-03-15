@@ -25,12 +25,14 @@ local clone of a GitHub repository on your computer.
     @set PATH=<node_folder>;%PATH%
     @cmd.exe /K
     ```
+    Make sure your text editor is configured to use Windows (not UNIX) line endings.
 -   In the terminal, `cd` to the location where you placed the dashboard.bat file
     and type `dashboard.bat`. After this, the current directory should now be the location that contains the dashboard.
--   In the terminal, type `npm install`. This will install a number of libraries in a subfolder named ´node_modules´.
+-   In the terminal, type `npm config set registry http://registry.npmjs.org`
+-   Next, type `npm install`. This will install a number of libraries in a subfolder named ´node_modules´.
 
 -   When the install has finished, type `npm start` to run the dashboard. The dashboard should automatically open as
-http://localhost:3000 in your default browser (it migh take a while before it appears).
+http://localhost:3000 in your default browser (it mighy take a while before it appears).
 
 # Running the dashboard again later
 When you want to run the dashboard later, first cd to the directory with dashboard.bat in a 'cmd' window and execute it.
