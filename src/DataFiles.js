@@ -59,8 +59,18 @@ function DataFiles(){
     }
     setSamples(samplesCopy)
     setAllData(allDataCopy)
-    }
+  }
 
+  let allDataArray = Array.from(allData)
+
+  function filterItems(allDataArray, samples) {
+    return allDataArray.filter(function(sample) {
+      return samples.get(sample[0])['selected']
+    })
+  }
+  
+  console.log(filterItems(allDataArray, samples))
+  
 	return(
    <div className="pane">
       <div className='vspace'>
@@ -69,7 +79,7 @@ function DataFiles(){
 			    <input type="file" name="file" multiple onChange={JSONChangeHandler} />
         </label>
       </div>
-      <DataView data={allData}/>
+      <DataView data={filterItems(allDataArray, samples)}/>
 		</div>
 	)
 
