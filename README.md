@@ -6,10 +6,13 @@ computer and that you don\'t have admin access to Windows.
 As a prerequisite you must have Git installed on and be able to make a
 local clone of a GitHub repository on your computer.
 
--   \'git clone\' the BeONE Dashboard repository somewhere on your
-    computer. Below we will refer to the created folder
+-   Open a PowerShell terminal window on your computer and `cd` to the location where
+    you want to clone the repository.
+
+-   Type `git clone git@github.com:ssi-dk/beone-dashboard.git`
+-   The command above will create a folder containing the dashboard. Below we will refer to the created folder
     as\<dashboard_folder\>.
--   Go to nodejs.org in a browser.
+-   Go to https://nodejs.org in a browser.
 -   Select "Other downloads".
 -   Download "Windows Binary (.zip)" and "64-bit".
 -   Extract the content to a folder somewhere on your computer. Below we
