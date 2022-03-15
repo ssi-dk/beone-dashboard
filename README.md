@@ -32,7 +32,7 @@ local clone of a GitHub repository on your computer.
 -   Next, type `npm install`. This will install a number of libraries in a subfolder named ´node_modules´.
 
 -   When the install has finished, type `npm start` to run the dashboard. The dashboard should automatically open as
-http://localhost:3000 in your default browser (it mighy take a while before it appears).
+http://localhost:3000 in your default browser (it might take a while before it appears).
 
 # Running the dashboard again later
 When you want to run the dashboard later, first cd to the directory with dashboard.bat in a 'cmd' window and execute it.
