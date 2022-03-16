@@ -21,8 +21,8 @@ const sampleState = atom({
 function DataFiles(){
     
 	const [samples, setSamples] = useRecoilState(sampleState);
-  // allData is only used locally, so we don't need Recoil.
   const [allData, setAllData] = useState(new Map());
+  const [filter, setFilter] = useState(false);
 
 	const JSONChangeHandler = async (event) => {
 
@@ -61,6 +61,10 @@ function DataFiles(){
     setAllData(allDataCopy)
   }
 
+  const filterChangeHandler = (event) => {
+    setFilter(!filter)
+  }
+
   let allDataArray = Array.from(allData)
 
   function filterItems(allDataArray, samples) {
@@ -78,8 +82,14 @@ function DataFiles(){
           <span className='rspace'>Select JSON file(s):</span>
 			    <input type="file" name="file" multiple onChange={JSONChangeHandler} />
         </label>
+        <label>
+          <input type="checkbox" name='filter_selected' checked={filter} onChange={filterChangeHandler}/>
+          <span className='rspace'>Show selected samples only</span>
+        </label>
       </div>
-      <DataView data={filterItems(allDataArray, samples)}/>
+      <DataView data={
+        filter ? filterItems(allDataArray, samples) : allDataArray
+      }/>
 		</div>
 	)
 

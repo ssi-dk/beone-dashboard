@@ -15,8 +15,7 @@ const sampleState = atom({
   });
 
 function DataView(props){
-    const dataArray = Array.from(props.data)
-    const rowItems = dataArray.map(([key, value]) =>
+    const rowItems = props.data.map(([key, value]) =>
     <div className="data-row" key={key}>
       <div className="column">
         {key}
