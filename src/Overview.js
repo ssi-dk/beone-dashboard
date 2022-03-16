@@ -81,9 +81,6 @@ function Overview(props){
         <div className='column'>
         <input type="checkbox" name={key} checked={value['selected']} onChange={handleOnSelectedChange}/>
         </div>
-        <div className='column'>
-          {value.clusters}
-        </div>
       </div>
     )
     return(
@@ -94,7 +91,6 @@ function Overview(props){
             <div className='column'><h2>Source</h2></div>
             <div className='column'><h2>In tree</h2></div>
             <div className='column'><h2>Selected</h2></div>
-            <div className='column'><h2>Clusters</h2></div>
           </div>
           {rowItems}
        </div>
