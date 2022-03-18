@@ -96,3 +96,7 @@ h2 {
   margin: 0 3px 0 3px;
   background-color:beige;
 }
+
+.selected-field {
+  margin: 3px;
+}

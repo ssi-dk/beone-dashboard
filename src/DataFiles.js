@@ -77,6 +77,7 @@ function DataFiles(){
   
 	return(
    <div className="pane">
+      <h1>JSON data</h1>
       <div className='vspace'>
         <label>
           <span className='rspace'>Select JSON file(s):</span>

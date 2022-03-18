@@ -1,4 +1,5 @@
 
+import { useState } from 'react'
 import ReactJson from 'react-json-view'
 import {
     RecoilRoot,
@@ -15,65 +16,63 @@ const sampleState = atom({
   });
 
 function DataView(props){
-    const rowItems = props.data.map(([key, value]) =>
+
+  const [selectedFields, setSelectedFields] = useState([]);
+  const [synced, setSynced] = useState(false);
+
+  const transferCheckHandler = (checked) => {
+    setSynced(!synced)
+  }
+
+  const fieldSelectHandler = (selection) => {
+    var jsonPath = selection.namespace.join('.')
+    jsonPath = jsonPath + '.' + selection.name
+    if (!selectedFields.includes(jsonPath)) {
+      var selectedFieldsCopy = Array.from(selectedFields)
+      selectedFieldsCopy.push(jsonPath)
+      setSelectedFields(selectedFieldsCopy)
+      setSynced(false)
+    }
+  }
+
+  const fieldDeselectHandler = (event) => {
+    console.log('Remove' + event.target.name + 'from selected fields')
+    if (selectedFields.includes(event.target.name)) {
+      var selectedFieldsCopy = Array.from(selectedFields)
+      selectedFieldsCopy.splice(selectedFieldsCopy.indexOf(event.target.name))
+      setSelectedFields(selectedFieldsCopy)
+      setSynced(false)
+    }
+  }
+  
+  const fieldItems = selectedFields.map((path) =>
+    <button className='selected-field' key={path} name={path} onClick={fieldDeselectHandler}>
+      {path}
+    </button>
+  )
+
+  const jsonView = props.data.map(([key, value]) =>
     <div className="data-row" key={key}>
-      <div className="column">
-        {key}
+      <h2>{key}</h2>
+      <ReactJson src={value} collapsed="true" onSelect={fieldSelectHandler}/>
+    </div>
+  )
+
+  return(
+    <div>
+      <div className='row'>
+        <label>
+        <span className='rspace'>Selected fields:</span>
+          {fieldItems}
+        </label>
+        <label>
+          <input type='checkbox' name='use_for_mapping' checked={synced} onChange={transferCheckHandler}/>
+          <span className='rspace'>Sync to Overview</span>
+        </label>
       </div>
-      <div className="column">
-        <ReactJson src={value["sample"]["summary"]} name="summary" collapsed="true"/>
-      </div>
-      <div className="column">
-        <ReactJson src={value["sample"]["qc_assessment"]} name="qc" collapsed="true"/>
-      </div>
-      <div className="column">
-        <ReactJson src={value["sample"]["metadata"]} name="sample_meta" collapsed="true"/>
-      </div>
-      <div className="column">
-        <ReactJson src={value["sample"]["run_metadata"]} name="run_meta" collapsed="true"/>
-      </div>
-      <div className="column">
-        <ReactJson src={value["pipelines"]} name="pipeline" collapsed="true"/>
+      <div>
+        {jsonView}
       </div>
     </div>
-    )
-  
-    return(
-       <div>
-        <h1>Data</h1>
-        <div className="row row-header">
-          <div className="column">
-            <h2>
-              Sample ID
-            </h2>
-          </div>
-          <div className="column">
-            <h2>
-              Summary
-            </h2>
-          </div>
-          <div className="column">
-            <h2>
-              QC assessment
-            </h2>
-          </div>
-          <div className="column">
-            <h2>
-              Sample metadata
-            </h2>
-          </div>
-          <div className="column">
-            <h2>
-              Run metadata
-            </h2>
-          </div>
-          <div className="column">
-            <h2>
-              Pipelines
-            </h2>
-          </div>
-        </div>
-          {rowItems}
-       </div>
     );
   }
