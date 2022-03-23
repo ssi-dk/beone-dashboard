@@ -1,26 +1,14 @@
 
-import { useState } from 'react'
+import {React, useState } from 'react'
 import ReactJson from 'react-json-view'
-import {
-    RecoilRoot,
-    atom,
-    selector,
-    useRecoilState,
-    useRecoilValue,
-  } from 'recoil'
 export default DataView
-
-const sampleState = atom({
-    key: 'sampleState',
-    default: new Map(),
-  });
 
 function DataView(props){
 
   const [selectedFields, setSelectedFields] = useState([]);
   const [synced, setSynced] = useState(false);
 
-  const transferCheckHandler = (checked) => {
+  const transferCheckHandler = () => {
     setSynced(!synced)
   }
 
@@ -52,9 +40,9 @@ function DataView(props){
   )
 
   const jsonView = props.data.map(([key, value]) =>
-    <div className="data-row" key={key}>
+    <div className='data-row' key={key}>
       <h2>{key}</h2>
-      <ReactJson src={value} collapsed="true" onSelect={fieldSelectHandler}/>
+      <ReactJson src={value} collapsed='true' onSelect={fieldSelectHandler}/>
     </div>
   )
 

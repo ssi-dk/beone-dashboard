@@ -1,14 +1,10 @@
 import React from 'react'
 import {
-  RecoilRoot,
   atom,
-  selector,
   useRecoilState,
-  useRecoilValue,
-  constSelector,
 } from 'recoil'
-import PhylocanvasGL, { TreeTypes } from "@phylocanvas/phylocanvas.gl"
-import parser from "biojs-io-newick"
+import PhylocanvasGL from '@phylocanvas/phylocanvas.gl'
+import parser from 'biojs-io-newick'
 import PubSub from 'pubsub-js'
 
 import {readFile, findValues} from './utils'
@@ -27,7 +23,7 @@ const sampleState = atom({
 
 class PhyloClass extends React.Component {
 
-  static displayName = "Phylocanvas"
+  static displayName = 'Phylocanvas'
 
   canvasRef = React.createRef()
 
@@ -45,7 +41,7 @@ class PhyloClass extends React.Component {
           event.srcEvent.metaKey || event.srcEvent.ctrlKey,
         );
         if (node) {  // or: if (!node.isNull && node.isLeaf)
-          console.log("Sending " + node.id)
+          console.log('Sending ' + node.id)
           PubSub.publish('SELECT', node.id)
         }
       }
@@ -53,11 +49,11 @@ class PhyloClass extends React.Component {
   }
 
   componentDidUpdate() {
-    console.log("componentDidUpdate")
+    console.log('componentDidUpdate')
     this.tree.setProps({
       ...this.props,
       // Grey out IDs that are unknown in JSON files
-      // styles: {'Se-Germany-BfR-0001': {fillColour: "lightgray"}}
+      // styles: {'Se-Germany-BfR-0001': {fillColour: 'lightgray'}}
     });
   }
 
@@ -75,18 +71,18 @@ class PhyloClass extends React.Component {
 
 function Phylo() {
   const [newick, setNewick] = useRecoilState(newickState);
-  const [samples, setSamples] = useRecoilState(sampleState);
+  const [samples] = useRecoilState(sampleState);
 
   const NewickChangeHandler = async (event) => {
 
     const f = event.target.files[0]
 
-    if (f['name'].endsWith(".nwk")) {
+    if (f['name'].endsWith('.nwk')) {
       const text = await readFile(f)
       setNewick(text)
     }
     else {
-      alert("Filename must end with '.nwk'.")
+      alert('Filename must end with ".nwk".')
     }
 
   }
@@ -98,12 +94,12 @@ function Phylo() {
 
   const treeAsJSON = parser.parse_newick(newick)
   const treeIds = findValues(treeAsJSON, 'name')
-  console.log("IDs in tree:")
+  console.log('IDs in tree:')
   console.log(treeIds)
   var styles = {}
   for (var id of treeIds) {
     if (!samplesCopy.has(id)) {
-      styles[id] = {fillColour: "lightgray"}
+      styles[id] = {fillColour: 'lightgray'}
     }
   }
   
@@ -111,14 +107,14 @@ function Phylo() {
   const selectedIds = selectedSamples.map(x => x[0])
 
   return (
-    <div className="pane">
+    <div className='pane'>
       <h1>
         Tree
       </h1>
       <div className='vspace'>
         <label>
           <span className='rspace'>Select Newick file:</span>
-          <input type="file" name="file" onChange={NewickChangeHandler} />
+          <input type='file' name='file' onChange={NewickChangeHandler} />
         </label>
       </div>
       <PhyloClass

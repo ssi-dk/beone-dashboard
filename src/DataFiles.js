@@ -1,11 +1,8 @@
-import {useState} from 'react'
+import React, {useState} from 'react'
 
 import {
-    RecoilRoot,
     atom,
-    selector,
     useRecoilState,
-    useRecoilValue,
   } from 'recoil'
 
 import DataView from './DataView'
@@ -35,17 +32,17 @@ function DataFiles(){
     ));
 
     for (let f of event.target.files) {
-      if (f['name'].endsWith(".json")) {
+      if (f['name'].endsWith('.json')) {
         const text = await readFile(f)
         const data = await JSON.parse(text)
-        const sampleId = data["sample"]["summary"]["sample"]
+        const sampleId = data['sample']['summary']['sample']
         if (samplesCopy.has(sampleId)) {
           /* We do not want to override an existing item here, as this would
           cause loss of information (inTree, selected, clusters). */
-          alert(f.name + " was not imported as it would overwrite existing sample ID " + sampleId)
+          alert(f.name + ' was not imported as it would overwrite existing sample ID ' + sampleId)
         } else {
           samplesCopy.set(sampleId, {
-            source: "file:///" + f.name,
+            source: 'file:///' + f.name,
             inTree: false,  // The tree should tell wether it knows the sample or not.
             selected: false,
             clusters: []
@@ -54,14 +51,14 @@ function DataFiles(){
         }
       }
       else {
-        alert("Filename must end with '.json'.")
+        alert('Filename must end with ".json".')
       }
     }
     setSamples(samplesCopy)
     setAllData(allDataCopy)
   }
 
-  const filterChangeHandler = (event) => {
+  const filterChangeHandler = () => {
     setFilter(!filter)
   }
 
@@ -76,15 +73,15 @@ function DataFiles(){
   console.log(filterItems(allDataArray, samples))
   
 	return(
-   <div className="pane">
+   <div className='pane'>
       <h1>JSON data</h1>
       <div className='vspace'>
         <label>
           <span className='rspace'>Select JSON file(s):</span>
-			    <input type="file" name="file" multiple onChange={JSONChangeHandler} />
+          <input type='file' name='file' multiple onChange={JSONChangeHandler} />
         </label>
         <label>
-          <input type="checkbox" name='filter_selected' checked={filter} onChange={filterChangeHandler}/>
+          <input type='checkbox' name='filter_selected' checked={filter} onChange={filterChangeHandler}/>
           <span className='rspace'>Show selected samples only</span>
         </label>
       </div>

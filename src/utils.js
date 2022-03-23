@@ -27,7 +27,7 @@ function readFile(file) {
     }
     if (obj[key]) list.push(obj[key]);
   
-    if ((typeof obj == "object") && (obj !== null) ){
+    if ((typeof obj === 'object') && (obj !== null) ){
       var children = Object.keys(obj);
       if (children.length > 0){
         for (i = 0; i < children.length; i++ ){

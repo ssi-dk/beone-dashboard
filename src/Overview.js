@@ -1,13 +1,10 @@
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import {
-    RecoilRoot,
     atom,
-    selector,
     useRecoilState,
-    useRecoilValue,
   } from 'recoil'
 
-import parser from "biojs-io-newick"
+import parser from 'biojs-io-newick'
 import PubSub from 'pubsub-js'
 
 import {findValues} from './utils'
@@ -24,9 +21,9 @@ const newickState = atom({
   default: '()',
 });
 
-function Overview(props){
+function Overview(){
     const [samples, setSamples] = useRecoilState(sampleState);
-    const [newick, setNewick] = useRecoilState(newickState);
+    const [newick] = useRecoilState(newickState);
 
     const treeAsJSON = parser.parse_newick(newick)
     const treeIds = findValues(treeAsJSON, 'name')
@@ -34,11 +31,11 @@ function Overview(props){
     useEffect(() => {
       var selectionSubscriber = function(msg, sampleID) {
         if (samples) {
-          console.log("Received ID " + sampleID)
+          console.log('Received ID ' + sampleID)
           var samplesCopy = new Map(JSON.parse(
             JSON.stringify(Array.from(samples))
           ));
-          console.log("samplesCopy:")
+          console.log('samplesCopy:')
           console.log(samplesCopy)
           var sample = samplesCopy.get(sampleID)
           if (sample) {
@@ -50,7 +47,7 @@ function Overview(props){
       }
       const subscription = PubSub.subscribe('SELECT', selectionSubscriber)
       return () => {
-        console.log("Unsubscribing.")
+        console.log('Unsubscribing.')
         PubSub.unsubscribe(subscription)
       }
     }, [samples])
@@ -76,15 +73,15 @@ function Overview(props){
           {value.source}
         </div>
         <div className='column'>
-          <input type="checkbox" disabled={true} checked={treeIds.includes(key)}/>
+          <input type='checkbox' disabled={true} checked={treeIds.includes(key)}/>
         </div>
         <div className='column'>
-        <input type="checkbox" name={key} checked={value['selected']} onChange={handleOnSelectedChange}/>
+        <input type='checkbox' name={key} checked={value['selected']} onChange={handleOnSelectedChange}/>
         </div>
       </div>
     )
     return(
-       <div className="pane">
+       <div className='pane'>
           <h1>Overview</h1>
           <div className='row row-header'>
             <div className='column'><h2>Sample ID</h2></div>
