@@ -87,18 +87,13 @@ function Phylo() {
 
   }
 
-  // memoise?
-  var samplesCopy = new Map(JSON.parse(
-    JSON.stringify(Array.from(samples))
-  ));
-
   const treeAsJSON = parser.parse_newick(newick)
   const treeIds = findValues(treeAsJSON, 'name')
   console.log('IDs in tree:')
   console.log(treeIds)
   var styles = {}
   for (var id of treeIds) {
-    if (!samplesCopy.has(id)) {
+    if (!samples.has(id)) {
       styles[id] = {fillColour: 'lightgray'}
     }
   }
