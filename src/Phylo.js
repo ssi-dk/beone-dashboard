@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import {
   atom,
   useRecoilState,
@@ -89,7 +89,7 @@ function Phylo() {
 
   function treeStyles(newick, samples) {
     /* In the future there may be a way of getting the tree IDs directly from
-    the trees. A getLeafIds() method seems to be planned, but is not
+    the tree. A getLeafIds() method seems to be planned, but is not
     implemented at the time of this writing. See
     https://www.phylocanvas.gl/docs/methods.html#getleafids */
     const treeAsJSON = parser.parse_newick(newick)
@@ -104,7 +104,10 @@ function Phylo() {
     return styles
   }
 
-  const styles = treeStyles(newick, samples)
+  const styles = useMemo(() =>
+    treeStyles(newick, samples),
+    [newick, samples]
+  )
   
   const selectedSamples = Array.from(samples).filter(sample => sample[1]['selected'])
   const selectedIds = selectedSamples.map(x => x[0])
