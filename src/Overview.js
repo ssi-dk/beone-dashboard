@@ -85,7 +85,6 @@ function Overview(){
           <h1>Overview</h1>
           <div className='row row-header'>
             <div className='column'><h2>Sample ID</h2></div>
-            <div className='column'><h2>Source</h2></div>
             <div className='column'><h2>In tree</h2></div>
             <div className='column'><h2>Selected</h2></div>
           </div>
