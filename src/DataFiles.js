@@ -37,16 +37,14 @@ function DataFiles(){
         const data = await JSON.parse(text)
         const sampleId = data['sample']['summary']['sample']
         if (samplesCopy.has(sampleId)) {
-          /* We do not want to override an existing item here, as this would
-          cause loss of information (inTree, selected, clusters). */
           alert(f.name + ' was not imported as it would overwrite existing sample ID ' + sampleId)
         } else {
           samplesCopy.set(sampleId, {
-            source: 'file:///' + f.name,
             inTree: false,  // The tree should tell wether it knows the sample or not.
-            selected: false,
-            clusters: []
+            selected: false
+            // clusters: [] Just an idea for the future
           })
+          data['source'] = 'file:///' + f.name
           allDataCopy.set(sampleId, data)
         }
       }

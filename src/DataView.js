@@ -41,7 +41,7 @@ function DataView(props){
 
   const jsonView = props.data.map(([key, value]) =>
     <div className='data-row' key={key}>
-      <h2>{key}</h2>
+      <div>{key}</div>
       <ReactJson src={value} collapsed='true' onSelect={fieldSelectHandler}/>
     </div>
   )
