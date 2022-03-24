@@ -87,16 +87,24 @@ function Phylo() {
 
   }
 
-  const treeAsJSON = parser.parse_newick(newick)
-  const treeIds = findValues(treeAsJSON, 'name')
-  console.log('IDs in tree:')
-  console.log(treeIds)
-  var styles = {}
-  for (var id of treeIds) {
-    if (!samples.has(id)) {
-      styles[id] = {fillColour: 'lightgray'}
+  function treeStyles(newick, samples) {
+    /* In the future there may be a way of getting the tree IDs directly from
+    the trees. A getLeafIds() method seems to be planned, but is not
+    implemented at the time of this writing. See
+    https://www.phylocanvas.gl/docs/methods.html#getleafids */
+    const treeAsJSON = parser.parse_newick(newick)
+    const treeIds = findValues(treeAsJSON, 'name')
+
+    var styles = {}
+    for (var id of treeIds) {
+      if (!samples.has(id)) {
+        styles[id] = {fillColour: 'lightgray'}
+      }
     }
+    return styles
   }
+
+  const styles = treeStyles(newick, samples)
   
   const selectedSamples = Array.from(samples).filter(sample => sample[1]['selected'])
   const selectedIds = selectedSamples.map(x => x[0])
