@@ -84,6 +84,7 @@ h2 {
 
 .column {
   flex: 1;
+  display: flex;
 }
 
 .react-json-view {
