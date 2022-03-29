@@ -8,6 +8,7 @@ import parser from 'biojs-io-newick'
 import PubSub from 'pubsub-js'
 
 import {findValues} from './utils'
+import treeIcon from './icons/icons8-tree-20.png'
 
 export default Overview
 
@@ -27,6 +28,7 @@ function Overview(){
 
     const treeAsJSON = parser.parse_newick(newick)
     const treeIds = findValues(treeAsJSON, 'name')
+    console.log(treeIds)
 
     useEffect(() => {
       var selectionSubscriber = function(msg, sampleID) {
@@ -66,8 +68,9 @@ function Overview(){
     const sampleArray = Array.from(samples)
     const rowItems = sampleArray.map(([key, value]) =>
       <div key={key} className='row'>
-        <div className='overview-column'>
-          <input type='checkbox' disabled={true} checked={treeIds.includes(key)}/>
+        <div className='overview-column overview-tree'>
+          {/* <input type='checkbox' disabled={true} checked={treeIds.includes(key)}/> */}
+          <img src={treeIcon}></img>
         </div>
         <div className='overview-column'>
           <input type='checkbox' name={key} checked={value['selected']} onChange={handleOnSelectedChange}/>
