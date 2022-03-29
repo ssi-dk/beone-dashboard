@@ -82,6 +82,21 @@ h2 {
   align-items: baseline;
 }
 
+.overview-row {
+  display: flex;
+}
+
+.overview-column {
+  flex: 1;
+  flex-grow: 0;
+  flex-basis: 40px;
+}
+
+.overview-datacolumn {
+  flex: 1;
+  flex-grow: 1;
+}
+
 .column {
   flex: 1;
   display: flex;
