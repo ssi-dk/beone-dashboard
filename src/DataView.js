@@ -13,6 +13,8 @@ function DataView(props){
   }
 
   const fieldSelectHandler = (selection) => {
+    // The values are also of interest.
+    console.log(selection.value)
     var jsonPath = selection.namespace.join('.')
     jsonPath = jsonPath + '.' + selection.name
     if (!selectedFields.includes(jsonPath)) {
