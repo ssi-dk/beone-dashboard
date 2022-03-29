@@ -65,7 +65,7 @@ function Overview(){
 
     const sampleArray = Array.from(samples)
     const rowItems = sampleArray.map(([key, value]) =>
-      <div key={key}className='data-row'>
+      <div key={key} className='row'>
         <div className='column'>
           {key}
         </div>
@@ -80,7 +80,7 @@ function Overview(){
     return(
        <div className='pane'>
           <h1>Overview</h1>
-          <div className='row row-header'>
+          <div className='row'>
             <div className='column'><h2>Sample ID</h2></div>
             <div className='column'><h2>In tree</h2></div>
             <div className='column'><h2>Selected</h2></div>
