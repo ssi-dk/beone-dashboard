@@ -70,9 +70,6 @@ function Overview(){
           {key}
         </div>
         <div className='column'>
-          {value.source}
-        </div>
-        <div className='column'>
           <input type='checkbox' disabled={true} checked={treeIds.includes(key)}/>
         </div>
         <div className='column'>
