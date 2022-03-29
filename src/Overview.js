@@ -67,13 +67,13 @@ function Overview(){
     const rowItems = sampleArray.map(([key, value]) =>
       <div key={key} className='row'>
         <div className='column'>
-          {key}
-        </div>
-        <div className='column'>
           <input type='checkbox' disabled={true} checked={treeIds.includes(key)}/>
         </div>
         <div className='column'>
-        <input type='checkbox' name={key} checked={value['selected']} onChange={handleOnSelectedChange}/>
+          <input type='checkbox' name={key} checked={value['selected']} onChange={handleOnSelectedChange}/>
+        </div>
+        <div className='column'>
+          {key}
         </div>
       </div>
     )
@@ -81,9 +81,9 @@ function Overview(){
        <div className='pane'>
           <h1>Overview</h1>
           <div className='row'>
-            <div className='column'><h2>Sample ID</h2></div>
             <div className='column'><h2>In tree</h2></div>
             <div className='column'><h2>Selected</h2></div>
+            <div className='column'><h2>Sample ID</h2></div>
           </div>
           {rowItems}
        </div>
