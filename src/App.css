@@ -87,6 +87,7 @@ h2 {
 }
 
 .overview-column {
+  margin: 3px 0 0 0;
   flex: 1;
   flex-grow: 0;
   flex-basis: 25px;
