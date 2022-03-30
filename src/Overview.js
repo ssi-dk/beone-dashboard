@@ -76,7 +76,7 @@ function Overview() {
 
   const rowItems = sampleArray.map(([key, value]) =>
     <div key={key} className='row'>
-      <div className='overview-column overview-tree'>
+      <div className='overview-column'>
         <ShowTreeIcon inTree={value.inTree} />
       </div>
       <div className='overview-column'>
