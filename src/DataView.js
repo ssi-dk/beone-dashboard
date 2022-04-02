@@ -1,16 +1,23 @@
 
 import {React, useState } from 'react'
+import {atom, useRecoilState} from 'recoil'
 import ReactJson from 'react-json-view'
 export default DataView
 
-function DataView(props){
+/* const columnDataState = atom({
+  key: 'columnDataState',
+  default: new Array(),
+}); */
 
+const columnMetadataState = atom({
+  key: 'columnMetadataState',
+  default: new Array(),
+});
+
+function DataView(props) {
   const [selectedFields, setSelectedFields] = useState([]);
-  const [synced, setSynced] = useState(false);
-
-  const transferCheckHandler = () => {
-    setSynced(!synced)
-  }
+  // const [columnData, setColumnData] = useRecoilState(columnDataState);
+  const [columnMetadata, setColumnMetadata] = useRecoilState(columnMetadataState);
 
   const fieldSelectHandler = (selection) => {
     // The values are also of interest.
@@ -21,17 +28,22 @@ function DataView(props){
       var selectedFieldsCopy = Array.from(selectedFields)
       selectedFieldsCopy.push(jsonPath)
       setSelectedFields(selectedFieldsCopy)
-      setSynced(false)
+      var columnMetadataCopy = Array.from(columnMetadata)
+      const columnMetadataElement = {'columnId': jsonPath}
+      columnMetadataCopy.push(columnMetadataElement)
+      setColumnMetadata(columnMetadataCopy)
     }
   }
 
   const fieldDeselectHandler = (event) => {
-    console.log('Remove' + event.target.name + 'from selected fields')
     if (selectedFields.includes(event.target.name)) {
       var selectedFieldsCopy = Array.from(selectedFields)
-      selectedFieldsCopy.splice(selectedFieldsCopy.indexOf(event.target.name))
+      selectedFieldsCopy.splice(selectedFieldsCopy.indexOf(event.target.name), 1)
       setSelectedFields(selectedFieldsCopy)
-      setSynced(false)
+      var columnMetadataCopy = Array.from(columnMetadata)
+      const columnMetadataElement = columnMetadataCopy.find(element => element['columnId']===event.target.name)
+      columnMetadataCopy.splice(columnMetadataCopy.indexOf(columnMetadataElement), 1)
+      setColumnMetadata(columnMetadataCopy)
     }
   }
   
@@ -54,10 +66,6 @@ function DataView(props){
         <label>
         <span className='rspace'>Selected fields:</span>
           {fieldItems}
-        </label>
-        <label>
-          <input type='checkbox' name='use_for_mapping' checked={synced} onChange={transferCheckHandler}/>
-          <span className='rspace'>Sync to Overview</span>
         </label>
       </div>
       <div>

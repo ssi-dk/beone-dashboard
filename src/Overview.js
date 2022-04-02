@@ -19,9 +19,16 @@ const newickState = atom({
   default: '()',
 });
 
+const columnMetadataState = atom({
+  key: 'columnMetadataState',
+  default: new Array(),
+});
+
 function Overview() {
   const [samples, setSamples] = useRecoilState(sampleState);
   const [newick] = useRecoilState(newickState);
+  const [columnMetadata, setColumnMetadata] = useRecoilState(columnMetadataState);
+  console.log(columnMetadata, setColumnMetadata)
 
   useEffect(() => {
     var selectionSubscriber = function (msg, sampleID) {
@@ -58,7 +65,7 @@ function Overview() {
     setSamples(samplesCopy)
   }
 
-  function getSampleArray(samples) {
+  function getSampleArray(samples, newick) {
     const treeAsJSON = parser.parse_newick(newick)
     const treeIds = findValues(treeAsJSON, 'name')
     const sampleArray = Array.from(samples)
@@ -67,7 +74,7 @@ function Overview() {
     }
     return sampleArray
   }
-  const sampleArray = useMemo(() => getSampleArray(samples), [samples])
+  const sampleArray = useMemo(() => getSampleArray(samples, newick), [samples, newick])
 
   function ShowTreeIcon(props) {
     const inTree = props.inTree;
@@ -88,13 +95,22 @@ function Overview() {
     </div>
   )
 
+const getHeaderTitleFromId = (headerId) => {
+  const parts = headerId.split('.')
+  return parts[parts.length - 1]
+}
+
+const dataColumnHeaders = columnMetadata.map((element) => 
+  <div className='overview-header' key={element['columnId']}>{getHeaderTitleFromId(element['columnId'])}</div>)
+
   return (
     <div className='pane'>
       <h1>Overview</h1>
       <div className='overview-row'>
         <div className='overview-column'>&nbsp;</div>
-        <div className='overview-column'><input type='checkbox'></input></div>
-        <div className='overview-datacolumn'><h2>ID</h2></div>
+        <div className='overview-firstcol'><input type='checkbox'></input></div>
+        <div className='overview-header'>ID</div>
+        {dataColumnHeaders}
       </div>
       {rowItems}
     </div>
