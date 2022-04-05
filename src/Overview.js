@@ -24,21 +24,23 @@ const columnMetadataState = atom({
   default: new Array(),
 });
 
+const columnDataState = atom({
+  key: 'columnDataState',
+  default: new Array(),
+});
+
 function Overview() {
   const [samples, setSamples] = useRecoilState(sampleState);
   const [newick] = useRecoilState(newickState);
-  const [columnMetadata, setColumnMetadata] = useRecoilState(columnMetadataState);
-  console.log(columnMetadata, setColumnMetadata)
+  const [columnMetadata] = useRecoilState(columnMetadataState);
+  const [columnData] = useRecoilState(columnDataState);
 
   useEffect(() => {
     var selectionSubscriber = function (msg, sampleID) {
       if (samples) {
-        console.log('Received ID ' + sampleID)
         var samplesCopy = new Map(JSON.parse(
           JSON.stringify(Array.from(samples))
         ));
-        console.log('samplesCopy:')
-        console.log(samplesCopy)
         var sample = samplesCopy.get(sampleID)
         if (sample) {
           sample['selected'] = !sample['selected']
@@ -49,7 +51,6 @@ function Overview() {
     }
     const subscription = PubSub.subscribe('SELECT', selectionSubscriber)
     return () => {
-      console.log('Unsubscribing.')
       PubSub.unsubscribe(subscription)
     }
   }, [samples])
@@ -81,6 +82,31 @@ function Overview() {
     if (inTree) { return <img src={treeIcon} /> } return <div />;
   }
 
+  const getColumnDataAsRows = (sampleArray, columnData) => {
+    var dataRows = new Map()
+    for (let rowNumber = 0; rowNumber < sampleArray.length; rowNumber++) {
+      var columnsInRow = Array()
+      for (let columnNumber = 0; columnNumber < columnData.length; columnNumber++) {
+        const field = columnData[columnNumber][rowNumber]
+        columnsInRow.push(field)
+      }
+      const id = sampleArray[rowNumber][0]
+      dataRows.set(id, columnsInRow)
+    }
+    return dataRows
+  }
+
+  const columnDataAsRows = useMemo(() => getColumnDataAsRows(sampleArray, columnData), [sampleArray, columnData])
+
+  const getRowItemsForKey = (key) => {
+    const dataFields = columnDataAsRows.get(key)
+    return dataFields.map((field) => 
+    <div className='overview-datacolumn' key={dataFields.indexOf(field)}>
+      {field}
+    </div>
+    )
+  }
+
   const rowItems = sampleArray.map(([key, value]) =>
     <div key={key} className='row'>
       <div className='overview-column'>
@@ -92,16 +118,17 @@ function Overview() {
       <div className='overview-datacolumn'>
         {key}
       </div>
+      {getRowItemsForKey(key)}
     </div>
   )
 
-const getHeaderTitleFromId = (headerId) => {
-  const parts = headerId.split('.')
-  return parts[parts.length - 1]
-}
+  const getHeaderTitleFromId = (headerId) => {
+    const parts = headerId.split('.')
+    return parts[parts.length - 1]
+  }
 
-const dataColumnHeaders = columnMetadata.map((element) => 
-  <div className='overview-header' key={element['columnId']}>{getHeaderTitleFromId(element['columnId'])}</div>)
+  const dataColumnHeaders = columnMetadata.map((element) =>
+    <div className='overview-header' key={element['columnId']}>{getHeaderTitleFromId(element['columnId'])}</div>)
 
   return (
     <div className='pane'>

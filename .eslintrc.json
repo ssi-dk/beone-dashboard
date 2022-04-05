@@ -21,7 +21,8 @@
         "react/prop-types": "off",
         "quotes": ["warn", "single"],
         "jsx-quotes": ["warn", "prefer-single"],
-        "eqeqeq": ["warn", "always"]
+        "eqeqeq": ["warn", "always"],
+        "no-unused-vars": "off"
     },
     "settings": {
         "react": {

@@ -68,8 +68,6 @@ function DataFiles(){
     })
   }
   
-  console.log(filterItems(allDataArray, samples))
-  
 	return(
    <div className='pane'>
       <h1>JSON data</h1>

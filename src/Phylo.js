@@ -41,7 +41,6 @@ class PhyloClass extends React.Component {
           event.srcEvent.metaKey || event.srcEvent.ctrlKey,
         );
         if (node) {  // or: if (!node.isNull && node.isLeaf)
-          console.log('Sending ' + node.id)
           PubSub.publish('SELECT', node.id)
         }
       }
@@ -49,11 +48,8 @@ class PhyloClass extends React.Component {
   }
 
   componentDidUpdate() {
-    console.log('componentDidUpdate')
     this.tree.setProps({
       ...this.props,
-      // Grey out IDs that are unknown in JSON files
-      // styles: {'Se-Germany-BfR-0001': {fillColour: 'lightgray'}}
     });
   }
 
