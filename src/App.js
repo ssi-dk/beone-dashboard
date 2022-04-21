@@ -7,7 +7,7 @@ import {
 
 import './App.css'
 import Overview from './Overview'
-import DataFiles from './DataFiles'
+import DataSources from './DataSources'
 import Phylo from './Phylo'
 
 export default App;
@@ -26,7 +26,12 @@ function App() {
         </div>
         <div className = 'row'>
           <div className='column'>
-              <DataFiles/>
+              <DataSources/>
+          </div>
+          <div className='column'>
+            <div className='pane'>
+              <h1>Map</h1>
+            </div>
           </div>
       </div>
     </div>

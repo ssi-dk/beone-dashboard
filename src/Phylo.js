@@ -115,7 +115,7 @@ function Phylo() {
       </h1>
       <div className='vspace'>
         <label>
-          <span className='rspace'>Select Newick file:</span>
+          <span className='label'>Select Newick file:</span>
           <input type='file' name='file' onChange={NewickChangeHandler} />
         </label>
       </div>

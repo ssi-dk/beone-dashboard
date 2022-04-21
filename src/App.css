@@ -60,15 +60,16 @@ h2 {
   box-shadow:0 2px 2px #ccc;
   padding: 5px 10px 10px 10px;
   margin: 5px 10px;
-  font-size: 0.8em;
+  font-size: 0.8rem;
 }
 
 .vspace {
   padding: 3px 0 3px 0;
 }
 
-.rspace {
-  padding-right: 5px;
+.label {
+  margin: 3px;
+  font-weight: bold;
 }
 
 .row {
@@ -131,6 +132,6 @@ h2 {
   background-color:beige;
 }
 
-.selected-field {
+.margin {
   margin: 3px;
 }
