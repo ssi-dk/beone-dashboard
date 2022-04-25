@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 
 import {
   atom,
@@ -57,7 +57,7 @@ function DataSources() {
     setAllData(allDataCopy)
   }
 
-  let allDataArray = Array.from(allData)
+  let allDataArray = useMemo(() => Array.from(allData), [allData])
 
   return (
     <div className='pane'>
