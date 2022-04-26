@@ -36,12 +36,12 @@ function Overview() {
   const [columnData] = useRecoilState(columnDataState);
 
   useEffect(() => {
-    var selectionSubscriber = function (msg, sampleID) {
+    let selectionSubscriber = function (msg, sampleID) {
       if (samples) {
-        var samplesCopy = new Map(JSON.parse(
+        let samplesCopy = new Map(JSON.parse(
           JSON.stringify(Array.from(samples))
         ));
-        var sample = samplesCopy.get(sampleID)
+        let sample = samplesCopy.get(sampleID)
         if (sample) {
           sample['selected'] = !sample['selected']
           samplesCopy.set(sampleID, sample)
@@ -57,10 +57,10 @@ function Overview() {
 
   const handleOnSelectedChange = (event) => {
     const sampleID = event.target.name
-    var samplesCopy = new Map(JSON.parse(
+    let samplesCopy = new Map(JSON.parse(
       JSON.stringify(Array.from(samples))
     ));
-    var sample = samplesCopy.get(sampleID)
+    let sample = samplesCopy.get(sampleID)
     sample['selected'] = !samples.get(sampleID)['selected']
     samplesCopy.set(sampleID, sample)
     setSamples(samplesCopy)
@@ -70,7 +70,7 @@ function Overview() {
     const treeAsJSON = parser.parse_newick(newick)
     const treeIds = findValues(treeAsJSON, 'name')
     const sampleArray = Array.from(samples)
-    for (var sample of sampleArray) {
+    for (let sample of sampleArray) {
       sample[1]['inTree'] = treeIds.includes(sample[0])
     }
     return sampleArray
@@ -83,9 +83,9 @@ function Overview() {
   }
 
   const getColumnDataAsRows = (sampleArray, columnData) => {
-    var dataRows = new Map()
+    let dataRows = new Map()
     for (let rowNumber = 0; rowNumber < sampleArray.length; rowNumber++) {
-      var columnsInRow = Array()
+      let columnsInRow = Array()
       for (let columnNumber = 0; columnNumber < columnData.length; columnNumber++) {
         const field = columnData[columnNumber][rowNumber]
         columnsInRow.push(field)

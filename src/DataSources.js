@@ -67,10 +67,10 @@ function DataSources() {
   const JSONChangeHandler = async (event) => {
 
     // Make deep copies of states
-    var samplesCopy = new Map(JSON.parse(
+    let samplesCopy = new Map(JSON.parse(
       JSON.stringify(Array.from(samples))
     ));
-    var allDataCopy = new Map(JSON.parse(
+    let allDataCopy = new Map(JSON.parse(
       JSON.stringify(Array.from(allData))
     ));
 

@@ -34,7 +34,7 @@ function FieldEditor(props) {
   }
 
   const fieldSelectHandler = (selection) => {
-    var path = [...selection['namespace']]
+    let path = [...selection['namespace']]
     path.push(selection['name'])
     path.unshift('$')
     const pathExpression = jp.stringify(path)
@@ -44,22 +44,22 @@ function FieldEditor(props) {
         alert('You can only have ' + maxFieldCount + ' selected fields at a time.')
       } else  {
         // Add field to selectedFields
-        var selectedFieldsCopy = Array.from(selectedFields)
+        let selectedFieldsCopy = Array.from(selectedFields)
         selectedFieldsCopy.push(pathExpression)
         setSelectedFields(selectedFieldsCopy)
         // Add header to columnMetadata
-        var columnMetadataCopy = Array.from(columnMetadata)
+        let columnMetadataCopy = Array.from(columnMetadata)
         const columnMetadataElement = {'columnId': pathExpression}
         columnMetadataCopy.push(columnMetadataElement)
         setColumnMetadata(columnMetadataCopy)
         // Build an array with column data from all samples
-        var column = Array()
+        let column = Array()
         for (const entry of props.data) {
           const columnDataForSample = jp.value(entry[1], pathExpression)
           column.push(columnDataForSample)
         }
         // Add column to columnData
-        var columnDataCopy = Array.from(columnData)
+        let columnDataCopy = Array.from(columnData)
         columnDataCopy.push(column)
         setColumnData(columnDataCopy)
         // Make this field the current field
@@ -75,16 +75,16 @@ function FieldEditor(props) {
       console.log('columnIndexNumber:')
       console.log(columnIndexNumber)
       // Remove field from selectedFields
-      var selectedFieldsCopy = Array.from(selectedFields)
+      let selectedFieldsCopy = Array.from(selectedFields)
       selectedFieldsCopy.splice(columnIndexNumber, 1)
       setSelectedFields(selectedFieldsCopy)
       // Remove field from columnMetadata
-      var columnMetadataCopy = Array.from(columnMetadata)
+      let columnMetadataCopy = Array.from(columnMetadata)
       const columnMetadataElement = columnMetadataCopy.find(element => element['columnId']===event.target.name)
       columnMetadataCopy.splice(columnMetadataCopy.indexOf(columnMetadataElement), 1)
       setColumnMetadata(columnMetadataCopy)
       // Remove field from columnData
-      var columnDataCopy = Array.from(columnData)
+      let columnDataCopy = Array.from(columnData)
       columnDataCopy.splice(columnIndexNumber, 1)
       setColumnData(columnDataCopy)
       setCurrentField(undefined)

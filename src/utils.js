@@ -20,7 +20,7 @@ function readFile(file) {
   function findValuesHelper(obj, key, list) {
     if (!obj) return list;
     if (obj instanceof Array) {
-      for (var i in obj) {
+      for (let i in obj) {
           list = list.concat(findValuesHelper(obj[i], key, []));
       }
       return list;
@@ -30,7 +30,7 @@ function readFile(file) {
     if ((typeof obj === 'object') && (obj !== null) ){
       var children = Object.keys(obj);
       if (children.length > 0){
-        for (i = 0; i < children.length; i++ ){
+        for (let i = 0; i < children.length; i++ ){
             list = list.concat(findValuesHelper(obj[children[i]], key, []));
         }
       }

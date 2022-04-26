@@ -91,8 +91,8 @@ function Phylo() {
     const treeAsJSON = parser.parse_newick(newick)
     const treeIds = findValues(treeAsJSON, 'name')
 
-    var styles = {}
-    for (var id of treeIds) {
+    let styles = {}
+    for (let id of treeIds) {
       if (!samples.has(id)) {
         styles[id] = {fillColour: 'lightgray'}
       }
