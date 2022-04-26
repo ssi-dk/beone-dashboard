@@ -132,7 +132,7 @@ function Overview() {
 
   return (
     <div className='pane'>
-      <h1>Overview</h1>
+      <h1>Table View</h1>
       <div className='overview-row'>
         <div className='overview-column'>&nbsp;</div>
         <div className='overview-firstcol'><input type='checkbox'></input></div>
