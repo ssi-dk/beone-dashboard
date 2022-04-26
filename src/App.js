@@ -6,7 +6,7 @@ import {
 } from 'recoil'
 
 import './App.css'
-import Overview from './Overview'
+import Overview from './TableView'
 import DataSources from './DataSources'
 import Phylo from './Phylo'
 
