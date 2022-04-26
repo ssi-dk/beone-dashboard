@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 
 import {
   atom,
@@ -7,6 +7,7 @@ import {
 
 import FieldEditor from './FieldEditor'
 import { readFile } from './utils'
+const jp = require('jsonpath')
 
 export default DataSources
 
@@ -15,12 +16,53 @@ const sampleState = atom({
   default: new Map(),
 });
 
+const columnDataState = atom({
+  key: 'columnDataState',
+  default: new Array(),
+});
+
+const columnMetadataState = atom({
+  key: 'columnMetadataState',
+  default: new Array(),
+});
+
 function DataSources() {
 
   // samples is a global state that holds a minimum of information about the samples.
   const [samples, setSamples] = useRecoilState(sampleState);
   // allData is a local state that holds all the JSON data (all data are not neededs globally).
   const [allData, setAllData] = useState(new Map());
+
+  const [columnData, setColumnData] = useRecoilState(columnDataState);
+  const [columnMetadata, setColumnMetadata] = useRecoilState(columnMetadataState);
+
+  function validateColumnLength(samples, columnData) {
+    for (let i = 0; i < columnData.length; i++) {
+      if (columnData[i].length < samples.size) {
+        return false
+      }
+    }
+    return true
+  }
+
+  // Check column sizes
+  const columnsOK = useMemo(() => validateColumnLength(samples, columnData), [samples, columnData])
+
+  useEffect(() => {
+    if (!columnsOK) {
+      let newColumnData = Array()
+      for (let colMeta of columnMetadata) {
+        let column = Array()
+        for (const entry of allData) {
+          const columnDataForSample = jp.value(entry[1], colMeta['columnId'])
+          column.push(columnDataForSample)
+        }
+        newColumnData.push(column)
+      }
+      setColumnData(newColumnData)
+    }
+  });
+
 
   const JSONChangeHandler = async (event) => {
 

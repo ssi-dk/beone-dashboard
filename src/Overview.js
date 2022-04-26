@@ -98,27 +98,27 @@ function Overview() {
 
   const columnDataAsRows = useMemo(() => getColumnDataAsRows(sampleArray, columnData), [sampleArray, columnData])
 
-  const getRowItemsForKey = (key) => {
-    const dataFields = columnDataAsRows.get(key)
-    return dataFields.map((field) => 
-    <div className='overview-datacolumn' key={dataFields.indexOf(field)}>
+  const getDataItemsForId = (id) => {
+    const dataFields = columnDataAsRows.get(id)
+    return dataFields.map((field, index) => 
+    <div className='overview-datacolumn' key={index}>
       {field}
     </div>
     )
   }
 
-  const rowItems = sampleArray.map(([key, value]) =>
-    <div key={key} className='row'>
+  const rowItems = sampleArray.map(([id, value]) =>
+    <div key={id} className='row'>
       <div className='overview-column'>
         <ShowTreeIcon inTree={value.inTree} />
       </div>
       <div className='overview-column'>
-        <input type='checkbox' name={key} checked={value['selected']} onChange={handleOnSelectedChange} />
+        <input type='checkbox' name={id} checked={value['selected']} onChange={handleOnSelectedChange} />
       </div>
       <div className='overview-datacolumn'>
-        {key}
+        {id}
       </div>
-      {getRowItemsForKey(key)}
+      {getDataItemsForId(id)}
     </div>
   )
 
