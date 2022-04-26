@@ -7,7 +7,7 @@ import PubSub from 'pubsub-js'
 import { findValues } from './utils'
 import treeIcon from './icons/icons8-tree-20.png'
 
-export default Overview
+export default TableView
 
 const sampleState = atom({
   key: 'sampleState',
@@ -29,7 +29,7 @@ const columnDataState = atom({
   default: new Array(),
 });
 
-function Overview() {
+function TableView() {
   const [samples, setSamples] = useRecoilState(sampleState);
   const [newick] = useRecoilState(newickState);
   const [columnMetadata] = useRecoilState(columnMetadataState);

@@ -6,7 +6,7 @@ import {
 } from 'recoil'
 
 import './App.css'
-import Overview from './TableView'
+import TableView from './TableView'
 import DataSources from './DataSources'
 import Phylo from './Phylo'
 
@@ -18,7 +18,7 @@ function App() {
       <div className='App'>
         <div className='row'>
           <div className='column'>
-              <Overview/>
+              <TableView/>
           </div>
           <div className='column'>
               <Phylo/>
