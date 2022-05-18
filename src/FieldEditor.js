@@ -2,24 +2,13 @@
 import React, {useState} from 'react'
 import {atom, useRecoilState} from 'recoil'
 import ReactJson from 'react-json-view'
+
+import { sampleState, columnDataState, columnUserdataState } from './RecoilStates'
+
 const jp = require('jsonpath')
 
 export default FieldEditor
 
-const sampleState = atom({
-  key: 'sampleState',
-  default: new Map(),
-});
-
-const columnDataState = atom({
-  key: 'columnDataState',
-  default: new Array(),
-});
-
-const columnUserdataState = atom({
-  key: 'columnUserdataState',
-  default: new Array(),
-});
 function FieldEditor(props) {
   const [samples] = useRecoilState(sampleState);
   const [selectedFields, setSelectedFields] = useState([]);

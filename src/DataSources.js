@@ -5,26 +5,12 @@ import {
   useRecoilState,
 } from 'recoil'
 
+import { sampleState, columnDataState, columnUserdataState } from './RecoilStates'
 import FieldEditor from './FieldEditor'
 import { readFile } from './utils'
 const jp = require('jsonpath')
 
 export default DataSources
-
-const sampleState = atom({
-  key: 'sampleState',
-  default: new Map(),
-});
-
-const columnDataState = atom({
-  key: 'columnDataState',
-  default: new Array(),
-});
-
-const columnUserdataState = atom({
-  key: 'columnUserdataState',
-  default: new Array(),
-});
 
 function DataSources() {
 
