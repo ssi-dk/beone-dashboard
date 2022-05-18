@@ -28,11 +28,6 @@ function App() {
           <div className='column'>
               <DataSources/>
           </div>
-          <div className='column'>
-            <div className='pane'>
-              <h1>Map</h1>
-            </div>
-          </div>
       </div>
     </div>
   </RecoilRoot>
