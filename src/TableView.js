@@ -3,9 +3,11 @@ import { atom, useRecoilState } from 'recoil'
 
 import parser from 'biojs-io-newick'
 import PubSub from 'pubsub-js'
+import {compile} from 'filtering-query'
 
 import { findValues } from './utils'
 import treeIcon from './icons/icons8-tree-20.png'
+import funnelIcon from './icons/funnel.png'
 
 export default TableView
 
@@ -19,8 +21,8 @@ const newickState = atom({
   default: '()',
 });
 
-const columnMetadataState = atom({
-  key: 'columnMetadataState',
+const columnUserdataState = atom({
+  key: 'columnUserdataState',
   default: new Array(),
 });
 
@@ -32,7 +34,7 @@ const columnDataState = atom({
 function TableView() {
   const [samples, setSamples] = useRecoilState(sampleState);
   const [newick] = useRecoilState(newickState);
-  const [columnMetadata] = useRecoilState(columnMetadataState);
+  const [columnUserdata] = useRecoilState(columnUserdataState);
   const [columnData] = useRecoilState(columnDataState);
 
   useEffect(() => {
@@ -85,10 +87,22 @@ function TableView() {
   const getColumnDataAsRows = (sampleArray, columnData) => {
     let dataRows = new Map()
     for (let rowNumber = 0; rowNumber < sampleArray.length; rowNumber++) {
+      let good = true
       let columnsInRow = Array()
       for (let columnNumber = 0; columnNumber < columnData.length; columnNumber++) {
-        const field = columnData[columnNumber][rowNumber]
-        columnsInRow.push(field)
+        const fieldValue = columnData[columnNumber][rowNumber]
+        const filterExp = 'fieldValue ' + columnUserdata[columnNumber]['filter']
+        if (filterExp !== 'fieldValue ') {
+          const fn = compile(filterExp);
+          good = fn({ fieldValue: fieldValue })
+          if (good === false) {
+            break
+          }
+        }
+        columnsInRow.push(fieldValue)
+      }
+      if (!good) {
+        continue
       }
       const id = sampleArray[rowNumber][0]
       dataRows.set(id, columnsInRow)
@@ -96,23 +110,23 @@ function TableView() {
     return dataRows
   }
 
-  const columnDataAsRows = useMemo(() => getColumnDataAsRows(sampleArray, columnData), [sampleArray, columnData])
+  const columnDataAsRows = useMemo(() => getColumnDataAsRows(sampleArray, columnData, columnUserdata), [sampleArray, columnData, columnUserdata])
 
   const getDataItemsForId = (id) => {
     const dataFields = columnDataAsRows.get(id)
-    return dataFields.map((field, index) => 
-    <div className='overview-datacolumn' key={index}>
-      {field}
-    </div>
+    return dataFields.map((field, index) =>
+      <div className='overview-datacolumn' key={index}>
+        {field}
+      </div>
     )
   }
 
-  const rowItems = sampleArray.map(([id, value]) =>
+  const rowItems = Array.from(columnDataAsRows).map(([id, value]) =>
     <div key={id} className='row'>
       <div className='overview-column'>
         <ShowTreeIcon inTree={value.inTree} />
       </div>
-      <div className='overview-column'>
+      <div className='overview-firstcol'>
         <input type='checkbox' name={id} checked={value['selected']} onChange={handleOnSelectedChange} />
       </div>
       <div className='overview-datacolumn'>
@@ -127,16 +141,29 @@ function TableView() {
     return parts[parts.length - 1]
   }
 
-  const dataColumnHeaders = columnMetadata.map((element) =>
-    <div className='overview-header' key={element['columnId']}>{getHeaderTitleFromId(element['columnId'])}</div>)
+  const dataColumnHeaders = columnUserdata.map((element) =>
+    <div className='overview-header' key={element['columnId']}>
+      <div className='overview-header-inner-bold'>{getHeaderTitleFromId(element['columnId'])}</div>
+      <div className='overview-header-inner'>
+        <span>{element['filter']}</span>
+      </div>
+    </div>
+  )
 
   return (
     <div className='pane'>
       <h1>Table View</h1>
       <div className='overview-row'>
         <div className='overview-column'>&nbsp;</div>
-        <div className='overview-firstcol'><input type='checkbox'></input></div>
-        <div className='overview-header'>ID</div>
+        <div className='overview-firstcol-border'>
+          <input type='checkbox' />
+          <img className='funnel' src={funnelIcon} />
+        </div>
+        <div className='overview-header'>
+          <div className='overview-header-inner-bold'>
+            ID
+          </div>
+        </div>
         {dataColumnHeaders}
       </div>
       {rowItems}

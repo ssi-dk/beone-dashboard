@@ -1,5 +1,5 @@
 
-import {React, useState, useMemo } from 'react'
+import React, {useState} from 'react'
 import {atom, useRecoilState} from 'recoil'
 import ReactJson from 'react-json-view'
 const jp = require('jsonpath')
@@ -16,17 +16,16 @@ const columnDataState = atom({
   default: new Array(),
 });
 
-const columnMetadataState = atom({
-  key: 'columnMetadataState',
+const columnUserdataState = atom({
+  key: 'columnUserdataState',
   default: new Array(),
 });
-
 function FieldEditor(props) {
   const [samples] = useRecoilState(sampleState);
   const [selectedFields, setSelectedFields] = useState([]);
-  const [currentField, setCurrentField] = useState();
+  const [currentFieldPath, setCurrentFieldPath] = useState();
   const [columnData, setColumnData] = useRecoilState(columnDataState);
-  const [columnMetadata, setColumnMetadata] = useRecoilState(columnMetadataState);
+  const [columnUserdata, setColumnUserdata] = useRecoilState(columnUserdataState);
   const [filterOnSelected, setFilterOnSelected] = useState(false);
 
   const filterChangeHandler = () => {
@@ -47,11 +46,14 @@ function FieldEditor(props) {
         let selectedFieldsCopy = Array.from(selectedFields)
         selectedFieldsCopy.push(pathExpression)
         setSelectedFields(selectedFieldsCopy)
-        // Add header to columnMetadata
-        let columnMetadataCopy = Array.from(columnMetadata)
-        const columnMetadataElement = {'columnId': pathExpression}
-        columnMetadataCopy.push(columnMetadataElement)
-        setColumnMetadata(columnMetadataCopy)
+        // Add header to columnUserdata
+        let columnUserdataCopy = Array.from(columnUserdata)
+        const currentUserdataElement = {
+          'columnId': pathExpression,
+          'filter': '',
+        }
+        columnUserdataCopy.push(currentUserdataElement)
+        setColumnUserdata(columnUserdataCopy)
         // Build an array with column data from all samples
         let column = Array()
         for (const entry of props.data) {
@@ -63,7 +65,7 @@ function FieldEditor(props) {
         columnDataCopy.push(column)
         setColumnData(columnDataCopy)
         // Make this field the current field
-        setCurrentField(pathExpression)
+        setCurrentFieldPath(pathExpression)
       }
     }
   }
@@ -78,26 +80,26 @@ function FieldEditor(props) {
       let selectedFieldsCopy = Array.from(selectedFields)
       selectedFieldsCopy.splice(columnIndexNumber, 1)
       setSelectedFields(selectedFieldsCopy)
-      // Remove field from columnMetadata
-      let columnMetadataCopy = Array.from(columnMetadata)
-      const columnMetadataElement = columnMetadataCopy.find(element => element['columnId']===event.target.name)
-      columnMetadataCopy.splice(columnMetadataCopy.indexOf(columnMetadataElement), 1)
-      setColumnMetadata(columnMetadataCopy)
+      // Remove field from columnUserdata
+      let columnUserdataCopy = Array.from(columnUserdata)
+      const currentUserdataElement = columnUserdataCopy.find(element => element['columnId']===event.target.name)
+      columnUserdataCopy.splice(columnUserdataCopy.indexOf(currentUserdataElement), 1)
+      setColumnUserdata(columnUserdataCopy)
       // Remove field from columnData
       let columnDataCopy = Array.from(columnData)
       columnDataCopy.splice(columnIndexNumber, 1)
       setColumnData(columnDataCopy)
-      setCurrentField(undefined)
+      setCurrentFieldPath(undefined)
     }
   }
 
-  const currentFieldHandler = (event) => {
+  const currentFieldPathHandler = (event) => {
     // When clicking a field button, show properties for selected field and enable editing them
-    setCurrentField(event.target.name)
+    setCurrentFieldPath(event.target.name)
   }
   
   const fieldItems = selectedFields.map((path) =>
-    <button className='margin' key={path} name={path} onClick={currentFieldHandler}>
+    <button className='margin' key={path} name={path} onClick={currentFieldPathHandler}>
       {path}
     </button>
   )
@@ -118,15 +120,69 @@ function FieldEditor(props) {
     </div>)
   )}
 
+  class FieldForm extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = columnUserdata.find(element => element.columnId === currentFieldPath)
+      this.handleQSChange = this.handleQSChange.bind(this);
+      this.handleSubmit = this.handleSubmit.bind(this);
+    }
+  
+    handleQSChange(event) {
+      this.setState({filter: event.target.value});
+    }
+    
+    handleSubmit(event) {
+      let columnUserdataCopy = Array.from(columnUserdata)
+      let index = columnUserdataCopy.findIndex(element => element.columnId === currentFieldPath)
+      columnUserdataCopy[index] = this.state
+      setColumnUserdata(columnUserdataCopy)
+      event.preventDefault();
+    }
+  
+    render() {
+      return (
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            <span className='rspace'>
+              Filter:
+            </span>
+            <span className='rspace'>
+              <input type='text' value={this.state.filter} onChange={this.handleQSChange} />
+            </span>
+          </label>
+          <input type='submit' value='Submit' />
+          <h3>Supported Filter Operators</h3>
+          <table>
+            <tbody>
+              <tr><td>{"="}</td><td>Equals</td></tr>
+              <tr><td>{"!="}</td><td>Does not equal</td></tr>
+              <tr><td>{"<"}</td><td>Less than</td></tr>
+              <tr><td>{"<="}</td><td>Less than or equals</td></tr>
+              <tr><td>{">"}</td><td>Greater than</td></tr>
+              <tr><td>{">="}</td><td>Greater than or equals</td></tr>
+              <tr><td>{"~="}</td><td>Regular expression match (case insensitive)</td></tr>
+            </tbody>
+          </table>
+        </form>
+      );
+    }
+  }  
+
   const showCurrentField = () => {
-    if (currentField) {
+    if (currentFieldPath) {
       return(
-        <span className='margin'>
-          {currentField}
-          <button className='margin' name={currentField} onClick={fieldDeselectHandler}>
-            Remove this field
-          </button>
-        </span>
+        <div className='margin'>
+          <div>
+            <span className='rspace'><label>Path:</label></span><span className='rspace'>{currentFieldPath}</span>
+            <button className='margin' name={currentFieldPath} onClick={fieldDeselectHandler}>
+              Remove this field
+            </button>
+          </div>
+          <div>
+          <FieldForm currentFieldPath={currentFieldPath}/>
+          </div>
+        </div>
       )
     }
     return 'Not set.'
