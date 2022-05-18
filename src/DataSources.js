@@ -5,26 +5,12 @@ import {
   useRecoilState,
 } from 'recoil'
 
+import { sampleState, columnDataState, columnUserdataState } from './RecoilStates'
 import FieldEditor from './FieldEditor'
 import { readFile } from './utils'
 const jp = require('jsonpath')
 
 export default DataSources
-
-const sampleState = atom({
-  key: 'sampleState',
-  default: new Map(),
-});
-
-const columnDataState = atom({
-  key: 'columnDataState',
-  default: new Array(),
-});
-
-const columnMetadataState = atom({
-  key: 'columnMetadataState',
-  default: new Array(),
-});
 
 function DataSources() {
 
@@ -34,7 +20,7 @@ function DataSources() {
   const [allData, setAllData] = useState(new Map());
 
   const [columnData, setColumnData] = useRecoilState(columnDataState);
-  const [columnMetadata, setColumnMetadata] = useRecoilState(columnMetadataState);
+  const [columnUserdata, setColumnUserdata] = useRecoilState(columnUserdataState);
 
   function validateColumnLength(samples, columnData) {
     for (let i = 0; i < columnData.length; i++) {
@@ -51,7 +37,7 @@ function DataSources() {
   useEffect(() => {
     if (!columnsOK) {
       let newColumnData = Array()
-      for (let colMeta of columnMetadata) {
+      for (let colMeta of columnUserdata) {
         let column = Array()
         for (const entry of allData) {
           const columnDataForSample = jp.value(entry[1], colMeta['columnId'])

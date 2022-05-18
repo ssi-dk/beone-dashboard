@@ -7,19 +7,10 @@ import PhylocanvasGL from '@phylocanvas/phylocanvas.gl'
 import parser from 'biojs-io-newick'
 import PubSub from 'pubsub-js'
 
+import { sampleState, newickState } from './RecoilStates'
 import {readFile, findValues} from './utils'
 
 export default Phylo
-
-const newickState = atom({
-  key: 'newickState',
-  default: '()',
-});
-
-const sampleState = atom({
-  key: 'sampleState',
-  default: new Map(),
-});
 
 class PhyloClass extends React.Component {
 
