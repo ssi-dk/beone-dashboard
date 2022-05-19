@@ -67,11 +67,11 @@ function DataSources() {
         let sampleId
         if ('sample' in data && 'summary' in data.sample && 'sample' in data.sample.summary) {
           sampleId = data.sample.summary.sample
-          console.log('Assuming BeONE data structure for sample.')
+          // Assuming BeONE data structure for sample.
         }
         if ('name' in data) {
           sampleId = data.name
-          console.log('Assuming Bifrost data structure for sample.')
+          // Assuming Bifrost data structure for sample.
         }
         if (samplesCopy.has(sampleId)) {
           alert(f.name + ' was not imported as it would overwrite existing sample ID ' + sampleId)
