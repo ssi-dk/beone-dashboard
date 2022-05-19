@@ -11,25 +11,7 @@ import funnelIcon from './icons/funnel.png'
 
 export default TableView
 
-const sampleState = atom({
-  key: 'sampleState',
-  default: new Map(),
-});
-
-const newickState = atom({
-  key: 'newickState',
-  default: '()',
-});
-
-const columnUserdataState = atom({
-  key: 'columnUserdataState',
-  default: new Array(),
-});
-
-const columnDataState = atom({
-  key: 'columnDataState',
-  default: new Array(),
-});
+import { sampleState, newickState, columnDataState, columnUserdataState } from './RecoilStates'
 
 function TableView() {
   const [samples, setSamples] = useRecoilState(sampleState);
