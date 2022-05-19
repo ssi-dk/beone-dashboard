@@ -150,7 +150,6 @@ function FieldEditor(props) {
               <tr><td>{'<='}</td><td>Less than or equals</td></tr>
               <tr><td>{'>'}</td><td>Greater than</td></tr>
               <tr><td>{'>='}</td><td>Greater than or equals</td></tr>
-              <tr><td>{'~='}</td><td>Regular expression match (case insensitive)</td></tr>
             </tbody>
           </table>
         </form>
