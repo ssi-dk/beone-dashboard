@@ -104,7 +104,7 @@ function FieldEditor(props) {
     return(
     dataToShow.map(([key, value]) =>
     <div className='data-row' key={key}>
-      <div>{key}</div>
+      <div className='rspace'>{key}</div>
       <ReactJson src={value} collapsed='true' onSelect={fieldSelectHandler}/>
     </div>)
   )}
@@ -191,7 +191,7 @@ function FieldEditor(props) {
           {showCurrentField()}
       </div>
       <div className='pane'>
-      <h2>Data Picker</h2>
+      <h2>Field Selector</h2>
       <label>
         <input type='checkbox' name='filter_selected' checked={filterOnSelected} onChange={filterChangeHandler} />
         <span className='margin'>Show selected samples only</span>

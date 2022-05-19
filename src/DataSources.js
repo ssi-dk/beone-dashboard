@@ -88,14 +88,16 @@ function DataSources() {
   let allDataArray = useMemo(() => Array.from(allData), [allData])
 
   return (
-    <div className='pane'>
-      <div className='pane'>
-        <h1>Data Sources</h1>
-        <div className='vspace'>
-          <label>
-            <span className='label'>Select local JSON file(s):</span>
-            <input type='file' name='file' multiple onChange={JSONChangeHandler} />
-          </label>
+    <div>
+      <div className='column'>
+        <div className='pane'>
+          <h1>Data Sources</h1>
+          <div className='vspace'>
+            <label>
+              <span className='label'>Select local JSON file(s):</span>
+              <input type='file' name='file' multiple onChange={JSONChangeHandler} />
+            </label>
+          </div>
         </div>
       </div>
       <div className='pane'>

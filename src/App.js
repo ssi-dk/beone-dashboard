@@ -25,8 +25,11 @@ function App() {
           </div>
         </div>
         <div className = 'row'>
+          <DataSources/>
           <div className='column'>
-              <DataSources/>
+            <div className='pane'>
+              <h1>Map</h1>
+            </div>
           </div>
       </div>
     </div>
