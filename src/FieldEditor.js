@@ -144,13 +144,13 @@ function FieldEditor(props) {
           <h3>Supported Filter Operators</h3>
           <table>
             <tbody>
-              <tr><td>{"="}</td><td>Equals</td></tr>
-              <tr><td>{"!="}</td><td>Does not equal</td></tr>
-              <tr><td>{"<"}</td><td>Less than</td></tr>
-              <tr><td>{"<="}</td><td>Less than or equals</td></tr>
-              <tr><td>{">"}</td><td>Greater than</td></tr>
-              <tr><td>{">="}</td><td>Greater than or equals</td></tr>
-              <tr><td>{"~="}</td><td>Regular expression match (case insensitive)</td></tr>
+              <tr><td>{'='}</td><td>Equals</td></tr>
+              <tr><td>{'!='}</td><td>Does not equal</td></tr>
+              <tr><td>{'<'}</td><td>Less than</td></tr>
+              <tr><td>{'<='}</td><td>Less than or equals</td></tr>
+              <tr><td>{'>'}</td><td>Greater than</td></tr>
+              <tr><td>{'>='}</td><td>Greater than or equals</td></tr>
+              <tr><td>{'~='}</td><td>Regular expression match (case insensitive)</td></tr>
             </tbody>
           </table>
         </form>
