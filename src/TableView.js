@@ -109,7 +109,7 @@ function TableView() {
         <ShowTreeIcon inTree={value.inTree} />
       </div>
       <div className='overview-firstcol'>
-        <input type='checkbox' name={id} checked={value['selected']} onChange={handleOnSelectedChange} />
+        <input type='checkbox' name={id} checked={samples.get(id).selected} onChange={handleOnSelectedChange} />
       </div>
       <div className='overview-datacolumn'>
         {id}
