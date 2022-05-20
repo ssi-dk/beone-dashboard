@@ -106,7 +106,7 @@ function TableView() {
   const rowItems = Array.from(columnDataAsRows).map(([id, value]) =>
     <div key={id} className='row'>
       <div className='overview-column'>
-        <ShowTreeIcon inTree={value.inTree} />
+        <ShowTreeIcon inTree={samples.get(id).inTree} />
       </div>
       <div className='overview-firstcol'>
         <input type='checkbox' name={id} checked={samples.get(id).selected} onChange={handleOnSelectedChange} />
