@@ -19,6 +19,7 @@ class PhyloClass extends React.Component {
   canvasRef = React.createRef()
 
   componentDidMount() {
+    console.log(this.props.allIds)
     this.tree = new PhylocanvasGL(
       this.canvasRef.current,
       { ...this.props } || {},
@@ -26,7 +27,7 @@ class PhyloClass extends React.Component {
 
     this.tree.handleClick = (info, event) => {
       const node = this.tree.pickNodeFromLayer(info);
-      if (node && node.isLeaf) {
+      if (node && this.props.allIds.includes(node.id)) {
         this.tree.selectNode(
           node,
           event.srcEvent.metaKey || event.srcEvent.ctrlKey,
@@ -98,6 +99,7 @@ function Phylo() {
   
   const selectedSamples = Array.from(samples).filter(sample => sample[1]['selected'])
   const selectedIds = selectedSamples.map(x => x[0])
+  const allIds = Array.from(samples).map(x => x[0])
 
   return (
     <div className='pane'>
@@ -119,6 +121,7 @@ function Phylo() {
         interactive
         styles={styles}
         selectedIds={selectedIds}
+        allIds={allIds}
       />
     </div>
   )
