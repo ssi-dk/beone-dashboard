@@ -141,7 +141,7 @@ function FieldEditor(props) {
             </span>
           </label>
           <input type='submit' value='Submit' />
-          <h3>Supported Filter Operators</h3>
+          <div className='label'>Supported Filter Operators</div>
           <table>
             <tbody>
               <tr><td>{'='}</td><td>Equals</td></tr>

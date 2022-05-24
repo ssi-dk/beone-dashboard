@@ -50,6 +50,12 @@ h2 {
   margin-bottom: 0;
 }
 
+h3 {
+  font-size: 1em;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 .row-header {
   align-items: baseline;
 }
