@@ -1,9 +1,10 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { atom, useRecoilState } from 'recoil'
 
 import parser from 'biojs-io-newick'
 import PubSub from 'pubsub-js'
 import {compile} from 'filtering-query'
+import Checkbox from 'react-three-state-checkbox'
 
 import { findValues } from './utils'
 import treeIcon from './icons/icons8-tree-20.png'
@@ -132,13 +133,56 @@ function TableView() {
     </div>
   )
 
+  const [masterCheckboxState, setMasterCheckboxState] = useState({ checked: false, indeterminate: false})
+
+  const handleMasterCheckboxChange = (event) => {
+    let samplesCopy = new Map(JSON.parse(
+      JSON.stringify(Array.from(samples))
+    ));
+    let newChecked = !masterCheckboxState.checked
+    for (let sample of samplesCopy) {
+      if (newChecked) {
+        // In this case we only select the samples that are contained in columnDataAsRows
+        if (columnDataAsRows.has(sample[0])) {
+          sample[1].selected = newChecked
+        }
+      } else {
+        // In this case we unselect ALL samples
+        sample[1].selected = newChecked
+      }
+    }
+    setSamples(samplesCopy)
+    setMasterCheckboxState({ checked: newChecked, indeterminate: false })
+  }
+
+  useMemo(() => {
+    let foundSelected = false
+    let foundUnselected = false
+    let newInd = false
+    for (const sample of samples) {
+      if (sample[1].selected) { foundSelected = true } else { foundUnselected = true }
+      if (foundSelected && foundUnselected) {
+        newInd = true
+        break
+      }
+    }
+    setMasterCheckboxState({
+      checked: masterCheckboxState.checked,
+      indeterminate: newInd
+    })
+  }, [samples])
+
   return (
     <div className='pane'>
       <h1>Table View</h1>
       <div className='overview-row'>
         <div className='overview-column'>&nbsp;</div>
         <div className='overview-firstcol-border'>
-          <input type='checkbox' />
+          <Checkbox
+            checked={masterCheckboxState.checked}
+            indeterminate={masterCheckboxState.indeterminate}
+            onChange={handleMasterCheckboxChange}
+          />
           <img className='funnel' src={funnelIcon} />
         </div>
         <div className='overview-header'>
