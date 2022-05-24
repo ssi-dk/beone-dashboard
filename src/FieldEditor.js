@@ -141,7 +141,8 @@ function FieldEditor(props) {
             </span>
           </label>
           <input type='submit' value='Submit' />
-          <div className='label'>Supported Filter Operators</div>
+          <div className='vspace'>Text values must be surrounded by double quotes.</div>
+          <div className='vspace'>Supported Filter Operators:</div>
           <table>
             <tbody>
               <tr><td>{'='}</td><td>Equals</td></tr>
