@@ -15,11 +15,24 @@ function Geo() {
 
   return (
     <div className='pane'>
-      <h1>Geo</h1>
-      <ComposableMap>
-        <Geographies geography={geoUrl}>
+      <h1>Geography</h1>
+      <ComposableMap
+        projection="geoAzimuthalEqualArea"
+        projectionConfig={{
+          rotate: [-20.0, -52.0, 0],
+          scale: 700
+        }}
+      >
+        <Geographies
+          geography={geoUrl}
+          fill="#D6D6DA"
+          stroke="#FFFFFF"
+          strokeWidth={0.5}
+        >
           {({ geographies }) =>
-            geographies.map(geo => <Geography key={geo.rsmKey} geography={geo} />)
+            geographies.map((geo) => (
+              <Geography key={geo.rsmKey} geography={geo} />
+            ))
           }
         </Geographies>
       </ComposableMap>
