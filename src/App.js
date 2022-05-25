@@ -9,6 +9,7 @@ import './App.css'
 import TableView from './TableView'
 import DataSources from './DataSources'
 import Phylo from './Phylo'
+import Geo from './Geo'
 
 export default App;
 
@@ -30,9 +31,7 @@ function App() {
         <div className = 'row'>
           <DataSources/>
           <div className='column'>
-            <div className='pane'>
-              <h1>Map</h1>
-            </div>
+            <Geo/>
           </div>
       </div>
     </div>
