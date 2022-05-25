@@ -100,6 +100,7 @@ h3 {
 
 .overview-row {
   display: flex;
+  margin-top: 3px;
 }
 
 .overview-column {
