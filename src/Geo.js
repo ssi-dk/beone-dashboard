@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react'
 import { useRecoilState } from 'recoil'
-import { ComposableMap, Geographies, Geography, Marker } from "react-simple-maps";
+import { ComposableMap, Geographies, Geography, Marker } from 'react-simple-maps';
 
 import { sampleState, columnDataState, columnUserdataState } from './RecoilStates'
 
@@ -11,13 +11,13 @@ function Geo() {
   const [columnData, setColumnData] = useRecoilState(columnDataState);
   const [columnUserdata, setColumnUserdata] = useRecoilState(columnUserdataState);
   const geoUrl =
-  "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
+  'https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json';
 
   return (
     <div className='pane'>
       <h1>Geography</h1>
       <ComposableMap
-        projection="geoAzimuthalEqualArea"
+        projection='geoAzimuthalEqualArea'
         projectionConfig={{
           rotate: [-20.0, -52.0, 0],
           scale: 700
@@ -25,8 +25,8 @@ function Geo() {
       >
         <Geographies
           geography={geoUrl}
-          fill="#D6D6DA"
-          stroke="#FFFFFF"
+          fill='#D6D6DA'
+          stroke='#FFFFFF'
           strokeWidth={0.5}
         >
           {({ geographies }) =>
