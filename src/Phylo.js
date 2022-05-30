@@ -19,7 +19,6 @@ class PhyloClass extends React.Component {
   canvasRef = React.createRef()
 
   componentDidMount() {
-    console.log(this.props.allIds)
     this.tree = new PhylocanvasGL(
       this.canvasRef.current,
       { ...this.props } || {},
