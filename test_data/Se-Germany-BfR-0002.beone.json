@@ -401,8 +401,8 @@
             ],
             "MLST_Genotype": null,
             "Serotype": "O157:H7",
-            "Latitude": null,
-            "Longitude": null
+            "Latitude": 51.30001,
+            "Longitude": 13.10984
         }
     },
     "pipelines": {

@@ -410,8 +410,8 @@
             ],
             "MLST_Genotype": null,
             "Serotype": "S4",
-            "Latitude": null,
-            "Longitude": null
+            "Latitude": 52.47774,
+            "Longitude": 10.5511
         }
     },
     "pipelines": {
