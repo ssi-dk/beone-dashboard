@@ -401,8 +401,8 @@
             ],
             "MLST_Genotype": null,
             "Serotype": "Enteritidis",
-            "Latitude": null,
-            "Longitude": null
+            "Latitude": 53.63333,
+            "Longitude": 9.85
         }
     },
     "pipelines": {
