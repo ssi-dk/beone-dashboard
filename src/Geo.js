@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react'
 import { useRecoilState } from 'recoil'
-import { ComposableMap, Geographies, Geography } from "react-simple-maps";
+import { ComposableMap, Geographies, Geography, Marker } from "react-simple-maps";
 
 import { sampleState, columnDataState, columnUserdataState } from './RecoilStates'
 
@@ -35,6 +35,20 @@ function Geo() {
             ))
           }
         </Geographies>
+
+        {/*Array.from(samples).map(({ name, coordinates, markerOffset }) => (
+        <Marker key={name} coordinates={coordinates}>
+          <circle r={10} fill="#F00" stroke="#fff" strokeWidth={2} />
+          <text
+            textAnchor="middle"
+            y={markerOffset}
+            style={{ fontFamily: "system-ui", fill: "#5D5A6D" }}
+          >
+            {name}
+          </text>
+        </Marker>
+        ))*/}
+
       </ComposableMap>
     </div>
   )
