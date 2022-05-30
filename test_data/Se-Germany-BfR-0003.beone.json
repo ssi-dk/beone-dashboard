@@ -297,7 +297,7 @@
         ],
         "summary": {
             "sample": "Se-Germany-BfR-0003",
-            "reference": "NZ_CP007507.1 Salmonella enterica subsp. enterica serovar Enteritidis strain Durban, complete genome",
+            "reference": "NZ_CP007507.1 Clostridium difficile serogroup S4 strain Havana, complete genome",
             "assembly_coverageDepth": 43.27531,
             "reads_total": 1041055,
             "reads_mapped": 1040858,
@@ -324,7 +324,7 @@
             "Complete%20BUSCO%20%28%25%29": 98.65,
             "Partial%20BUSCO%20%28%25%29": 0.0,
             "Total%20aligned%20length": 4642383,
-            "species": "Salmonella enterica",
+            "species": "Clostridium difficile",
             "species_cumlength": 4697585,
             "species_fraction": 0.99833,
             "sequence_type": "11"
@@ -338,7 +338,7 @@
             "qc_cgmlst": "PASS"
         },
         "metadata": {
-            "Microorganism": "Salmonella enterica",
+            "Microorganism": "Clostridium difficile",
             "Fastq_R1": "Se_Germany_BfR_0003_R1.fastq.gz",
             "Fastq_R2": "Se_Germany_BfR_0003_R2.fastq.gz",
             "Outbreak_related": "outbreak_08",
@@ -409,7 +409,7 @@
                 null
             ],
             "MLST_Genotype": null,
-            "Serotype": "Enteritidis",
+            "Serotype": "S4",
             "Latitude": null,
             "Longitude": null
         }

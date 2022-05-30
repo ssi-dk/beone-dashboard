@@ -297,7 +297,7 @@
         ],
         "summary": {
             "sample": "Se-Germany-BfR-0002",
-            "reference": "NZ_CP007507.1 Salmonella enterica subsp. enterica serovar Enteritidis strain Durban, complete genome",
+            "reference": "NZ_CP007507.1 Escherichia coli O157:H7 strain Durban, complete genome",
             "assembly_coverageDepth": 61.51235,
             "reads_total": 1226113,
             "reads_mapped": 1225680,
@@ -324,7 +324,7 @@
             "Complete%20BUSCO%20%28%25%29": 98.65,
             "Partial%20BUSCO%20%28%25%29": 0.0,
             "Total%20aligned%20length": 4637774,
-            "species": "Salmonella enterica",
+            "species": "Escherichia coli",
             "species_cumlength": 4693416,
             "species_fraction": 0.99813,
             "sequence_type": "11"
@@ -338,7 +338,7 @@
             "qc_cgmlst": "PASS"
         },
         "metadata": {
-            "Microorganism": "Salmonella enterica",
+            "Microorganism": "Escherichia coli",
             "Fastq_R1": "Se_Germany_BfR_0002_R1.fastq.gz",
             "Fastq_R2": "Se_Germany_BfR_0002_R2.fastq.gz",
             "Outbreak_related": "outbreak_08",
@@ -400,7 +400,7 @@
                 null
             ],
             "MLST_Genotype": null,
-            "Serotype": "Enteritidis",
+            "Serotype": "O157:H7",
             "Latitude": null,
             "Longitude": null
         }
