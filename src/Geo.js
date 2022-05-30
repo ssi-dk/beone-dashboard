@@ -36,18 +36,17 @@ function Geo() {
           }
         </Geographies>
 
-        {/*Array.from(samples).map(({ name, coordinates, markerOffset }) => (
-        <Marker key={name} coordinates={coordinates}>
+        {Array.from(samples).map(sample => 
+        <Marker key={sample[0]} coordinates={[sample[1].Latitude, sample[1].Longitude]}>
           <circle r={10} fill="#F00" stroke="#fff" strokeWidth={2} />
           <text
             textAnchor="middle"
-            y={markerOffset}
             style={{ fontFamily: "system-ui", fill: "#5D5A6D" }}
           >
             {name}
           </text>
         </Marker>
-        ))*/}
+        )}
 
       </ComposableMap>
     </div>
