@@ -12,11 +12,6 @@ function Geo() {
   const [columnUserdata, setColumnUserdata] = useRecoilState(columnUserdataState);
   const geoUrl =
   'https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json';
-  
-  // useMemo
-  const coordinates = Array.from(samples).map(sample => [sample[1].latitude, sample[1].longitude])
-  console.log('Coordinates:')
-  console.log(coordinates)
 
   return (
     <div className='pane'>
