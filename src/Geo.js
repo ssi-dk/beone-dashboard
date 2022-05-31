@@ -38,7 +38,7 @@ function Geo() {
 
         {Array.from(samples).map(sample => 
         <Marker key={sample[0]} coordinates={[sample[1].longitude, sample[1].latitude]}>
-          <circle r={7} fill="#00F" stroke="#fff" strokeWidth={2} />
+          <circle r={5} fill="#00F" stroke="#fff" strokeWidth={2} />
           <text
             textAnchor="middle"
             style={{ fontFamily: "system-ui", fill: "#5D5A6D" }}
