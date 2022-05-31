@@ -20,7 +20,7 @@ function Geo() {
         projection='geoAzimuthalEqualArea'
         projectionConfig={{
           rotate: [-20.0, -52.0, 0],
-          scale: 700
+          scale: 900
         }}
       >
         <Geographies
