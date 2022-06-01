@@ -8,8 +8,6 @@ export default Geo
 
 function Geo() {
   const [samples, setSamples] = useRecoilState(sampleState);
-  const [columnData, setColumnData] = useRecoilState(columnDataState);
-  const [columnUserdata, setColumnUserdata] = useRecoilState(columnUserdataState);
   const geoUrl =
   'https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json';
 
