@@ -69,7 +69,7 @@ access. \<node_folder\> is the folder that contains the file node.exe.
     ```
     @cd <dashboard_folder>
     @set PATH=<node_folder>;%PATH%
-    @cmd.exe /K*
+    @cmd.exe /K
     ```
 -   Save the file and quit your text editor.
 -   Run the file, f. ex. by double-clicking it. This will create a
