@@ -11,6 +11,17 @@ function Geo() {
   const geoUrl =
   'https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json';
 
+  const handleOnSelectedChange = (event) => {
+    const sampleID = event.currentTarget.id
+    let samplesCopy = new Map(JSON.parse(
+      JSON.stringify(Array.from(samples))
+    ));
+    let sample = samplesCopy.get(sampleID)
+    sample['selected'] = !samples.get(sampleID)['selected']
+    samplesCopy.set(sampleID, sample)
+    setSamples(samplesCopy)
+  }
+
   return (
     <div className='pane'>
       <h1>Geography</h1>
@@ -36,7 +47,7 @@ function Geo() {
 
         {Array.from(samples).map(sample => 
         <Marker key={sample[0]} id={sample[0]} coordinates={[sample[1].longitude, sample[1].latitude]}
-          onClick={(event) => console.log(event.currentTarget.id)}
+          onClick={(event) => handleOnSelectedChange(event)}
         >
           <circle r={5} fill={sample[1].selected ? '#F00' :'#00F'} stroke='#fff' strokeWidth={2} />
         </Marker>
