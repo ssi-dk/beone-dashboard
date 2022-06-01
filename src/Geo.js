@@ -35,7 +35,9 @@ function Geo() {
         </Geographies>
 
         {Array.from(samples).map(sample => 
-        <Marker key={sample[0]} coordinates={[sample[1].longitude, sample[1].latitude]}>
+        <Marker key={sample[0]} id={sample[0]} coordinates={[sample[1].longitude, sample[1].latitude]}
+          onClick={(event) => console.log(event.currentTarget.id)}
+        >
           <circle r={5} fill={sample[1].selected ? '#F00' :'#00F'} stroke='#fff' strokeWidth={2} />
         </Marker>
         )}
