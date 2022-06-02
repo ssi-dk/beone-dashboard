@@ -83,6 +83,10 @@ h3 {
 
 .row {
   display: flex;
+}
+
+.baseline-row {
+  display: flex;
   align-items: baseline;
 }
 

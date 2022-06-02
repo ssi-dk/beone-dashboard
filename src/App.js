@@ -17,7 +17,7 @@ function App() {
   return (
     <RecoilRoot>
       <div className='App'>
-        <div className='row pane'>
+        <div className='baseline-row pane'>
           <div className='column'>
             <h1>BeONE Dashboard</h1>
           </div>
