@@ -9,6 +9,7 @@ import './App.css'
 import TableView from './TableView'
 import DataSources from './DataSources'
 import Phylo from './Phylo'
+import Geo from './Geo'
 
 export default App;
 
@@ -17,7 +18,12 @@ function App() {
     <RecoilRoot>
       <div className='App'>
         <div className='row pane'>
-          <h1>BeONE Dashboard</h1>
+          <div className='column'>
+            <h1>BeONE Dashboard</h1>
+          </div>
+          <div className='right-justify'>
+            <div>Version 0.2</div>
+          </div>
         </div>
         <div className='row'>
           <div className='column'>
@@ -30,9 +36,7 @@ function App() {
         <div className = 'row'>
           <DataSources/>
           <div className='column'>
-            <div className='pane'>
-              <h1>Map</h1>
-            </div>
+            <Geo/>
           </div>
       </div>
     </div>

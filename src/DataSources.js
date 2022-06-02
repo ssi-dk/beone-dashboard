@@ -78,7 +78,9 @@ function DataSources() {
         } else {
           samplesCopy.set(sampleId, {
             inTree: false,  // The tree should tell wether it knows the sample or not.
-            selected: false
+            selected: false,
+            latitude: data.sample.metadata.Latitude,
+            longitude: data.sample.metadata.Longitude,
             // clusters: [] Just an idea for the future
           })
           data['source'] = 'file:///' + f.name
