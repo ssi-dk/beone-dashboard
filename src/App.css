@@ -84,7 +84,6 @@ h3 {
 
 .row {
   display: flex;
-  margin-top: 5px;
   align-items: baseline;
 }
 
