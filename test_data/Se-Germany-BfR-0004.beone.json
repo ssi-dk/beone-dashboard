@@ -327,7 +327,7 @@
             "species": "Salmonella enterica",
             "species_cumlength": 4700921,
             "species_fraction": 0.99726,
-            "sequence_type": "12"
+            "sequence_type": "11"
         },
         "qc_assessment": {
             "qc_FAIL": 0,

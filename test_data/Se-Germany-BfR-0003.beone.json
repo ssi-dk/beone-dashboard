@@ -260,8 +260,8 @@
                             "chewbbaca": {
                                 "bsr_theshold": 0.6,
                                 "size_threshold": 0.2,
-                                "scheme_dir": "/cluster/projects/nn9772k/git/chewieSnake/reference_db/enterobase_cdifficile_cgmlst",
-                                "prodigal_training_file": "/cluster/home/brendeba/data/git/chewieSnake/chewBBACA/CHEWBBACA/prodigal_training_files/Clostridium_difficile.trn",
+                                "scheme_dir": "/cluster/projects/nn9772k/git/chewieSnake/reference_db/enterobase_senterica_cgmlst",
+                                "prodigal_training_file": "/cluster/home/brendeba/data/git/chewieSnake/chewBBACA/CHEWBBACA/prodigal_training_files/Salmonella_enterica.trn",
                                 "allele_caller": {
                                     "name": "chewBBACA",
                                     "version": "2.0.12"
@@ -287,9 +287,9 @@
                     }
                 },
                 "database_information": {
-                    "scheme_name": "enterobase_cdifficile_cgmlst",
-                    "species": "Clostridium_difficile",
-                    "scheme_dir": "/cluster/projects/nn9772k/git/chewieSnake/reference_db/enterobase_cdifficile_cgmlst",
+                    "scheme_name": "enterobase_senterica_cgmlst",
+                    "species": "Salmonella_enterica",
+                    "scheme_dir": "/cluster/projects/nn9772k/git/chewieSnake/reference_db/enterobase_senterica_cgmlst",
                     "scheme_md5": "98af37389dd9803c6432a41dc55a2ab5",
                     "count_loci": 3000
                 }
@@ -443,8 +443,8 @@
                             "chewbbaca": {
                                 "bsr_theshold": 0.6,
                                 "size_threshold": 0.2,
-                                "scheme_dir": "/cluster/projects/nn9772k/git/chewieSnake/reference_db/enterobase_cdifficile_cgmlst",
-                                "prodigal_training_file": "/cluster/home/brendeba/data/git/chewieSnake/chewBBACA/CHEWBBACA/prodigal_training_files/Clostridium_difficile.trn",
+                                "scheme_dir": "/cluster/projects/nn9772k/git/chewieSnake/reference_db/enterobase_senterica_cgmlst",
+                                "prodigal_training_file": "/cluster/home/brendeba/data/git/chewieSnake/chewBBACA/CHEWBBACA/prodigal_training_files/Salmonella_enterica.trn",
                                 "allele_caller": {
                                     "name": "chewBBACA",
                                     "version": "2.0.12"
@@ -470,9 +470,9 @@
                     }
                 },
                 "database_information": {
-                    "scheme_name": "enterobase_cdifficile_cgmlst",
-                    "species": "Clostridium_difficile",
-                    "scheme_dir": "/cluster/projects/nn9772k/git/chewieSnake/reference_db/enterobase_cdifficile_cgmlst",
+                    "scheme_name": "enterobase_senterica_cgmlst",
+                    "species": "Salmonella_enterica",
+                    "scheme_dir": "/cluster/projects/nn9772k/git/chewieSnake/reference_db/enterobase_senterica_cgmlst",
                     "scheme_md5": "98af37389dd9803c6432a41dc55a2ab5",
                     "count_loci": 3000
                 }
