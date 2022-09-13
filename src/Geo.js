@@ -4,12 +4,14 @@ import { ComposableMap, Geographies, Geography, Marker } from 'react-simple-maps
 
 import { sampleState, columnDataState, columnUserdataState } from './RecoilStates'
 
+import europe from './europe.json'
+
 export default Geo
 
 function Geo() {
   const [samples, setSamples] = useRecoilState(sampleState);
   const geoUrl =
-  'https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json';
+  'https://raw.githubusercontent.com/deldersveld/topojson/master/continents/europe.json';
 
   const handleOnSelectedChange = (event) => {
     const sampleID = event.currentTarget.id
@@ -33,7 +35,7 @@ function Geo() {
         }}
       >
         <Geographies
-          geography={geoUrl}
+          geography={europe}
           fill='#D6D6DA'
           stroke='#FFFFFF'
           strokeWidth={0.5}
