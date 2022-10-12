@@ -13,10 +13,16 @@ import Geo from './Geo'
 
 export default DashboardComponent;
 
-function DashboardComponent() {
+function DashboardComponent(props) {
   return (
     <RecoilRoot>
       <div className='App'>
+        <div className='row'>
+          {props.samples}
+        </div>
+        <div className='row'>
+          {props.newick}
+        </div>
         <div className='row'>
           <div className='column'>
               <TableView/>
