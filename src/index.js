@@ -17,7 +17,10 @@ if (document.getElementById('root')) {
   // In this case we render the dashboard as a component
   ReactDOM.render(
     <React.StrictMode>
-      <DashboardComponent />
+      <DashboardComponent 
+        samples={document.getElementById('sampleList').innerHTML}
+        newick={document.getElementById('newick').innerHTML}
+      />
     </React.StrictMode>,
     document.getElementById('dashboard')
   );
