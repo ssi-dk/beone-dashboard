@@ -33,9 +33,6 @@ function DashboardComponent(props) {
         </div>
         <div className = 'row'>
           <DataSources/>
-          <div className='column'>
-            <Geo/>
-          </div>
       </div>
     </div>
   </RecoilRoot>
