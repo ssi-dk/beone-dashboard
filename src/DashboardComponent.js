@@ -18,6 +18,12 @@ function DashboardComponent(props) {
     <RecoilRoot>
       <div className='App'>
         <div className='row'>
+          {props.samples}
+        </div>
+        <div className='row'>
+          {props.newick}
+        </div>
+        <div className='row'>
           <div className='column'>
               <TableView/>
           </div>
@@ -26,7 +32,7 @@ function DashboardComponent(props) {
           </div>
         </div>
         <div className = 'row'>
-          <DataSources samples={props.samples} newick={props.newick}/>
+          <DataSources/>
       </div>
     </div>
   </RecoilRoot>

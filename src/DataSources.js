@@ -12,7 +12,7 @@ const jp = require('jsonpath')
 
 export default DataSources
 
-function DataSources(props) {
+function DataSources() {
 
   // samples is a global state that holds a minimum of information about the samples.
   const [samples, setSamples] = useRecoilState(sampleState);
@@ -102,12 +102,6 @@ function DataSources(props) {
       <div className='column'>
         <div className='pane'>
           <h1>Data Sources</h1>
-          <div className='row'>
-            {props.samples}
-          </div>
-          <div className='row'>
-            {props.newick}
-          </div>
           <div className='vspace'>
             <label>
               <span className='label'>Select local JSON file(s):</span>
