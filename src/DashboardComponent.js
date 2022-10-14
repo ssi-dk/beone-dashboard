@@ -18,9 +18,7 @@ function DashboardComponent(props) {
     <RecoilRoot>
       <div className='App'>
         <div className='row'>
-          Load ReporTree job #
-          {document.getElementById('reportree_job_number').innerHTML}
-          into dashboard
+          Load ReporTree job #{props.reportree_job_number} into dashboard
         </div>
         <div className='row'>
           <div className='column'>
