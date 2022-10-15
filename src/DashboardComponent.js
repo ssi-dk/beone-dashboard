@@ -17,8 +17,9 @@ function DashboardComponent(props) {
   return (
     <RecoilRoot>
       <div className='pane'>
-        <div className='baseline-row'>
-          Load ReporTree job #{props.reportree_job_number} into dashboard
+        <h2>Dashboard Launcher</h2>
+        <div className="margin-tb">
+          <button>Load ReporTree job {props.reportree_job_number} into dashboard</button>  
         </div>
       </div>
       <div className='row'>
