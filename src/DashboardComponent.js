@@ -16,22 +16,22 @@ export default DashboardComponent;
 function DashboardComponent(props) {
   return (
     <RecoilRoot>
-      <div className='App'>
-        <div className='row'>
+      <div className='pane'>
+        <div className='baseline-row'>
           Load ReporTree job #{props.reportree_job_number} into dashboard
         </div>
-        <div className='row'>
-          <div className='column'>
-              <TableView/>
-          </div>
-          <div className='column'>
-              <Phylo/>
-          </div>
-        </div>
-        <div className = 'row'>
-          <DataSources/>
       </div>
-    </div>
+      <div className='row'>
+        <div className='column'>
+            <TableView/>
+        </div>
+        <div className='column'>
+            <Phylo/>
+        </div>
+      </div>
+      <div className = 'row'>
+        <DataSources/>
+      </div>
   </RecoilRoot>
   );
 }
