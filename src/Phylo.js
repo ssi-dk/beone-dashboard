@@ -15,7 +15,7 @@ function Phylo(props) {
   const [newick, setNewick] = useRecoilState(newickState);
   const [samples] = useRecoilState(sampleState);
 
-  const NewickChangeHandler = async (event) => {
+  const NewickManualHandler = async (event) => {
 
     const f = event.target.files[0]
 
@@ -66,7 +66,7 @@ function Phylo(props) {
       <div className='vspace'>
         <label>
           <span className='label'>Select Newick file:</span>
-          <input type='file' name='file' onChange={NewickChangeHandler} />
+          <input type='file' name='file' onChange={NewickManualHandler} />
         </label>
       </div>
       <PhyloClass
