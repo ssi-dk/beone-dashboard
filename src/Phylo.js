@@ -70,7 +70,7 @@ function Phylo(props) {
         </div>
       <div className='vspace'>
         <label>
-          <span className='label'>Select Newick file:</span>
+          <span className='label'>Or select Newick file:</span>
           <input type='file' name='file' onChange={NewickManualHandler} />
         </label>
       </div>
