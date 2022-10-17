@@ -18,7 +18,7 @@ function DashboardComponent(props) {
     <RecoilRoot>
       <div className='pane'>
         <h2>Dashboard Launcher</h2>
-        <div className="margin-tb">
+        <div className='margin-tb'>
           <button>Load ReporTree job {props.reportree_job_number} into dashboard</button>  
         </div>
       </div>
@@ -31,7 +31,12 @@ function DashboardComponent(props) {
         </div>
       </div>
       <div className = 'row'>
-        <DataSources/>
+        <div className='column'>
+          <DataSources/>
+        </div>
+        <div className='column'>
+          <Geo/>
+        </div>
       </div>
   </RecoilRoot>
   );
