@@ -16,6 +16,7 @@ function Phylo(props) {
   const [samples] = useRecoilState(sampleState);
 
   const NewickManualHandler = async (event) => {
+    // Handle manual upload of a Newick file.
 
     const f = event.target.files[0]
 
@@ -28,6 +29,14 @@ function Phylo(props) {
     }
 
   }
+      
+ // Fetch Newick file via props 
+  // useMemo(() => {
+    if (props.rtJob) {
+      setNewick('((Se-Germany-BfR-0001:1,Se-Germany-BfR-0002:2,Se-Germany-BfR-0003:3,Se-Germany-BfR-0004:4):5,(Se-Germany-BfR-0005:5,Se-Germany-BfR-0006:6):3,(Se-Germany-BfR-0007:7,Se-Germany-BfR-0008:8,Se-Germany-BfR-0009:9,Se-Germany-BfR-0010:10,Not-in-data:5):11);')
+    }
+    //}, [props.rtJob]
+  //)
 
   function treeStyles(newick, samples) {
     /* In the future there may be a way of getting the tree IDs directly from
