@@ -11,7 +11,7 @@ import PhyloClass from './PhyloClass'
 
 export default Phylo
 
-function Phylo() {
+function Phylo(props) {
   const [newick, setNewick] = useRecoilState(newickState);
   const [samples] = useRecoilState(sampleState);
 
@@ -60,6 +60,9 @@ function Phylo() {
       <h1>
         Tree
       </h1>
+      <div className='vspace'>
+          <button>Load tree from ReporTree job {props.rtJob}</button>  
+        </div>
       <div className='vspace'>
         <label>
           <span className='label'>Select Newick file:</span>

@@ -102,7 +102,7 @@ function DataSources(props) {
       <div className='pane'>
         <h1>Data Sources</h1>
         <div className='vspace'>
-          <button>Load ReporTree job {props.rtJob}</button>  
+          <button>Load data from ReporTree job {props.rtJob}</button>  
         </div>
         <div className='vspace'>
           <label>

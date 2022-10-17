@@ -16,18 +16,12 @@ export default DashboardComponent;
 function DashboardComponent(props) {
   return (
     <RecoilRoot>
-      <div className='pane'>
-        <h2>Dashboard Launcher</h2>
-        <div className='margin-tb'>
-          <button>Load ReporTree job {props.rtJob} into dashboard</button>  
-        </div>
-      </div>
       <div className='row'>
         <div className='column'>
             <TableView/>
         </div>
         <div className='column'>
-            <Phylo/>
+            <Phylo rtJob={props.rtJob}/>
         </div>
       </div>
       <div className = 'row'>
