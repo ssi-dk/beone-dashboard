@@ -19,7 +19,7 @@ function DashboardComponent(props) {
       <div className='pane'>
         <h2>Dashboard Launcher</h2>
         <div className='margin-tb'>
-          <button>Load ReporTree job {props.reportree_job_number} into dashboard</button>  
+          <button>Load ReporTree job {props.rtJob} into dashboard</button>  
         </div>
       </div>
       <div className='row'>
@@ -32,7 +32,7 @@ function DashboardComponent(props) {
       </div>
       <div className = 'row'>
         <div className='column'>
-          <DataSources/>
+          <DataSources rtJob={props.rtJob}/>
         </div>
         <div className='column'>
           <Geo/>

@@ -18,7 +18,7 @@ if (document.getElementById('root')) {
   ReactDOM.render(
     <React.StrictMode>
       <DashboardComponent 
-        reportree_job_number={document.getElementById('reportree_job_number').innerHTML}
+        rtJob={document.getElementById('reportree_job_number').innerHTML}
       />
     </React.StrictMode>,
     document.getElementById('dashboard')
