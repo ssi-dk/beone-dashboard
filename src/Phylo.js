@@ -17,9 +17,7 @@ function Phylo(props) {
 
   const NewickManualHandler = async (event) => {
     // Handle manual upload of a Newick file.
-
     const f = event.target.files[0]
-
     if (f['name'].endsWith('.nwk')) {
       const text = await readFile(f)
       setNewick(text)
@@ -27,16 +25,14 @@ function Phylo(props) {
     else {
       alert('Filename must end with ".nwk".')
     }
-
   }
       
- // Fetch Newick file via props 
-  // useMemo(() => {
+  const NewickPropHandler = async () => {
+    // Fetch Newick file via props 
     if (props.rtJob) {
       setNewick('((Se-Germany-BfR-0001:1,Se-Germany-BfR-0002:2,Se-Germany-BfR-0003:3,Se-Germany-BfR-0004:4):5,(Se-Germany-BfR-0005:5,Se-Germany-BfR-0006:6):3,(Se-Germany-BfR-0007:7,Se-Germany-BfR-0008:8,Se-Germany-BfR-0009:9,Se-Germany-BfR-0010:10,Not-in-data:5):11);')
     }
-    //}, [props.rtJob]
-  //)
+  }
 
   function treeStyles(newick, samples) {
     /* In the future there may be a way of getting the tree IDs directly from
@@ -70,7 +66,7 @@ function Phylo(props) {
         Tree
       </h1>
       <div className='vspace'>
-          <button>Load tree from ReporTree job {props.rtJob}</button>  
+          <button onClick={NewickPropHandler}>Load tree from ReporTree job {props.rtJob}</button>  
         </div>
       <div className='vspace'>
         <label>
