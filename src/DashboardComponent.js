@@ -28,7 +28,7 @@ function DashboardComponent(props) {
     fetch(url, options)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        setNewick(data.newick);
       });
 
     //setData(result.data);
