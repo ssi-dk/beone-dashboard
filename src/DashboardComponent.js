@@ -17,17 +17,13 @@ function DashboardComponent(props) {
   const [newick, setNewick] = useRecoilState(newickState);
 
   useEffect(async () => {
-    const url = "https://jsonplaceholder.typicode.com/todos";
+    const url = "/rt_jobs/1/data/";
     const options = {
-      method: "POST",
+      method: "GET",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json;charset=UTF-8",
-      },
-      body: JSON.stringify({
-        a: 10,
-        b: 20,
-      }),
+      }
     };
     fetch(url, options)
       .then((response) => response.json())
