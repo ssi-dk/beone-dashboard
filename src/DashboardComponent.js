@@ -13,6 +13,8 @@ import Geo from './Geo'
 
 export default DashboardComponent;
 
+// Fetch job data asynchronously
+
 function DashboardComponent(props) {
   return (
     <RecoilRoot>
@@ -22,14 +24,6 @@ function DashboardComponent(props) {
         </div>
         <div className='column'>
             <Phylo rtJob={props.rtJob}/>
-        </div>
-      </div>
-      <div className = 'row'>
-        <div className='column'>
-          <DataSources rtJob={props.rtJob}/>
-        </div>
-        <div className='column'>
-          <Geo/>
         </div>
       </div>
   </RecoilRoot>
