@@ -102,9 +102,6 @@ function DataSources(props) {
       <div className='pane'>
         <h1>Data Sources</h1>
         <div className='vspace'>
-          <button>Load data from ReporTree job {props.rtJob}</button>  
-        </div>
-        <div className='vspace'>
           <label>
             <span className='label'>Select local JSON file(s):</span>
             <input type='file' name='file' multiple onChange={JSONChangeHandler} />
