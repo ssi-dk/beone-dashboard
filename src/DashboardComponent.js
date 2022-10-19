@@ -17,12 +17,12 @@ function DashboardComponent(props) {
   const [newick, setNewick] = useRecoilState(newickState);
 
   useEffect(async () => {
-    const url = "/rt_jobs/1/data/";
+    const url = '/rt_jobs/1/data/';
     const options = {
-      method: "GET",
+      method: 'GET',
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json;charset=UTF-8",
+        Accept: 'application/json',
+        'Content-Type': 'application/json;charset=UTF-8',
       }
     };
     fetch(url, options)
@@ -34,11 +34,9 @@ function DashboardComponent(props) {
           fetchedSamples.set(fullName, {'inTree': false, 'selected': false, 'latitude': false, 'longitude': false})
         }
         console.log(fetchedSamples)
-        setSamples(fetchedSamples);
-        //setNewick(data.newick);
+        // setSamples(fetchedSamples);
+        setNewick(data.newick);
       });
-
-    //setData(result.data);
   });
 
   return (
