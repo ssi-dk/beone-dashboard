@@ -15,10 +15,9 @@ function Phylo() {
   const [newick, setNewick] = useRecoilState(newickState);
   const [samples] = useRecoilState(sampleState);
 
-  const NewickChangeHandler = async (event) => {
-
+  const NewickManualHandler = async (event) => {
+    // Handle manual upload of a Newick file.
     const f = event.target.files[0]
-
     if (f['name'].endsWith('.nwk')) {
       const text = await readFile(f)
       setNewick(text)
@@ -26,7 +25,6 @@ function Phylo() {
     else {
       alert('Filename must end with ".nwk".')
     }
-
   }
 
   function treeStyles(newick, samples) {
@@ -46,6 +44,19 @@ function Phylo() {
     return styles
   }
 
+  function showFileSelector(newick) {
+    if (newick === '()') {
+      return(
+        <div className='vspace'>
+        <label>
+          <span className='label'>Select Newick file:</span>
+          <input type='file' name='file' onChange={NewickManualHandler} />
+        </label>
+      </div>
+      );
+    }
+  }
+
   const styles = useMemo(() =>
     treeStyles(newick, samples),
     [newick, samples]
@@ -60,12 +71,7 @@ function Phylo() {
       <h1>
         Tree
       </h1>
-      <div className='vspace'>
-        <label>
-          <span className='label'>Select Newick file:</span>
-          <input type='file' name='file' onChange={NewickChangeHandler} />
-        </label>
-      </div>
+      {showFileSelector(newick)}
       <PhyloClass
         source={newick}
         metadata={samples}

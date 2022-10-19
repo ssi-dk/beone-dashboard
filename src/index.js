@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {RecoilRoot} from 'recoil'
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -17,7 +18,11 @@ if (document.getElementById('root')) {
   // In this case we render the dashboard as a component
   ReactDOM.render(
     <React.StrictMode>
-      <DashboardComponent />
+      <RecoilRoot>
+        <DashboardComponent 
+          rtJob={document.getElementById('reportree_job_number').innerText.trim()}
+        />
+      </RecoilRoot>
     </React.StrictMode>,
     document.getElementById('dashboard')
   );
