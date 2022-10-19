@@ -44,6 +44,19 @@ function Phylo() {
     return styles
   }
 
+  function showFileSelector(newick) {
+    if (newick === '()') {
+      return(
+        <div className='vspace'>
+        <label>
+          <span className='label'>Select Newick file:</span>
+          <input type='file' name='file' onChange={NewickManualHandler} />
+        </label>
+      </div>
+      );
+    }
+  }
+
   const styles = useMemo(() =>
     treeStyles(newick, samples),
     [newick, samples]
@@ -58,12 +71,7 @@ function Phylo() {
       <h1>
         Tree
       </h1>
-      <div className='vspace'>
-        <label>
-          <span className='label'>Or select Newick file:</span>
-          <input type='file' name='file' onChange={NewickManualHandler} />
-        </label>
-      </div>
+      {showFileSelector(newick)}
       <PhyloClass
         source={newick}
         metadata={samples}
