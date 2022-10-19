@@ -1,5 +1,5 @@
 // import logo from './logo.svg';
-import React, { useEffect } from 'react'
+import React, { useMemo, useEffect } from 'react'
 
 import { useRecoilState } from 'recoil'
 
@@ -16,7 +16,7 @@ function DashboardComponent(props) {
   const [samples, setSamples] = useRecoilState(sampleState);
   const [newick, setNewick] = useRecoilState(newickState);
 
-  useEffect(async () => {
+  useMemo(async () => {
     const url = '/rt_jobs/1/data/';
     const options = {
       method: 'GET',
@@ -34,16 +34,13 @@ function DashboardComponent(props) {
           fetchedSamples.set(fullName, {'inTree': false, 'selected': false, 'latitude': false, 'longitude': false})
         }
         console.log(fetchedSamples)
-        // setSamples(fetchedSamples);
+        setSamples(fetchedSamples);
         setNewick(data.newick);
       });
-  });
+  }, [props.rtJob]);
 
   return (
     <div className='row'>
-      <div className='column'>
-          <TableView/>
-      </div>
       <div className='column'>
           <Phylo/>
       </div>
