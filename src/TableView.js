@@ -174,7 +174,7 @@ function TableView() {
 
   return (
     <div className='pane'>
-      <h1>Table</h1>
+      <h1>Sample List</h1>
       <div className='overview-row'>
         <div className='overview-column'>&nbsp;</div>
         <div className='overview-firstcol-border'>
