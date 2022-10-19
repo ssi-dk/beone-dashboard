@@ -45,7 +45,7 @@ function DashboardComponent(props) {
           <TableView/>
       </div>
       <div className='column'>
-          <Phylo rtJob={props.rtJob}/>
+          <Phylo/>
       </div>
     </div>
 );
