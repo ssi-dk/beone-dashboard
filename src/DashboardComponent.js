@@ -17,7 +17,7 @@ function DashboardComponent(props) {
   const [newick, setNewick] = useRecoilState(newickState);
 
   useMemo(async () => {
-    const url = '/rt_jobs/1/data/';
+    const url = '/rt_jobs/' + props.rtJob + '/data/';
     const options = {
       method: 'GET',
       headers: {

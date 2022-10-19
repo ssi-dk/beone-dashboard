@@ -20,7 +20,7 @@ if (document.getElementById('root')) {
     <React.StrictMode>
       <RecoilRoot>
         <DashboardComponent 
-          rtJob={document.getElementById('reportree_job_number').innerHTML}
+          rtJob={document.getElementById('reportree_job_number').innerText.trim()}
         />
       </RecoilRoot>
     </React.StrictMode>,
