@@ -28,7 +28,14 @@ function DashboardComponent(props) {
     fetch(url, options)
       .then((response) => response.json())
       .then((data) => {
-        setNewick(data.newick);
+        let fetchedSamples = new Map()
+        for (let entry of data.sample_ids) {
+          let fullName = entry.org + '.' + entry.name
+          fetchedSamples.set(fullName, {'inTree': false, 'selected': false, 'latitude': false, 'longitude': false})
+        }
+        console.log(fetchedSamples)
+        setSamples(fetchedSamples);
+        //setNewick(data.newick);
       });
 
     //setData(result.data);
