@@ -33,7 +33,6 @@ function DashboardComponent(props) {
           let fullName = entry.org + '.' + entry.name
           fetchedSamples.set(fullName, {'inTree': false, 'selected': false, 'latitude': false, 'longitude': false})
         }
-        console.log(fetchedSamples)
         setSamples(fetchedSamples);
         setNewick(data.newick);
       });
