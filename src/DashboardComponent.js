@@ -42,6 +42,9 @@ function DashboardComponent(props) {
   return (
     <div className='row'>
       <div className='column'>
+        <TableView/>
+      </div>
+      <div className='column'>
           <Phylo/>
       </div>
     </div>
