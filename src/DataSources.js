@@ -97,15 +97,18 @@ function DataSources(props) {
 
   let allDataArray = useMemo(() => Array.from(allData), [allData])
 
+  const buttons = () =>
+  <label>
+    <span className='label'>Select local JSON file(s):</span>
+    <input type='file' name='file' multiple onChange={JSONChangeHandler} />
+  </label>
+
   return (
     <div>
       <div className='pane'>
         <h1>Data Sources</h1>
         <div className='vspace'>
-          <label>
-            <span className='label'>Select local JSON file(s):</span>
-            <input type='file' name='file' multiple onChange={JSONChangeHandler} />
-          </label>
+          {buttons()}
         </div>
       </div>
       <div className='pane'>

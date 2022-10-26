@@ -39,12 +39,19 @@ function DashboardComponent(props) {
   }, [props.rtJob]);
 
   return (
-    <div className='row'>
-      <div className='column'>
-        <TableView/>
+    <div>
+      <div className='row'>
+        <div className='column'>
+          <TableView/>
+        </div>
+        <div className='column'>
+            <Phylo/>
+        </div>
       </div>
-      <div className='column'>
-          <Phylo/>
+      <div className='row'>
+        <div className='column'>
+          <DataSources rtJob={props.rtJob}/>
+        </div>
       </div>
     </div>
 );
