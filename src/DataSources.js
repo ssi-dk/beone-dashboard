@@ -97,11 +97,18 @@ function DataSources(props) {
 
   let allDataArray = useMemo(() => Array.from(allData), [allData])
 
-  const buttons = () =>
-  <label>
-    <span className='label'>Select local JSON file(s):</span>
-    <input type='file' name='file' multiple onChange={JSONChangeHandler} />
-  </label>
+  const buttons = () => {
+    if (props.rtJob) {
+      return props.rtJob
+    } else {
+      return(
+        <label>
+          <span className='label'>Select local JSON file(s):</span>
+          <input type='file' name='file' multiple onChange={JSONChangeHandler} />
+        </label>
+      )
+    }
+  }
 
   return (
     <div>
