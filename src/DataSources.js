@@ -99,7 +99,9 @@ function DataSources(props) {
 
   const buttons = () => {
     if (props.rtJob) {
-      return props.rtJob
+      return(
+        <button>Add ReporTree clusters</button>
+      )
     } else {
       return(
         <label>
