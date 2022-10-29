@@ -97,10 +97,10 @@ function DataSources(props) {
 
   let allDataArray = useMemo(() => Array.from(allData), [allData])
 
-  const buttons = () => {
+  const dataSourceOptions = () => {
     if (props.rtJob) {
       return(
-        <button>Add ReporTree clusters</button>
+        <h2>Add ReporTree clusters</h2>
       )
     } else {
       return(
@@ -117,7 +117,7 @@ function DataSources(props) {
       <div className='pane'>
         <h1>Data Sources</h1>
         <div className='vspace'>
-          {buttons()}
+          {dataSourceOptions()}
         </div>
       </div>
       <div className='pane'>
