@@ -49,9 +49,7 @@ function DashboardComponent(props) {
         </div>
       </div>
       <div className='row'>
-        <div className='column'>
-          <DataSources rtJob={props.rtJob}/>
-        </div>
+        <DataSources rtJob={props.rtJob}/>
       </div>
     </div>
 );

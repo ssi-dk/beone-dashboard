@@ -100,7 +100,19 @@ function DataSources(props) {
   const dataSourceOptions = () => {
     if (props.rtJob) {
       return(
-        <h2>Add ReporTree clusters</h2>
+        <div>
+          <h1>ReporTree clusters</h1>
+          <div> Select partition:</div>
+          <div className='row'>
+          <select className='column rspace'>
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="fiat">Fiat</option>
+            <option value="audi">Audi</option>
+          </select>
+          <button className='column'>Add clusters</button>
+          </div>
+        </div>
       )
     } else {
       return(
@@ -114,14 +126,13 @@ function DataSources(props) {
 
   return (
     <div>
-      <div className='pane'>
-        <h1>Data Sources</h1>
-        <div className='vspace'>
+      <div className='row'>
+        <div className='pane column'>
           {dataSourceOptions()}
         </div>
-      </div>
-      <div className='pane'>
-        <FieldEditor data={allDataArray} />
+        <div className='pane column'>
+          <FieldEditor data={allDataArray} />
+        </div>
       </div>
     </div>
   )
