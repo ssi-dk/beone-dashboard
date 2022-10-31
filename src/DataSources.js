@@ -115,8 +115,7 @@ function DataSources(props) {
 
   let allDataArray = useMemo(() => Array.from(allData), [allData])
 
-  // Todo: memoize
-  const dataSourceOptions = () => {
+  let dataSourceOptions = useMemo(() => {
     if (props.rtJob) {
       console.log(clusters)
       return(
@@ -142,13 +141,13 @@ function DataSources(props) {
         </label>
       )
     }
-  }
+  }, [clusters])
 
   return (
     <div>
       <div className='row'>
         <div className='pane column'>
-          {dataSourceOptions()}
+          {dataSourceOptions}
         </div>
         <div className='pane column'>
           <FieldEditor data={allDataArray} />
