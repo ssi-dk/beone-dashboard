@@ -5,7 +5,7 @@ import {
   useRecoilState,
 } from 'recoil'
 
-import { sampleState, columnDataState, columnUserdataState } from './RecoilStates'
+import { sampleState, columnDataState, columnUserdataState, clusterState } from './RecoilStates'
 import FieldEditor from './FieldEditor'
 import { readFile } from './utils'
 const jp = require('jsonpath')
@@ -21,6 +21,7 @@ function DataSources(props) {
 
   const [columnData, setColumnData] = useRecoilState(columnDataState);
   const [columnUserdata, setColumnUserdata] = useRecoilState(columnUserdataState);
+  const [clusters, setClusters] = useRecoilState(clusterState);
 
   function validateColumnLength(samples, columnData) {
     for (let i = 0; i < columnData.length; i++) {
@@ -30,6 +31,23 @@ function DataSources(props) {
     }
     return true
   }
+
+  useMemo(async () => {
+    const url = '/rt_jobs/' + props.rtJob + '/partitions/';
+    const options = {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json;charset=UTF-8',
+      }
+    };
+    fetch(url, options)
+      .then((response) => response.json())
+      .then((data) => {
+        setClusters(data);
+      });
+  }, [props.rtJob]);
+
 
   // Check column sizes
   const columnsOK = useMemo(() => validateColumnLength(samples, columnData), [samples, columnData])
@@ -97,8 +115,10 @@ function DataSources(props) {
 
   let allDataArray = useMemo(() => Array.from(allData), [allData])
 
+  // Todo: memoize
   const dataSourceOptions = () => {
     if (props.rtJob) {
+      console.log(clusters)
       return(
         <div>
           <h1>ReporTree clusters</h1>

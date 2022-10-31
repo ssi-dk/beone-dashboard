@@ -24,3 +24,9 @@ const newickState = atom({
     default: '()',
   });
 export { newickState }
+
+const clusterState = atom({
+  key: 'clusterState',
+  default: new Array(),
+});
+export { clusterState }
