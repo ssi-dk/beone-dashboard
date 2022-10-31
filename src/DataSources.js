@@ -116,18 +116,15 @@ function DataSources(props) {
   let allDataArray = useMemo(() => Array.from(allData), [allData])
 
   let dataSourceOptions = useMemo(() => {
-    if (props.rtJob) {
+    if (props.rtJob && clusters.length!==0) {
       console.log(clusters)
       return(
         <div>
           <h1>ReporTree clusters</h1>
-          <div> Select partition:</div>
+          <div> Select partitioning:</div>
           <div className='row'>
           <select className='column rspace'>
-            <option value="volvo">Volvo</option>
-            <option value="saab">Saab</option>
-            <option value="fiat">Fiat</option>
-            <option value="audi">Audi</option>
+          {Object.keys(clusters['partitions']).map(element => <option key={element} value={element}>{element}</option>)}
           </select>
           <button className='column'>Add clusters</button>
           </div>
