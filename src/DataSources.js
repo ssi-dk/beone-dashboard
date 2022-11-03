@@ -121,7 +121,7 @@ function DataSources(props) {
       return(
         <div>
           <h1>ReporTree clusters</h1>
-          <div> Select partitioning:</div>
+          <div> Select distance threshold:</div>
           <div className='row'>
           <select className='column rspace'>
           {Object.keys(clusters['partitions']).map(element => <option key={element} value={element}>{element}</option>)}
