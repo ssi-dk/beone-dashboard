@@ -16,8 +16,12 @@ function DataSources(props) {
 
   // samples is a global state that holds a minimum of information about the samples.
   const [samples, setSamples] = useRecoilState(sampleState);
+
   // allData is a local state that holds all the JSON data (all data are not neededs globally).
   const [allData, setAllData] = useState(new Map());
+
+  // This is a local state that holds the last selected value from the partition select.
+  const [selectedPartion, setSelectedPartition] = useState(new String())
 
   const [columnData, setColumnData] = useRecoilState(columnDataState);
   const [columnUserdata, setColumnUserdata] = useRecoilState(columnUserdataState);
@@ -115,6 +119,46 @@ function DataSources(props) {
 
   let allDataArray = useMemo(() => Array.from(allData), [allData])
 
+  const partitionSelectHandler = (e) => {
+    // Copied from Fieldeditor.fieldSelectHandler - maybe merge some parts?
+    console.log(selectedPartion)
+    let path = ['reportree', 'partition']  // Add selection to the end
+    // path.push(selection['name'])
+    // path.unshift('$')
+    // const pathExpression = jp.stringify(path)
+    // const maxFieldCount = 6
+    // if (!selectedFields.includes(pathExpression)) {
+    //   if (selectedFields.length >= maxFieldCount) {
+    //     alert('You can only have ' + maxFieldCount + ' selected fields at a time.')
+    //   } else  {
+    //     // Add field to selectedFields
+    //     let selectedFieldsCopy = Array.from(selectedFields)
+    //     selectedFieldsCopy.push(pathExpression)
+    //     setSelectedFields(selectedFieldsCopy)
+    //     // Add header to columnUserdata
+    //     let columnUserdataCopy = Array.from(columnUserdata)
+    //     const currentUserdataElement = {
+    //       'columnId': pathExpression,
+    //       'filter': '',
+    //     }
+    //     columnUserdataCopy.push(currentUserdataElement)
+    //     setColumnUserdata(columnUserdataCopy)
+    //     // Build an array with column data from all samples
+    //     let column = Array()
+    //     for (const entry of props.data) {
+    //       const columnDataForSample = jp.value(entry[1], pathExpression)
+    //       column.push(columnDataForSample)
+    //     }
+    //     // Add column to columnData
+    //     let columnDataCopy = Array.from(columnData)
+    //     columnDataCopy.push(column)
+    //     setColumnData(columnDataCopy)
+    //     // Make this field the current field
+    //     setCurrentFieldPath(pathExpression)
+    //   }
+    // }
+  }
+
   let dataSourceOptions = useMemo(() => {
     if (props.rtJob && clusters.length!==0) {
       console.log(clusters)
@@ -123,10 +167,13 @@ function DataSources(props) {
           <h1>ReporTree clusters</h1>
           <div> Select distance threshold:</div>
           <div className='row'>
-          <select className='column rspace'>
+          <select className='column rspace' onChange={e => {
+                    console.log('You just selected partition ' + e.target.value)
+                    setSelectedPartition(e.target.value)
+                }}>
           {Object.keys(clusters['partitions']).map(element => <option key={element} value={element}>{element}</option>)}
           </select>
-          <button className='column'>Add clusters</button>
+          <button className='column' onClick={partitionSelectHandler}>Add clusters</button>
           </div>
         </div>
       )
@@ -138,7 +185,7 @@ function DataSources(props) {
         </label>
       )
     }
-  }, [clusters])
+  }, [clusters, selectedPartion])
 
   return (
     <div>
