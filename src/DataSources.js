@@ -121,6 +121,7 @@ function DataSources(props) {
 
   const partitionSelectHandler = (e) => {
     // Copied from Fieldeditor.fieldSelectHandler - maybe merge some parts?
+    if (selectedPartion.length > 0) {
     console.log('We want to add clusters from ' + selectedPartion)
     let path = ['reportree', 'partition']  // Add selection to the end
     // path.push(selection['name'])
@@ -157,6 +158,7 @@ function DataSources(props) {
     //     setCurrentFieldPath(pathExpression)
     //   }
     // }
+    }
   }
 
   let dataSourceOptions = useMemo(() => {
@@ -166,10 +168,14 @@ function DataSources(props) {
           <h1>ReporTree clusters</h1>
           <div> Select distance threshold:</div>
           <div className='row'>
-          <select className='column rspace' onChange={e => {
-                    console.log('You just selected partition ' + e.target.value)
-                    setSelectedPartition(e.target.value)
-                }}>
+          <select className='column rspace'
+            onChange={e => {
+                      setSelectedPartition(e.target.value)
+                  }}
+            onFocus={e => {
+              setSelectedPartition(e.target.value)
+          }}
+          >
           {Object.keys(clusters['partitions']).map(element => <option key={element} value={element}>{element}</option>)}
           </select>
           <button className='column' onClick={partitionSelectHandler}>Add clusters</button>
