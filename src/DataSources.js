@@ -121,7 +121,7 @@ function DataSources(props) {
 
   const partitionSelectHandler = (e) => {
     // Copied from Fieldeditor.fieldSelectHandler - maybe merge some parts?
-    console.log(selectedPartion)
+    console.log('We want to add clusters from ' + selectedPartion)
     let path = ['reportree', 'partition']  // Add selection to the end
     // path.push(selection['name'])
     // path.unshift('$')
@@ -161,7 +161,6 @@ function DataSources(props) {
 
   let dataSourceOptions = useMemo(() => {
     if (props.rtJob && clusters.length!==0) {
-      console.log(clusters)
       return(
         <div>
           <h1>ReporTree clusters</h1>
