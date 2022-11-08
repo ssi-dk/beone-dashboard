@@ -150,9 +150,18 @@ function DataSources(props) {
 
       // Build an array with column data from all samples
       let column = Array()
+      let cluster
       for (const sample of samples) {
         // Find the cluster name in which the sample name exists
-        column.push('SomeClusterName')
+        for (cluster of partitionWithData) {
+          for (let clusterSample of cluster.samples) {
+            if (clusterSample.org === sample.org && clusterSample.name === sample.name) {
+              console.log('Yup, found it!')
+              break
+            }
+          }
+          column.push(cluster.name)
+        }
       }
       // Add column to columnData
       columnDataCopy.unshift(column)
