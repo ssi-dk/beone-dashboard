@@ -138,6 +138,7 @@ function DataSources(props) {
           console.log('We already had a Cluster column.')
           columnUserdataCopy.shift()
           console.log('Remember to also remove column data!')
+          //TODO: remove cluster data.
       }
       const clusterUserdata = {
         'columnId': 'Cluster',
@@ -145,18 +146,17 @@ function DataSources(props) {
       }
       columnUserdataCopy.unshift(clusterUserdata)
       setColumnUserdata(columnUserdataCopy)
-      // // Build an array with column data from all samples
-      // let column = Array()
-      // for (const entry of props.data) {
-      //   const columnDataForSample = jp.value(entry[1], pathExpression)
-      //   column.push(columnDataForSample)
-      // }
-      // // Add column to columnData
-      // let columnDataCopy = Array.from(columnData)
-      // columnDataCopy.push(column)
-      // setColumnData(columnDataCopy)
-      // // Make this field the current field
-      // setCurrentFieldPath(pathExpression)
+
+      // Build an array with column data from all samples
+      let column = Array()
+      for (const sample of samples) {
+        // Find the cluster name in which the sample name exists
+        column.push('SomeClusterName')
+      }
+      // Add column to columnData
+      let columnDataCopy = Array.from(columnData)
+      columnDataCopy.unshift(column)
+      setColumnData(columnDataCopy)
     }
   }
 
