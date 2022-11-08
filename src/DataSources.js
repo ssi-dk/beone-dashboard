@@ -132,6 +132,13 @@ function DataSources(props) {
     }
       // Add header to columnUserdata
       let columnUserdataCopy = Array.from(columnUserdata)
+
+      // First, check if we already have a Cluster column (this will alway be the first column)
+      if (columnUserdataCopy.length > 0 && columnUserdataCopy[0].columnId === 'Cluster') {
+          console.log('We already had a Cluster column.')
+          columnUserdataCopy.shift()
+          console.log('Remember to also remove column data!')
+      }
       const clusterUserdata = {
         'columnId': 'Cluster',
         'filter': '',
