@@ -130,15 +130,16 @@ function DataSources(props) {
       console.log('Cluster ' + cluster.name + ' contains these samples:')
       console.log(cluster.samples)
     }
-      // Add header to columnUserdata
       let columnUserdataCopy = Array.from(columnUserdata)
+      let columnDataCopy = Array.from(columnData)
+
+      // Add header to columnUserdata
 
       // First, check if we already have a Cluster column (this will alway be the first column)
       if (columnUserdataCopy.length > 0 && columnUserdataCopy[0].columnId === 'Cluster') {
           console.log('We already had a Cluster column.')
           columnUserdataCopy.shift()
-          console.log('Remember to also remove column data!')
-          //TODO: remove cluster data.
+          columnDataCopy.shift()
       }
       const clusterUserdata = {
         'columnId': 'Cluster',
@@ -154,7 +155,6 @@ function DataSources(props) {
         column.push('SomeClusterName')
       }
       // Add column to columnData
-      let columnDataCopy = Array.from(columnData)
       columnDataCopy.unshift(column)
       setColumnData(columnDataCopy)
     }
