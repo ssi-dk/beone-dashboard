@@ -123,16 +123,21 @@ function DataSources(props) {
     // Copied from Fieldeditor.fieldSelectHandler - maybe merge some parts?
     if (selectedPartion.length > 0) {
     console.log('We want to add clusters from ' + selectedPartion)
-    console.log('Here we have the names of the clusters within the selected partition:')
+    console.log('Here we have the clusters within the selected partition:')
     console.log(clusters.partitions[selectedPartion])
+    let partitionWithData = clusters.partitions[selectedPartion]
+    for (let cluster of partitionWithData) {
+      console.log('Cluster ' + cluster.name + ' contains these samples:')
+      console.log(cluster.samples)
+    }
       // Add header to columnUserdata
       let columnUserdataCopy = Array.from(columnUserdata)
-      const currentUserdataElement = {
+      const clusterUserdata = {
         'columnId': 'Cluster',
         'filter': '',
       }
-      columnUserdataCopy.unshift(currentUserdataElement)
-      // setColumnUserdata(columnUserdataCopy)
+      columnUserdataCopy.unshift(clusterUserdata)
+      setColumnUserdata(columnUserdataCopy)
       // // Build an array with column data from all samples
       // let column = Array()
       // for (const entry of props.data) {
