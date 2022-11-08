@@ -123,41 +123,28 @@ function DataSources(props) {
     // Copied from Fieldeditor.fieldSelectHandler - maybe merge some parts?
     if (selectedPartion.length > 0) {
     console.log('We want to add clusters from ' + selectedPartion)
-    let path = ['reportree', 'partition']  // Add selection to the end
-    // path.push(selection['name'])
-    // path.unshift('$')
-    // const pathExpression = jp.stringify(path)
-    // const maxFieldCount = 6
-    // if (!selectedFields.includes(pathExpression)) {
-    //   if (selectedFields.length >= maxFieldCount) {
-    //     alert('You can only have ' + maxFieldCount + ' selected fields at a time.')
-    //   } else  {
-    //     // Add field to selectedFields
-    //     let selectedFieldsCopy = Array.from(selectedFields)
-    //     selectedFieldsCopy.push(pathExpression)
-    //     setSelectedFields(selectedFieldsCopy)
-    //     // Add header to columnUserdata
-    //     let columnUserdataCopy = Array.from(columnUserdata)
-    //     const currentUserdataElement = {
-    //       'columnId': pathExpression,
-    //       'filter': '',
-    //     }
-    //     columnUserdataCopy.push(currentUserdataElement)
-    //     setColumnUserdata(columnUserdataCopy)
-    //     // Build an array with column data from all samples
-    //     let column = Array()
-    //     for (const entry of props.data) {
-    //       const columnDataForSample = jp.value(entry[1], pathExpression)
-    //       column.push(columnDataForSample)
-    //     }
-    //     // Add column to columnData
-    //     let columnDataCopy = Array.from(columnData)
-    //     columnDataCopy.push(column)
-    //     setColumnData(columnDataCopy)
-    //     // Make this field the current field
-    //     setCurrentFieldPath(pathExpression)
-    //   }
-    // }
+    console.log('Here we have the names of the clusters within the selected partition:')
+    console.log(clusters.partitions[selectedPartion])
+      // Add header to columnUserdata
+      let columnUserdataCopy = Array.from(columnUserdata)
+      const currentUserdataElement = {
+        'columnId': 'Cluster',
+        'filter': '',
+      }
+      columnUserdataCopy.unshift(currentUserdataElement)
+      // setColumnUserdata(columnUserdataCopy)
+      // // Build an array with column data from all samples
+      // let column = Array()
+      // for (const entry of props.data) {
+      //   const columnDataForSample = jp.value(entry[1], pathExpression)
+      //   column.push(columnDataForSample)
+      // }
+      // // Add column to columnData
+      // let columnDataCopy = Array.from(columnData)
+      // columnDataCopy.push(column)
+      // setColumnData(columnDataCopy)
+      // // Make this field the current field
+      // setCurrentFieldPath(pathExpression)
     }
   }
 
