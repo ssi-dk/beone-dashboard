@@ -145,6 +145,11 @@ h3 {
   display: flex;
 }
 
+.row2 {
+  display: flex;
+  flex: 0 0 100%;
+}
+
 .baseline-row {
   display: flex;
   align-items: baseline;
@@ -159,6 +164,7 @@ h3 {
 .column {
   flex: 1;
   display: flex;
+  flex-wrap: wrap;
 }
 
 .react-json-view {
