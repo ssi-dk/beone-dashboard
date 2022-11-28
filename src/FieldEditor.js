@@ -180,15 +180,16 @@ function FieldEditor(props) {
   return(
     <div className='column2'>
       <h1>Field Editor</h1>
-      <div className='pane'>
-        <h2>Selected Fields</h2>
-        <div className='row'>
+      <div className='row2'>
+        <div className='row2'>
           {fieldItems}
         </div>
       </div>
       <div className='pane'>
           <h2>Current Field</h2>
-          {showCurrentField()}
+          <div className='row2'>
+            {showCurrentField()}
+          </div>
       </div>
       <div className='pane'>
       <h2>Field Selector</h2>
