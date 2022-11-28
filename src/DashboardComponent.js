@@ -44,9 +44,7 @@ function DashboardComponent(props) {
         <div className='column'>
           <div className='row2'>
               <DataSources rtJob={props.rtJob}/>
-            <div className='row'>
               <TableView/>
-            </div>
           </div>
         </div>
         <div className='column'>
