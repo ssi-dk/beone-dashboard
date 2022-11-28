@@ -81,15 +81,6 @@ h3 {
   font-weight: bold;
 }
 
-.row {
-  display: flex;
-}
-
-.baseline-row {
-  display: flex;
-  align-items: baseline;
-}
-
 .right-justify {
   justify-content: right;
 }
@@ -148,6 +139,15 @@ h3 {
   flex: 1;
   flex-grow: 1;
   font-weight: bold;
+}
+
+.row {
+  display: flex;
+}
+
+.baseline-row {
+  display: flex;
+  align-items: baseline;
 }
 
 .overview-datacolumn {
