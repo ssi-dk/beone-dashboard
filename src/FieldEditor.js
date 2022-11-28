@@ -178,7 +178,7 @@ function FieldEditor(props) {
   }
 
   return(
-    <div>
+    <div className='column2'>
       <h1>Field Editor</h1>
       <div className='pane'>
         <h2>Selected Fields</h2>

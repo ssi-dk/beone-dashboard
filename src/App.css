@@ -163,7 +163,17 @@ h3 {
 
 .column {
   flex: 1;
+  flex-basis: 50%;
   display: flex;
+  flex-grow: 0;
+  flex-wrap: wrap;
+}
+
+.column2 {
+  flex: 1;
+  flex-basis: 100%;
+  display: flex;
+  flex-grow: 1;
   flex-wrap: wrap;
 }
 

@@ -202,11 +202,11 @@ function DataSources(props) {
 
   return (
     <div>
-      <div className='row'>
+      <div className='row2'>
         <div className='pane column'>
           {dataSourceOptions}
         </div>
-        <div className='pane column'>
+        <div className='pane column2'>
           <FieldEditor data={allDataArray} />
         </div>
       </div>
