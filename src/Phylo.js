@@ -75,7 +75,7 @@ function Phylo() {
       <PhyloClass
         source={newick}
         metadata={samples}
-        size={{ width: window.innerWidth / 2, height: 400 }}
+        size={{ width: window.innerWidth / 2, height: 700 }}
         showLabels
         showLeafLabels
         interactive
