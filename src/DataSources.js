@@ -190,9 +190,6 @@ function DataSources(props) {
             console.log("No, it was not in " + clusterSample.name + '.')
           }
         }
-        // If we reach this line, we did not find a cluster (or singularity) for the sample!
-        console.log("We did not find a cluster (or singularity) for the sample!")
-        column.push("NOT FOUND")
       }
       // Add column to columnData
       columnDataCopy.unshift(column)
