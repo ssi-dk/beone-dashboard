@@ -48,6 +48,8 @@ function DataSources(props) {
     fetch(url, options)
       .then((response) => response.json())
       .then((data) => {
+        console.log("data:")
+        console.log(data)
         setClusters(data);
       });
   }, [props.rtJob]);
@@ -151,18 +153,39 @@ function DataSources(props) {
       // Build an array with column data from all samples
       let column = Array()
       let cluster
-      for (const sample of samples) {
-        console.log("Start looking for a cluster for sample " + sample.name)
+      let samplesArray = Array.from(samples)
+      console.log("We have the following samples in the samples state:")
+      console.log("samplesArray:")
+      console.log(samplesArray)
+      console.log("Length:")
+      console.log(samplesArray.length)
+      for (let sample of samplesArray) {
+        
+        console.log("This is the sample we look at in 'samples':")
+        console.log(sample)
+        console.log("Let's call it " + sample[0])
         // Find the cluster name in which the sample name exists
-        for (cluster of partitionWithData) {
+        for (let cluster of partitionWithData) {
+          let found = false
+          console.log("Now looking at this cluster in partitionWithData:")
+          console.log(cluster)
+          console.log("Does one of its samples have an org.name that euqals " + sample[0] + '?')
           for (let clusterSample of cluster.samples) {
-            if (clusterSample.org === sample.org && clusterSample.name === sample.name) {
-              console.log('Yup, found it: ' + clusterSample.name)
+            if (found) {
+              column.push(cluster.name)
               break
             }
+            if (clusterSample.org === sample.org && clusterSample.name === sample.name) {
+              console.log('Yup, found it: ' + clusterSample.name)
+              found = true
+              break
+            }
+            console.log("No, it was not in " + clusterSample.name + '.')
           }
-          column.push(cluster.name)
         }
+        // If we reach this line, we did not find a cluster (or singularity) for the sample!
+        console.log("We did not find a cluster (or singularity) for the sample!")
+        column.push("NOT FOUND")
       }
       // Add column to columnData
       columnDataCopy.unshift(column)
