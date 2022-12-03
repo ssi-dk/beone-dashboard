@@ -166,17 +166,24 @@ function DataSources(props) {
         console.log("Let's call it " + sample[0])
         // Find the cluster name in which the sample name exists
         for (let cluster of partitionWithData) {
-          let found = false
           console.log("Now looking at this cluster in partitionWithData:")
           console.log(cluster)
           console.log("Does one of its samples have an org.name that euqals " + sample[0] + '?')
+          let orgAndName
+          let found = false
           for (let clusterSample of cluster.samples) {
             if (found) {
-              column.push(cluster.name)
               break
             }
-            if (clusterSample.org === sample.org && clusterSample.name === sample.name) {
+            orgAndName = clusterSample.org + '.' + clusterSample.name
+            console.log("orgAndName:")
+            console.log(orgAndName)
+            console.log("sample[0]:")
+            console.log(sample[0])
+            if (orgAndName === sample[0]) {
               console.log('Yup, found it: ' + clusterSample.name)
+              // alert('Yup, found it: ' + clusterSample.name)
+              column.push(cluster.name)
               found = true
               break
             }
