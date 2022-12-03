@@ -122,13 +122,13 @@ function DataSources(props) {
   const partitionSelectHandler = (e) => {
     // Copied from Fieldeditor.fieldSelectHandler - maybe merge some parts?
     if (selectedPartion.length > 0) {
-    console.log('We want to add clusters from ' + selectedPartion)
-    console.log('Here we have the clusters within the selected partition:')
-    console.log(clusters.partitions[selectedPartion])
+    // console.log('We want to add clusters from ' + selectedPartion)
+    // console.log('Here we have the clusters within the selected partition:')
+    // console.log(clusters.partitions[selectedPartion])
     let partitionWithData = clusters.partitions[selectedPartion]
     for (let cluster of partitionWithData) {
-      console.log('Cluster ' + cluster.name + ' contains these samples:')
-      console.log(cluster.samples)
+      // console.log('Cluster ' + cluster.name + ' contains these samples:')
+      // console.log(cluster.samples)
     }
       let columnUserdataCopy = Array.from(columnUserdata)
       let columnDataCopy = Array.from(columnData)
@@ -137,7 +137,7 @@ function DataSources(props) {
 
       // First, check if we already have a Cluster column (this will alway be the first column)
       if (columnUserdataCopy.length > 0 && columnUserdataCopy[0].columnId === 'Cluster') {
-          console.log('We already had a Cluster column.')
+          // console.log('We already had a Cluster column.')
           columnUserdataCopy.shift()
           columnDataCopy.shift()
       }
@@ -152,11 +152,12 @@ function DataSources(props) {
       let column = Array()
       let cluster
       for (const sample of samples) {
+        console.log("Start looking for a cluster for sample " + sample.name)
         // Find the cluster name in which the sample name exists
         for (cluster of partitionWithData) {
           for (let clusterSample of cluster.samples) {
             if (clusterSample.org === sample.org && clusterSample.name === sample.name) {
-              console.log('Yup, found it!')
+              console.log('Yup, found it: ' + clusterSample.name)
               break
             }
           }
