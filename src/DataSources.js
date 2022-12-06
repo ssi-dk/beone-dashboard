@@ -152,7 +152,6 @@ function DataSources(props) {
 
       // Build an array with column data from all samples
       let column = Array()
-      let cluster
       let samplesArray = Array.from(samples)
       console.log("We have the following samples in the samples state:")
       console.log("samplesArray:")
