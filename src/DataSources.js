@@ -156,10 +156,6 @@ function DataSources(props) {
         JSON.stringify(Array.from(samples))
       ));
       samplesCopy.forEach(function(sample, id) {
-        console.log("id:")
-        console.log(id)
-        console.log("sample:")
-        console.log(sample)
         
         // Find the cluster name in which the sample name exists
         for (let cluster of partitionWithData) {
@@ -175,9 +171,7 @@ function DataSources(props) {
               // alert('Yup, found it: ' + clusterSample.name)
               column.push(cluster.name)
               sample = samplesCopy.get(id)
-              console.log("Sample:")
               sample['cluster'] = cluster.name
-              console.log(sample)
               samplesCopy.set(id, sample)
               found = true
               break
