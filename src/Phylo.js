@@ -34,8 +34,8 @@ function Phylo() {
     https://www.phylocanvas.gl/docs/methods.html#getleafids */
     const treeAsJSON = parser.parse_newick(newick)
     const treeIds = findValues(treeAsJSON, 'name')
-    console.log("treeIds:")
-    console.log(treeIds)
+    // console.log("treeIds:")
+    // console.log(treeIds)
     let styles = {}
     for (let id of treeIds) {
       // Here we must set a different fillColour depending on the cluster,
