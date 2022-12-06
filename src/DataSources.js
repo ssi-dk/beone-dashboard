@@ -166,8 +166,6 @@ function DataSources(props) {
         console.log(id)
         console.log("sample:")
         console.log(sample)
-      })
-      for (let sample of samplesArray) {
         
         // console.log("This is the sample we look at in 'samples':")
         // console.log(sample)
@@ -188,7 +186,7 @@ function DataSources(props) {
             // console.log(orgAndName)
             // console.log("sample[0]:")
             // console.log(sample[0])
-            if (orgAndName === sample[0]) {
+            if (orgAndName === id) {
               // console.log('Yup, found it: ' + clusterSample.name)
               // alert('Yup, found it: ' + clusterSample.name)
               column.push(cluster.name)
@@ -198,7 +196,7 @@ function DataSources(props) {
             // console.log("No, it was not in " + clusterSample.name + '.')
           }
         }
-      }
+      });
       // Add column to columnData
       columnDataCopy.unshift(column)
       setColumnData(columnDataCopy)
