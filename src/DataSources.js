@@ -174,6 +174,11 @@ function DataSources(props) {
               // console.log('Yup, found it: ' + clusterSample.name)
               // alert('Yup, found it: ' + clusterSample.name)
               column.push(cluster.name)
+              sample = samplesCopy.get(id)
+              console.log("Sample:")
+              sample['cluster'] = cluster.name
+              console.log(sample)
+              samplesCopy.set(id, sample)
               found = true
               break
             }
