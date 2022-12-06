@@ -152,15 +152,9 @@ function DataSources(props) {
 
       // Build an array with column data from all samples
       let column = Array()
-      let samplesArray = Array.from(samples)
       let samplesCopy = new Map(JSON.parse(
         JSON.stringify(Array.from(samples))
       ));
-      console.log("We have the following samples in the samples state:")
-      console.log("samplesArray:")
-      console.log(samplesArray)
-      console.log("Length:")
-      console.log(samplesArray.length)
       samplesCopy.forEach(function(sample, id) {
         console.log("id:")
         console.log(id)
