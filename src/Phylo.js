@@ -30,12 +30,22 @@ function Phylo() {
   function treeStyles(newick, samples) {
     const treeAsJSON = parser.parse_newick(newick)
     const treeIds = findValues(treeAsJSON, 'name')
+    
     let styles = {}
+    let realClusterCount = 0
+
+    samples.forEach(function(sample, id) {
+      if ('cluster' in sample && sample.cluster.startsWith('cluster_')) {
+        styles[id] = {fillColour: 'red'}
+        realClusterCount++
+      }
+    });
+    console.log(realClusterCount)
+
+    // styles[id] = {fillColour: 'green'}
+
     for (let id of treeIds) {
-      // Here we must set a different fillColour depending on the cluster,
-      // which must be found in the samples state!
-      // And we must have a table that maps cluster names to colours.
-      styles[id] = {fillColour: 'green'}
+      // Make tree nodes lightgray if not in samples
       if (!samples.has(id)) {
         styles[id] = {fillColour: 'lightgray'}
       }
