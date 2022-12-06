@@ -28,14 +28,8 @@ function Phylo() {
   }
 
   function treeStyles(newick, samples) {
-    /* In the future there may be a way of getting the tree IDs directly from
-    the tree. A getLeafIds() method seems to be planned, but is not
-    implemented at the time of this writing. See
-    https://www.phylocanvas.gl/docs/methods.html#getleafids */
     const treeAsJSON = parser.parse_newick(newick)
     const treeIds = findValues(treeAsJSON, 'name')
-    // console.log("treeIds:")
-    // console.log(treeIds)
     let styles = {}
     for (let id of treeIds) {
       // Here we must set a different fillColour depending on the cluster,
