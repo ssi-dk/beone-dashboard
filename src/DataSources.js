@@ -184,6 +184,8 @@ function DataSources(props) {
       // Add column to columnData
       columnDataCopy.unshift(column)
       setColumnData(columnDataCopy)
+      // Update samples
+      setSamples(samplesCopy)
     }
   }
 
