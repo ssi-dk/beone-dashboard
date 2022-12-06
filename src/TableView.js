@@ -95,10 +95,10 @@ function TableView() {
 
   const columnDataAsRows = useMemo(() => getColumnDataAsRows(sampleArray, columnData, columnUserdata), [sampleArray, columnData, columnUserdata])
 
-  const getColorForField = (index, field) => {
+  const getColorForField = (index, value) => {
     // Cluster column is always index 0
     if (index === 0) {
-      if (field.startsWith('cluster_')) {
+      if (value.startsWith('cluster_')) {
         return 'red'
       }
     }
