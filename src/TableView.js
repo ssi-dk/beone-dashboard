@@ -95,10 +95,20 @@ function TableView() {
 
   const columnDataAsRows = useMemo(() => getColumnDataAsRows(sampleArray, columnData, columnUserdata), [sampleArray, columnData, columnUserdata])
 
+  const getColorForField = (index, field) => {
+    // Cluster column is always index 0
+    if (index === 0) {
+      if (field.startsWith('cluster_')) {
+        return 'red'
+      }
+    }
+    return 'black'
+  }
+  
   const getDataItemsForId = (id) => {
     const dataFields = columnDataAsRows.get(id)
     return dataFields.map((field, index) =>
-      <div className='overview-datacolumn' key={index}>
+      <div className='overview-datacolumn' key={index} style={{color: getColorForField(index, field)}}>
         {field}
       </div>
     )
