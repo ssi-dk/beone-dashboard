@@ -139,6 +139,12 @@ function DataSources(props) {
       let samplesCopy = new Map(JSON.parse(
         JSON.stringify(Array.from(samples))
       ));
+
+      // minVal and maxVal are in this case the lowest and highest cluster number.
+      // If no clusters are found, both values will be 0.
+      let minVal = 0 
+      let maxVal = 0
+      let clusterNumber
       samplesCopy.forEach(function(sample, id) {
         
         // Find the cluster name in which the sample name exists
@@ -158,6 +164,9 @@ function DataSources(props) {
               sample['cluster'] = cluster.name
               samplesCopy.set(id, sample)
               found = true
+              clusterNumber = parseInt(cluster.name.substring(cluster.name.indexOf('_') + 1))
+              minVal = 1
+              if (clusterNumber > maxVal) { maxVal = clusterNumber }
               break
             }
             // console.log("No, it was not in " + clusterSample.name + '.')
@@ -173,7 +182,7 @@ function DataSources(props) {
       // Add header to columnMetadata
       let columnMetadataCopy = Array.from(columnMetadata)
 
-      // First, check if we already have a Cluster column (this will alway be the first column)
+      // First, check if we already have a Cluster column (this will always be the first column)
       if (columnMetadataCopy.length > 0 && columnMetadataCopy[0].columnId === 'Cluster') {
         // console.log('We already had a Cluster column.')
         columnMetadataCopy.shift()
@@ -182,9 +191,10 @@ function DataSources(props) {
     const clusterMetadata = {
       'columnId': 'Cluster',
       'filter': '',
-      'minVal': 1,
-      'maxVal': 123
+      'minVal': minVal,
+      'maxVal': maxVal
     }
+    console.log(clusterMetadata)
     columnMetadataCopy.unshift(clusterMetadata)
     setColumnMetadata(columnMetadataCopy)
     }
