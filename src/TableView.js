@@ -132,7 +132,7 @@ function TableView() {
   const getHeaderTitleFromId = (headerId, minVal, maxVal) => {
     const parts = headerId.split('.')
     let title = parts[parts.length - 1]
-    title += " (" + minVal + "..." + maxVal + ")"
+    title += ' (' + minVal + '...' + maxVal + ')'
     return title
   }
 
