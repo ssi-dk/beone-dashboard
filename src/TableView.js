@@ -9,6 +9,7 @@ import Checkbox from 'react-three-state-checkbox'
 import { findValues } from './utils'
 import treeIcon from './icons/icons8-tree-20.png'
 import funnelIcon from './icons/funnel.png'
+import { getClusterColor } from './utils'
 
 export default TableView
 
@@ -98,11 +99,7 @@ function TableView() {
   const getColorForField = (index, value) => {
     // Cluster column is always index 0
     if (index === 0) {
-      if (value.startsWith('cluster_')) {
-        let hue = value.substring(value.indexOf('_') + 1) * 100
-        let colorCode = 'hsl(' + hue + ', 100%, 50%)'
-        return colorCode
-      }
+      return getClusterColor(value)
     }
     return 'black'
   }
