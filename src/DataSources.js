@@ -132,23 +132,7 @@ function DataSources(props) {
       // console.log('Cluster ' + cluster.name + ' contains these samples:')
       // console.log(cluster.samples)
     }
-      let columnMetadataCopy = Array.from(columnMetadata)
-      let columnDataCopy = Array.from(columnData)
-
-      // Add header to columnMetadata
-
-      // First, check if we already have a Cluster column (this will alway be the first column)
-      if (columnMetadataCopy.length > 0 && columnMetadataCopy[0].columnId === 'Cluster') {
-          // console.log('We already had a Cluster column.')
-          columnMetadataCopy.shift()
-          columnDataCopy.shift()
-      }
-      const clusterMetadata = {
-        'columnId': 'Cluster',
-        'filter': '',
-      }
-      columnMetadataCopy.unshift(clusterMetadata)
-      setColumnMetadata(columnMetadataCopy)
+       let columnDataCopy = Array.from(columnData)
 
       // Build an array with column data from all samples
       let column = Array()
@@ -185,6 +169,24 @@ function DataSources(props) {
       setColumnData(columnDataCopy)
       // Update samples
       setSamples(samplesCopy)
+
+      // Add header to columnMetadata
+      let columnMetadataCopy = Array.from(columnMetadata)
+
+      // First, check if we already have a Cluster column (this will alway be the first column)
+      if (columnMetadataCopy.length > 0 && columnMetadataCopy[0].columnId === 'Cluster') {
+        // console.log('We already had a Cluster column.')
+        columnMetadataCopy.shift()
+        columnDataCopy.shift()
+    }
+    const clusterMetadata = {
+      'columnId': 'Cluster',
+      'filter': '',
+      'minVal': 1,
+      'maxVal': 123
+    }
+    columnMetadataCopy.unshift(clusterMetadata)
+    setColumnMetadata(columnMetadataCopy)
     }
   }
 
