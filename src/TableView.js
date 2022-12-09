@@ -129,14 +129,21 @@ function TableView() {
     </div>
   )
 
-  const getHeaderTitleFromId = (headerId) => {
+  const getHeaderTitleFromId = (headerId, minVal, maxVal) => {
     const parts = headerId.split('.')
-    return parts[parts.length - 1]
+    let title = parts[parts.length - 1]
+    title += " (" + minVal + "..." + maxVal + ")"
+    return title
   }
 
   const dataColumnHeaders = columnMetadata.map((element) =>
     <div className='overview-header' key={element['columnId']}>
-      <div className='overview-header-inner-bold'>{getHeaderTitleFromId(element['columnId'])}</div>
+      <div className='overview-header-inner-bold'>{getHeaderTitleFromId(
+        element['columnId'],
+        element['minVal'],
+        element['maxVal'],
+        )}
+      </div>
       <div className='overview-header-inner'>
         <span>{element['filter']}</span>
       </div>
