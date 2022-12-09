@@ -13,11 +13,11 @@ const columnDataState = atom({
 });
 export { columnDataState }
 
-const columnUserdataState = atom({
-  key: 'columnUserdataState',
+const columnMetadataState = atom({
+  key: 'columnMetadataState',
   default: new Array(),
 });
-export { columnUserdataState }
+export { columnMetadataState }
 
 const newickState = atom({
     key: 'newickState',

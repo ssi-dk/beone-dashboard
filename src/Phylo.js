@@ -6,7 +6,7 @@ import {
 import parser from 'biojs-io-newick'
 
 import { sampleState, newickState } from './RecoilStates'
-import {readFile, findValues} from './utils'
+import {readFile, findValues, getClusterColor} from './utils'
 import PhyloClass from './PhyloClass'
 
 export default Phylo
@@ -36,7 +36,7 @@ function Phylo() {
 
     samples.forEach(function(sample, id) {
       if ('cluster' in sample && sample.cluster.startsWith('cluster_')) {
-        styles[id] = {fillColour: 'red'}
+        styles[id] = {'fillColour': getClusterColor(sample.cluster)}
         realClusterCount++
       }
     });

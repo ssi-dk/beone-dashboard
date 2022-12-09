@@ -3,7 +3,7 @@ import React, {useState} from 'react'
 import {atom, useRecoilState} from 'recoil'
 import ReactJson from 'react-json-view'
 
-import { sampleState, columnDataState, columnUserdataState } from './RecoilStates'
+import { sampleState, columnDataState, columnMetadataState } from './RecoilStates'
 
 const jp = require('jsonpath')
 
@@ -14,7 +14,7 @@ function FieldEditor(props) {
   const [selectedFields, setSelectedFields] = useState([]);
   const [currentFieldPath, setCurrentFieldPath] = useState();
   const [columnData, setColumnData] = useRecoilState(columnDataState);
-  const [columnUserdata, setColumnUserdata] = useRecoilState(columnUserdataState);
+  const [columnMetadata, setColumnMetadata] = useRecoilState(columnMetadataState);
   const [filterOnSelected, setFilterOnSelected] = useState(false);
 
   const filterChangeHandler = () => {
@@ -35,14 +35,14 @@ function FieldEditor(props) {
         let selectedFieldsCopy = Array.from(selectedFields)
         selectedFieldsCopy.push(pathExpression)
         setSelectedFields(selectedFieldsCopy)
-        // Add header to columnUserdata
-        let columnUserdataCopy = Array.from(columnUserdata)
-        const currentUserdataElement = {
+        // Add header to columnMetadata
+        let columnMetadataCopy = Array.from(columnMetadata)
+        const currentMetadataElement = {
           'columnId': pathExpression,
           'filter': '',
         }
-        columnUserdataCopy.push(currentUserdataElement)
-        setColumnUserdata(columnUserdataCopy)
+        columnMetadataCopy.push(currentMetadataElement)
+        setColumnMetadata(columnMetadataCopy)
         // Build an array with column data from all samples
         let column = Array()
         for (const entry of props.data) {
@@ -69,11 +69,11 @@ function FieldEditor(props) {
       let selectedFieldsCopy = Array.from(selectedFields)
       selectedFieldsCopy.splice(columnIndexNumber, 1)
       setSelectedFields(selectedFieldsCopy)
-      // Remove field from columnUserdata
-      let columnUserdataCopy = Array.from(columnUserdata)
-      const currentUserdataElement = columnUserdataCopy.find(element => element['columnId']===event.target.name)
-      columnUserdataCopy.splice(columnUserdataCopy.indexOf(currentUserdataElement), 1)
-      setColumnUserdata(columnUserdataCopy)
+      // Remove field from columnMetadata
+      let columnMetadataCopy = Array.from(columnMetadata)
+      const currentMetadataElement = columnMetadataCopy.find(element => element['columnId']===event.target.name)
+      columnMetadataCopy.splice(columnMetadataCopy.indexOf(currentMetadataElement), 1)
+      setColumnMetadata(columnMetadataCopy)
       // Remove field from columnData
       let columnDataCopy = Array.from(columnData)
       columnDataCopy.splice(columnIndexNumber, 1)
@@ -112,7 +112,7 @@ function FieldEditor(props) {
   class FieldForm extends React.Component {
     constructor(props) {
       super(props);
-      this.state = columnUserdata.find(element => element.columnId === currentFieldPath)
+      this.state = columnMetadata.find(element => element.columnId === currentFieldPath)
       this.handleQSChange = this.handleQSChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -122,10 +122,10 @@ function FieldEditor(props) {
     }
     
     handleSubmit(event) {
-      let columnUserdataCopy = Array.from(columnUserdata)
-      let index = columnUserdataCopy.findIndex(element => element.columnId === currentFieldPath)
-      columnUserdataCopy[index] = this.state
-      setColumnUserdata(columnUserdataCopy)
+      let columnMetadataCopy = Array.from(columnMetadata)
+      let index = columnMetadataCopy.findIndex(element => element.columnId === currentFieldPath)
+      columnMetadataCopy[index] = this.state
+      setColumnMetadata(columnMetadataCopy)
       event.preventDefault();
     }
   

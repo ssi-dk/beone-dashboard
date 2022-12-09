@@ -9,15 +9,16 @@ import Checkbox from 'react-three-state-checkbox'
 import { findValues } from './utils'
 import treeIcon from './icons/icons8-tree-20.png'
 import funnelIcon from './icons/funnel.png'
+import { getClusterColor } from './utils'
 
 export default TableView
 
-import { sampleState, newickState, columnDataState, columnUserdataState } from './RecoilStates'
+import { sampleState, newickState, columnDataState, columnMetadataState } from './RecoilStates'
 
 function TableView() {
   const [samples, setSamples] = useRecoilState(sampleState);
   const [newick] = useRecoilState(newickState);
-  const [columnUserdata] = useRecoilState(columnUserdataState);
+  const [columnMetadata] = useRecoilState(columnMetadataState);
   const [columnData] = useRecoilState(columnDataState);
 
   useEffect(() => {
@@ -74,7 +75,7 @@ function TableView() {
       let columnsInRow = Array()
       for (let columnNumber = 0; columnNumber < columnData.length; columnNumber++) {
         const fieldValue = columnData[columnNumber][rowNumber]
-        const filterExp = 'fieldValue ' + columnUserdata[columnNumber]['filter']
+        const filterExp = 'fieldValue ' + columnMetadata[columnNumber]['filter']
         if (filterExp !== 'fieldValue ') {
           const fn = compile(filterExp);
           good = fn({ fieldValue: fieldValue })
@@ -93,14 +94,12 @@ function TableView() {
     return dataRows
   }
 
-  const columnDataAsRows = useMemo(() => getColumnDataAsRows(sampleArray, columnData, columnUserdata), [sampleArray, columnData, columnUserdata])
+  const columnDataAsRows = useMemo(() => getColumnDataAsRows(sampleArray, columnData, columnMetadata), [sampleArray, columnData, columnMetadata])
 
   const getColorForField = (index, value) => {
     // Cluster column is always index 0
     if (index === 0) {
-      if (value.startsWith('cluster_')) {
-        return 'red'
-      }
+      return getClusterColor(value)
     }
     return 'black'
   }
@@ -129,14 +128,21 @@ function TableView() {
     </div>
   )
 
-  const getHeaderTitleFromId = (headerId) => {
+  const getHeaderTitleFromId = (headerId, minVal, maxVal) => {
     const parts = headerId.split('.')
-    return parts[parts.length - 1]
+    let title = parts[parts.length - 1]
+    title += ' (' + minVal + '...' + maxVal + ')'
+    return title
   }
 
-  const dataColumnHeaders = columnUserdata.map((element) =>
+  const dataColumnHeaders = columnMetadata.map((element) =>
     <div className='overview-header' key={element['columnId']}>
-      <div className='overview-header-inner-bold'>{getHeaderTitleFromId(element['columnId'])}</div>
+      <div className='overview-header-inner-bold'>{getHeaderTitleFromId(
+        element['columnId'],
+        element['minVal'],
+        element['maxVal'],
+        )}
+      </div>
       <div className='overview-header-inner'>
         <span>{element['filter']}</span>
       </div>

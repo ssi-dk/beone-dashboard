@@ -1,4 +1,4 @@
-export { readFile, findValues }
+export { readFile, findValues, getClusterColor }
 
 function readFile(file) {
     return new Promise((resolve, reject) => {
@@ -38,3 +38,11 @@ function readFile(file) {
     return list;
   }
   
+  function getClusterColor(value) {
+    if (value.startsWith('cluster_')) {
+      let hue = value.substring(value.indexOf('_') + 1) * 100
+      let colorCode = 'hsl(' + hue + ', 100%, 50%)'
+      return colorCode
+    }
+    return 'black'
+  }

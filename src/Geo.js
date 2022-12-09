@@ -2,7 +2,7 @@ import React, { useState, useMemo, useEffect } from 'react'
 import { useRecoilState } from 'recoil'
 import { ComposableMap, Geographies, Geography, Marker } from 'react-simple-maps';
 
-import { sampleState, columnDataState, columnUserdataState } from './RecoilStates'
+import { sampleState, columnDataState, columnMetadataState } from './RecoilStates'
 
 import europe from './europe.json'
 

@@ -5,7 +5,7 @@ import {
   useRecoilState,
 } from 'recoil'
 
-import { sampleState, columnDataState, columnUserdataState, clusterState } from './RecoilStates'
+import { sampleState, columnDataState, columnMetadataState, clusterState } from './RecoilStates'
 import FieldEditor from './FieldEditor'
 import { readFile } from './utils'
 const jp = require('jsonpath')
@@ -24,7 +24,7 @@ function DataSources(props) {
   const [selectedPartion, setSelectedPartition] = useState(new String())
 
   const [columnData, setColumnData] = useRecoilState(columnDataState);
-  const [columnUserdata, setColumnUserdata] = useRecoilState(columnUserdataState);
+  const [columnMetadata, setColumnMetadata] = useRecoilState(columnMetadataState);
   const [clusters, setClusters] = useRecoilState(clusterState);
 
   function validateColumnLength(samples, columnData) {
@@ -61,7 +61,7 @@ function DataSources(props) {
   useEffect(() => {
     if (!columnsOK) {
       let newColumnData = Array()
-      for (let colMeta of columnUserdata) {
+      for (let colMeta of columnMetadata) {
         let column = Array()
         for (const entry of allData) {
           const columnDataForSample = jp.value(entry[1], colMeta['columnId'])
@@ -132,29 +132,19 @@ function DataSources(props) {
       // console.log('Cluster ' + cluster.name + ' contains these samples:')
       // console.log(cluster.samples)
     }
-      let columnUserdataCopy = Array.from(columnUserdata)
-      let columnDataCopy = Array.from(columnData)
-
-      // Add header to columnUserdata
-
-      // First, check if we already have a Cluster column (this will alway be the first column)
-      if (columnUserdataCopy.length > 0 && columnUserdataCopy[0].columnId === 'Cluster') {
-          // console.log('We already had a Cluster column.')
-          columnUserdataCopy.shift()
-          columnDataCopy.shift()
-      }
-      const clusterUserdata = {
-        'columnId': 'Cluster',
-        'filter': '',
-      }
-      columnUserdataCopy.unshift(clusterUserdata)
-      setColumnUserdata(columnUserdataCopy)
+       let columnDataCopy = Array.from(columnData)
 
       // Build an array with column data from all samples
       let column = Array()
       let samplesCopy = new Map(JSON.parse(
         JSON.stringify(Array.from(samples))
       ));
+
+      // minVal and maxVal are in this case the lowest and highest cluster number.
+      // If no clusters are found, both values will be 0.
+      let minVal = 0 
+      let maxVal = 0
+      let clusterNumber
       samplesCopy.forEach(function(sample, id) {
         
         // Find the cluster name in which the sample name exists
@@ -174,6 +164,9 @@ function DataSources(props) {
               sample['cluster'] = cluster.name
               samplesCopy.set(id, sample)
               found = true
+              clusterNumber = parseInt(cluster.name.substring(cluster.name.indexOf('_') + 1))
+              minVal = 1
+              if (clusterNumber > maxVal) { maxVal = clusterNumber }
               break
             }
             // console.log("No, it was not in " + clusterSample.name + '.')
@@ -185,6 +178,25 @@ function DataSources(props) {
       setColumnData(columnDataCopy)
       // Update samples
       setSamples(samplesCopy)
+
+      // Add header to columnMetadata
+      let columnMetadataCopy = Array.from(columnMetadata)
+
+      // First, check if we already have a Cluster column (this will always be the first column)
+      if (columnMetadataCopy.length > 0 && columnMetadataCopy[0].columnId === 'Cluster') {
+        // console.log('We already had a Cluster column.')
+        columnMetadataCopy.shift()
+        columnDataCopy.shift()
+    }
+    const clusterMetadata = {
+      'columnId': 'Cluster',
+      'filter': '',
+      'minVal': minVal,
+      'maxVal': maxVal
+    }
+    console.log(clusterMetadata)
+    columnMetadataCopy.unshift(clusterMetadata)
+    setColumnMetadata(columnMetadataCopy)
     }
   }
 
