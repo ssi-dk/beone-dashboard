@@ -5,7 +5,7 @@ import {
   useRecoilState,
 } from 'recoil'
 
-import { sampleState, columnDataState, columnUserdataState, clusterState } from './RecoilStates'
+import { sampleState, columnDataState, columnMetadataState, clusterState } from './RecoilStates'
 import FieldEditor from './FieldEditor'
 import { readFile } from './utils'
 const jp = require('jsonpath')
@@ -24,7 +24,7 @@ function DataSources(props) {
   const [selectedPartion, setSelectedPartition] = useState(new String())
 
   const [columnData, setColumnData] = useRecoilState(columnDataState);
-  const [columnUserdata, setColumnUserdata] = useRecoilState(columnUserdataState);
+  const [columnMetadata, setColumnMetadata] = useRecoilState(columnMetadataState);
   const [clusters, setClusters] = useRecoilState(clusterState);
 
   function validateColumnLength(samples, columnData) {
@@ -61,7 +61,7 @@ function DataSources(props) {
   useEffect(() => {
     if (!columnsOK) {
       let newColumnData = Array()
-      for (let colMeta of columnUserdata) {
+      for (let colMeta of columnMetadata) {
         let column = Array()
         for (const entry of allData) {
           const columnDataForSample = jp.value(entry[1], colMeta['columnId'])
@@ -132,23 +132,23 @@ function DataSources(props) {
       // console.log('Cluster ' + cluster.name + ' contains these samples:')
       // console.log(cluster.samples)
     }
-      let columnUserdataCopy = Array.from(columnUserdata)
+      let columnMetadataCopy = Array.from(columnMetadata)
       let columnDataCopy = Array.from(columnData)
 
-      // Add header to columnUserdata
+      // Add header to columnMetadata
 
       // First, check if we already have a Cluster column (this will alway be the first column)
-      if (columnUserdataCopy.length > 0 && columnUserdataCopy[0].columnId === 'Cluster') {
+      if (columnMetadataCopy.length > 0 && columnMetadataCopy[0].columnId === 'Cluster') {
           // console.log('We already had a Cluster column.')
-          columnUserdataCopy.shift()
+          columnMetadataCopy.shift()
           columnDataCopy.shift()
       }
-      const clusterUserdata = {
+      const clusterMetadata = {
         'columnId': 'Cluster',
         'filter': '',
       }
-      columnUserdataCopy.unshift(clusterUserdata)
-      setColumnUserdata(columnUserdataCopy)
+      columnMetadataCopy.unshift(clusterMetadata)
+      setColumnMetadata(columnMetadataCopy)
 
       // Build an array with column data from all samples
       let column = Array()

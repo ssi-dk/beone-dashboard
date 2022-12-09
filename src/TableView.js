@@ -12,12 +12,12 @@ import funnelIcon from './icons/funnel.png'
 
 export default TableView
 
-import { sampleState, newickState, columnDataState, columnUserdataState } from './RecoilStates'
+import { sampleState, newickState, columnDataState, columnMetadataState } from './RecoilStates'
 
 function TableView() {
   const [samples, setSamples] = useRecoilState(sampleState);
   const [newick] = useRecoilState(newickState);
-  const [columnUserdata] = useRecoilState(columnUserdataState);
+  const [columnMetadata] = useRecoilState(columnMetadataState);
   const [columnData] = useRecoilState(columnDataState);
 
   useEffect(() => {
@@ -74,7 +74,7 @@ function TableView() {
       let columnsInRow = Array()
       for (let columnNumber = 0; columnNumber < columnData.length; columnNumber++) {
         const fieldValue = columnData[columnNumber][rowNumber]
-        const filterExp = 'fieldValue ' + columnUserdata[columnNumber]['filter']
+        const filterExp = 'fieldValue ' + columnMetadata[columnNumber]['filter']
         if (filterExp !== 'fieldValue ') {
           const fn = compile(filterExp);
           good = fn({ fieldValue: fieldValue })
@@ -93,7 +93,7 @@ function TableView() {
     return dataRows
   }
 
-  const columnDataAsRows = useMemo(() => getColumnDataAsRows(sampleArray, columnData, columnUserdata), [sampleArray, columnData, columnUserdata])
+  const columnDataAsRows = useMemo(() => getColumnDataAsRows(sampleArray, columnData, columnMetadata), [sampleArray, columnData, columnMetadata])
 
   const getColorForField = (index, value) => {
     // Cluster column is always index 0
@@ -134,7 +134,7 @@ function TableView() {
     return parts[parts.length - 1]
   }
 
-  const dataColumnHeaders = columnUserdata.map((element) =>
+  const dataColumnHeaders = columnMetadata.map((element) =>
     <div className='overview-header' key={element['columnId']}>
       <div className='overview-header-inner-bold'>{getHeaderTitleFromId(element['columnId'])}</div>
       <div className='overview-header-inner'>
