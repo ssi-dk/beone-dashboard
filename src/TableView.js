@@ -99,7 +99,9 @@ function TableView() {
     // Cluster column is always index 0
     if (index === 0) {
       if (value.startsWith('cluster_')) {
-        return 'red'
+        let hue = value.substring(value.indexOf('_') + 1) * 100
+        let colorCode = 'hsl(' + hue + ', 100%, 50%)'
+        return colorCode
       }
     }
     return 'black'
