@@ -152,18 +152,11 @@ function DataSources(props) {
       const clusterMetadata = {
         'columnId': 'Cluster',
         'filter': '',
-        // 'minVal': minVal,
-        // 'maxVal': maxVal
       }
       console.log(clusterMetadata)
       columnMetadataCopy.unshift(clusterMetadata)
       setColumnMetadata(columnMetadataCopy)
 
-      // minVal and maxVal are in this case the lowest and highest cluster number.
-      // If no clusters are found, both values will be 0.
-      // let minVal = 0 
-      // let maxVal = 0
-      // let clusterNumber
       samplesCopy.forEach(function (sample, id) {
 
         // Find the cluster name in which the sample name exists
@@ -183,9 +176,6 @@ function DataSources(props) {
               sample['cluster'] = cluster.name
               samplesCopy.set(id, sample)
               found = true
-              // clusterNumber = parseInt(cluster.name.substring(cluster.name.indexOf('_') + 1))
-              // minVal = 1
-              // if (clusterNumber > maxVal) { maxVal = clusterNumber }
               break
             }
             // console.log("No, it was not in " + clusterSample.name + '.')

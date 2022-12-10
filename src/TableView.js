@@ -128,11 +128,9 @@ function TableView() {
     </div>
   )
 
-  // const getHeaderTitleFromId = (headerId, minVal, maxVal) => {
   const getHeaderTitleFromId = (headerId) => {
     const parts = headerId.split('.')
     let title = parts[parts.length - 1]
-    // title += ' (' + minVal + '...' + maxVal + ')'
     return title
   }
 
@@ -140,8 +138,6 @@ function TableView() {
     <div className='overview-header' key={element['columnId']}>
       <div className='overview-header-inner-bold'>{getHeaderTitleFromId(
         element['columnId'],
-        // element['minVal'],
-        // element['maxVal'],
         )}
       </div>
       <div className='overview-header-inner'>
