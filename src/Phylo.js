@@ -32,17 +32,12 @@ function Phylo() {
     const treeIds = findValues(treeAsJSON, 'name')
     
     let styles = {}
-    let realClusterCount = 0
 
     samples.forEach(function(sample, id) {
       if ('cluster' in sample && sample.cluster.startsWith('cluster_')) {
         styles[id] = {'fillColour': getClusterColor(sample.cluster)}
-        realClusterCount++
       }
     });
-    console.log(realClusterCount)
-
-    // styles[id] = {fillColour: 'green'}
 
     for (let id of treeIds) {
       // Make tree nodes lightgray if not in samples

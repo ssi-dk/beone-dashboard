@@ -153,7 +153,6 @@ function DataSources(props) {
         'columnId': 'Cluster',
         'filter': '',
       }
-      console.log(clusterMetadata)
       columnMetadataCopy.unshift(clusterMetadata)
       setColumnMetadata(columnMetadataCopy)
 
