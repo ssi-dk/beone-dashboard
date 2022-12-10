@@ -124,15 +124,15 @@ function DataSources(props) {
   const partitionSelectHandler = (e) => {
     // Copied from Fieldeditor.fieldSelectHandler - maybe merge some parts?
     if (selectedPartion.length > 0) {
-    // console.log('We want to add clusters from ' + selectedPartion)
-    // console.log('Here we have the clusters within the selected partition:')
-    // console.log(clusters.partitions[selectedPartion])
-    let partitionWithData = clusters.partitions[selectedPartion]
-    for (let cluster of partitionWithData) {
-      // console.log('Cluster ' + cluster.name + ' contains these samples:')
-      // console.log(cluster.samples)
-    }
-       let columnDataCopy = Array.from(columnData)
+      // console.log('We want to add clusters from ' + selectedPartion)
+      // console.log('Here we have the clusters within the selected partition:')
+      // console.log(clusters.partitions[selectedPartion])
+      let partitionWithData = clusters.partitions[selectedPartion]
+      for (let cluster of partitionWithData) {
+        // console.log('Cluster ' + cluster.name + ' contains these samples:')
+        // console.log(cluster.samples)
+      }
+      let columnDataCopy = Array.from(columnData)
 
       // Build an array with column data from all samples
       let column = Array()
@@ -148,24 +148,24 @@ function DataSources(props) {
         // console.log('We already had a Cluster column.')
         columnMetadataCopy.shift()
         columnDataCopy.shift()
-    }
-    const clusterMetadata = {
-      'columnId': 'Cluster',
-      'filter': '',
-      // 'minVal': minVal,
-      // 'maxVal': maxVal
-    }
-    console.log(clusterMetadata)
-    columnMetadataCopy.unshift(clusterMetadata)
-    setColumnMetadata(columnMetadataCopy)
+      }
+      const clusterMetadata = {
+        'columnId': 'Cluster',
+        'filter': '',
+        // 'minVal': minVal,
+        // 'maxVal': maxVal
+      }
+      console.log(clusterMetadata)
+      columnMetadataCopy.unshift(clusterMetadata)
+      setColumnMetadata(columnMetadataCopy)
 
       // minVal and maxVal are in this case the lowest and highest cluster number.
       // If no clusters are found, both values will be 0.
       // let minVal = 0 
       // let maxVal = 0
       // let clusterNumber
-      samplesCopy.forEach(function(sample, id) {
-        
+      samplesCopy.forEach(function (sample, id) {
+
         // Find the cluster name in which the sample name exists
         for (let cluster of partitionWithData) {
           let orgAndName
