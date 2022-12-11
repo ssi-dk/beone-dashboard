@@ -226,9 +226,6 @@ function DataSources(props) {
         <div className='pane column'>
           {dataSourceOptions}
         </div>
-        <div className='pane column2'>
-          <FieldEditor data={allDataArray} />
-        </div>
       </div>
     </div>
   )
