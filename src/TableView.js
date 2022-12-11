@@ -20,6 +20,11 @@ function TableView() {
   const [newick] = useRecoilState(newickState);
   const [columnMetadata] = useRecoilState(columnMetadataState);
   const [columnData] = useRecoilState(columnDataState);
+  const [filterOnSelected, setFilterOnSelected] = useState(false);
+  const filterChangeHandler = () => {
+    console.log('Click.')
+    setFilterOnSelected(!filterOnSelected)
+  }
 
   useEffect(() => {
     let selectionSubscriber = function (msg, sampleID) {
@@ -188,6 +193,10 @@ function TableView() {
   return (
     <div className='pane'>
       <h1>Sample List</h1>
+      <label>
+        <input type='checkbox' name='filter_selected' checked={filterOnSelected} onChange={filterChangeHandler} />
+        <span className='margin'>Show selected samples only</span>
+      </label>
       <div className='overview-row'>
         <div className='overview-column'>&nbsp;</div>
         <div className='overview-firstcol-border'>
