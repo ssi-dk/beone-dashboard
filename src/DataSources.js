@@ -194,8 +194,7 @@ function DataSources(props) {
       return(
         <div>
           <h1>ReporTree clusters</h1>
-          <div> Select distance threshold:</div>
-          <div className='row'>
+          Select distance threshold:
           <select className='column rspace'
             onChange={e => {
                       setSelectedPartition(e.target.value)
@@ -207,7 +206,6 @@ function DataSources(props) {
           {Object.keys(clusters['partitions']).map(element => <option key={element} value={element}>{element}</option>)}
           </select>
           <button className='column' onClick={partitionSelectHandler}>Add clusters</button>
-          </div>
         </div>
       )
     } else {
@@ -221,13 +219,9 @@ function DataSources(props) {
   }, [clusters, selectedPartion])
 
   return (
-    <div>
-      <div className='row2'>
-        <div className='pane column'>
-          {dataSourceOptions}
-        </div>
+      <div className='pane'>
+        {dataSourceOptions}
       </div>
-    </div>
   )
 
 }
